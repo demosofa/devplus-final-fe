@@ -27,7 +27,8 @@
 			"@constants": ["./constants/index"],
 			"@contexts": ["./contexts/index"],
 			"@services": ["./services/index"],
-			"@layouts": ["./layout/index"],
+			"@layouts/*": ["./layouts/*"],
+			"@routes/*": ["./routes/*"],
 			"@hooks": ["./hooks/index"],
 			"@utils": ["./utils/index"],
 			"@pages": ["./pages/index"]
