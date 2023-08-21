@@ -1,0 +1,81 @@
+import {
+	createContext,
+	useEffect,
+	useState,
+	PropsWithChildren,
+	useMemo,
+} from 'react';
+import axios from 'axios';
+import jwtDecode from 'jwt-decode';
+import { getStorage, removeStorage, setStorage } from '@utils';
+
+type User = {
+	id: string;
+	username: string;
+	role: string;
+};
+type GetAuth = () => User | void;
+type SetAuth = (newToken?: string) => void;
+type AuthType = { getAuth: GetAuth; setAuth: SetAuth };
+
+export const Auth = createContext<AuthType>({
+	getAuth: () => ({
+		id: '',
+		username: '',
+		role: '',
+	}),
+	setAuth: () => null,
+});
+
+export function AuthProvider({ children }: PropsWithChildren) {
+	const [token, setToken] = useState<string | null>(getStorage('token'));
+
+	if (token) {
+		if (!axios.defaults.headers.common['Authorization']) {
+			axios.defaults.headers.common['Authorization'] = 'Bearer ' + token;
+		}
+	} else {
+		delete axios.defaults.headers.common['Authorization'];
+	}
+
+	const authValue = useMemo(() => {
+		const setAuth: SetAuth = (newToken) => {
+			if (newToken) {
+				setStorage('token', newToken);
+				setToken(newToken);
+			} else {
+				removeStorage('token');
+				setToken(null);
+			}
+		};
+
+		const getAuth: GetAuth = () => {
+			try {
+				if (token) return jwtDecode(token);
+			} catch (error) {
+				return setAuth();
+			}
+		};
+
+		return { getAuth, setAuth };
+	}, [token]);
+
+	useEffect(() => {
+		const interceptor = axios.interceptors.response.use(
+			(response) => response,
+			(error) => {
+				switch (error?.response?.status) {
+					case 403:
+						window.location.href = '/403';
+						break;
+					default:
+				}
+				return Promise.reject(error);
+			}
+		);
+
+		return () => axios.interceptors.response.eject(interceptor);
+	}, []);
+
+	return <Auth.Provider value={authValue}>{children}</Auth.Provider>;
+}
