@@ -1,0 +1,3 @@
+export enum QUERY_KEY {
+	LIST_WORKSPACE = 'LIST_WORKSPACE',
+}
