@@ -7,11 +7,11 @@ import privateRoutes from '@routes/privateRoutes';
 import publicRoutes from '@routes/publicRoutes';
 import axios from 'axios';
 import { AuthProvider } from '@contexts';
+import { BASE_URL } from '@constants';
 
 const queryClient = new QueryClient();
 const router = createBrowserRouter([...privateRoutes, ...publicRoutes]);
 
-const BASE_URL = import.meta.env.VITE_BASE_URL;
 axios.defaults.baseURL = BASE_URL;
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
