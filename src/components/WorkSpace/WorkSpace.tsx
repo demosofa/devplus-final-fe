@@ -1,6 +1,6 @@
 import { Table } from 'antd';
 import { useGetListWorkSpace } from 'hooks/useGetListWorkSpace';
-import { WORKSPACE } from 'types/workspace.type';
+import { WORKSPACE } from 'types';
 
 const WorkSpace = () => {
 	const { data: listWorkSpace } = useGetListWorkSpace();
