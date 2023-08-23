@@ -10,6 +10,7 @@ import Sider from 'antd/es/layout/Sider';
 import { Content } from 'antd/es/layout/layout';
 import React, { useState } from 'react';
 import { Link, Outlet } from 'react-router-dom';
+import './PublicLayout.css';
 
 interface MenuItem {
 	key: string;
@@ -85,9 +86,9 @@ export function PublicLayout() {
 						items={items}
 					/>
 				</Sider>
-				<div style={{ minWidth: '100vw' }}>
+				<div className="layout-content">
 					{' '}
-					<Content style={{ margin: '0 16px' }}>
+					<Content>
 						<div
 							style={{
 								margin: 24,
