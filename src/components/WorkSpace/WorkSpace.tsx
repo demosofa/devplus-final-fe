@@ -5,6 +5,7 @@ import {
 } from '@ant-design/icons';
 import { Modal, Table } from 'antd';
 import { WorkspaceType } from '@types';
+import { useState } from 'react';
 import './WorkSpace.css';
 import { ColumnsType } from 'antd/es/table';
 import {
@@ -14,9 +15,19 @@ import {
 } from '@hooks';
 
 const WorkSpace = () => {
-	const { data: listWorkSpace } = useGetListWorkSpace();
+	const [currentPage, setCurrentPage] = useState(1);
+	const { data: listWorkSpace, isLoading } = useGetListWorkSpace(currentPage);
+
+	const [pageSize, setPageSize] = useState(7);
 	const acceptWorkspace = useAcceptWorkspace();
 	const rejectWorkspace = useRejectWorkspace();
+
+	const handlePaginationChange = (page: number, pageSize?: number) => {
+		setCurrentPage(page);
+		if (pageSize) {
+			setPageSize(pageSize);
+		}
+	};
 
 	const handleAcceptWorkspace = (id: number) => {
 		Modal.confirm({
@@ -50,17 +61,6 @@ const WorkSpace = () => {
 			title: 'name',
 			dataIndex: 'title_workspace',
 			key: 'name',
-			render: (text: string) => <a>{text}</a>,
-		},
-		{
-			title: 'email',
-			dataIndex: 'admin_email',
-			key: 'email',
-		},
-		{
-			title: 'password',
-			dataIndex: 'admin_password',
-			key: 'password',
 		},
 		{
 			title: 'status',
@@ -72,7 +72,7 @@ const WorkSpace = () => {
 			key: 'action',
 			render: (record: WorkspaceType) => (
 				<div className="action-icons">
-					{record.status === 'pending' && (
+					{record.status === 'pending' ? (
 						<>
 							<CheckCircleOutlined
 								className="icons-check"
@@ -91,6 +91,8 @@ const WorkSpace = () => {
 								}}
 							/>
 						</>
+					) : (
+						'No actions'
 					)}
 				</div>
 			),
@@ -98,11 +100,21 @@ const WorkSpace = () => {
 	];
 
 	return (
-		<Table<WorkspaceType>
-			columns={columns}
-			dataSource={listWorkSpace}
-			rowKey={(record) => record.id}
-		/>
+		<>
+			<Table<WorkspaceType>
+				columns={columns}
+				dataSource={listWorkSpace?.data}
+				rowKey={(record) => record.id}
+				pagination={{
+					defaultPageSize: pageSize,
+					showSizeChanger: true,
+					current: currentPage,
+					total: listWorkSpace?.count,
+					onChange: handlePaginationChange,
+				}}
+				loading={isLoading}
+			/>
+		</>
 	);
 };
 
