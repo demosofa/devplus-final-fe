@@ -1,7 +1,7 @@
 import { useAuth } from '@hooks';
 import { PropsWithChildren } from 'react';
 import { Navigate } from 'react-router-dom';
-import { ROLE } from 'types';
+import { ROLE } from '@enums';
 
 export function PrivatePage({
 	children,

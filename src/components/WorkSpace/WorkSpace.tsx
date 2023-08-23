@@ -1,12 +1,46 @@
-import { CheckCircleOutlined, CloseCircleOutlined } from '@ant-design/icons';
-import { Table } from 'antd';
-import { useGetListWorkSpace } from 'hooks/useGetListWorkSpace';
-import { WORKSPACE } from 'types';
+import {
+	CheckCircleOutlined,
+	CloseCircleOutlined,
+	ExclamationCircleFilled,
+} from '@ant-design/icons';
+import { Modal, Table } from 'antd';
+import { WorkspaceType } from '@types';
 import './WorkSpace.css';
+import { ColumnsType } from 'antd/es/table';
+import {
+	useAcceptWorkspace,
+	useGetListWorkSpace,
+	useRejectWorkspace,
+} from '@hooks';
 
 const WorkSpace = () => {
 	const { data: listWorkSpace } = useGetListWorkSpace();
-	const columns = [
+	const acceptWorkspace = useAcceptWorkspace();
+	const rejectWorkspace = useRejectWorkspace();
+
+	const handleAcceptWorkspace = (id: number) => {
+		Modal.confirm({
+			title: `Accept Workspace ${id}`,
+			icon: <ExclamationCircleFilled />,
+			content: 'Do you Want to accept this workspace?',
+			onOk() {
+				acceptWorkspace.mutate(id);
+			},
+		});
+	};
+
+	const handleRejectWorkspace = (id: number) => {
+		Modal.confirm({
+			title: `Reject Workspace ${id}`,
+			icon: <ExclamationCircleFilled />,
+			content: 'Do you Want to reject this workspace?',
+			onOk() {
+				rejectWorkspace.mutate(id);
+			},
+		});
+	};
+
+	const columns: ColumnsType<WorkspaceType> = [
 		{
 			title: 'id',
 			dataIndex: 'id',
@@ -36,12 +70,26 @@ const WorkSpace = () => {
 		{
 			title: 'Action',
 			key: 'action',
-			render: (record: WORKSPACE) => (
+			render: (record: WorkspaceType) => (
 				<div className="action-icons">
 					{record.status === 'pending' && (
 						<>
-							<CheckCircleOutlined className="icons-check" />
-							<CloseCircleOutlined className="icons-close" />
+							<CheckCircleOutlined
+								className="icons-check"
+								onClick={(e) => {
+									e.preventDefault();
+									e.stopPropagation();
+									handleAcceptWorkspace(record.id);
+								}}
+							/>
+							<CloseCircleOutlined
+								className="icons-close"
+								onClick={(e) => {
+									e.preventDefault();
+									e.stopPropagation();
+									handleRejectWorkspace(record.id);
+								}}
+							/>
 						</>
 					)}
 				</div>
@@ -50,7 +98,7 @@ const WorkSpace = () => {
 	];
 
 	return (
-		<Table<WORKSPACE>
+		<Table<WorkspaceType>
 			columns={columns}
 			dataSource={listWorkSpace}
 			rowKey={(record) => record.id}
