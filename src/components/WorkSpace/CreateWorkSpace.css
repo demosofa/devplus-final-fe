@@ -1,0 +1,44 @@
+body {
+	background-color: whitesmoke;
+	color: black;
+	padding: 25px;
+	width: 100%;
+	box-sizing: border-box;
+}
+
+.register_workspace {
+	color: red;
+	font-weight: bold;
+	font-size: 20px;
+	text-align: center;
+}
+
+.anticon-user {
+	color: red;
+}
+
+.container {
+	max-width: 90%;
+	margin: 0 auto;
+	padding: 20px;
+}
+
+.submit-button {
+	margin-right: 50px;
+}
+.ant-form-item {
+	text-align: center;
+}
+.ant-row {
+	justify-content: center;
+}
+
+.ant-form-item-explain-error {
+	text-align: initial;
+}
+
+@media only screen and (max-width: 576) {
+	.submit-button {
+		width: 30%;
+	}
+}
