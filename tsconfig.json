@@ -31,7 +31,9 @@
 			"@routes/*": ["./routes/*"],
 			"@hooks": ["./hooks/index"],
 			"@utils": ["./utils/index"],
-			"@pages": ["./pages/index"]
+			"@pages": ["./pages/index"],
+			"@types": ["./types/index"],
+			"@enums": ["./enums/index"]
 		}
 	},
 	"include": ["src"],

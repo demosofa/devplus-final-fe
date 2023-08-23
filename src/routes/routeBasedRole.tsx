@@ -1,5 +1,5 @@
 import { RouteObject } from 'react-router-dom';
-import { ROLE } from 'types';
+import { ROLE } from '@enums';
 import { PrivatePage } from '@components';
 
 export type Route = Omit<RouteObject, 'children'> & {
