@@ -1,4 +1,4 @@
-import { ROLE } from 'types';
+import { ROLE } from '@enums';
 import { Route, routeBasedRole } from './routeBasedRole';
 import { PrivateLayout } from '@layouts/PrivateLayout';
 
