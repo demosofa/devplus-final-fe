@@ -89,13 +89,7 @@ export function PublicLayout() {
 				<div className="layout-content">
 					{' '}
 					<Content>
-						<div
-							style={{
-								margin: 24,
-								minHeight: 360,
-								marginRight: 280,
-							}}
-						>
+						<div className="layout-outlet">
 							<Outlet />
 						</div>
 					</Content>
