@@ -10,7 +10,7 @@ const publicRoutes: RouteObject[] = [
 		element: <PublicLayout />,
 		children: [
 			{
-				path: '/hehe',
+				path: '/workspace',
 				element: <WorkSpace />,
 			},
 
