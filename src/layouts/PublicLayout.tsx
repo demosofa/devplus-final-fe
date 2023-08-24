@@ -5,7 +5,7 @@ import {
 	UserSwitchOutlined,
 	UsergroupAddOutlined,
 } from '@ant-design/icons';
-import { Layout, Menu } from 'antd';
+import { Grid, Layout, Menu } from 'antd';
 import Sider from 'antd/es/layout/Sider';
 import { Content } from 'antd/es/layout/layout';
 import React, { useState } from 'react';
@@ -35,6 +35,8 @@ function getItem(
 
 export function PublicLayout() {
 	const [collapsed, setCollapsed] = useState(false);
+
+	const breakpoint = Grid.useBreakpoint();
 
 	const items: MenuItem[] = [
 		getItem(
@@ -73,7 +75,10 @@ export function PublicLayout() {
 		<>
 			<Layout style={{ minHeight: '100vh' }}>
 				<Sider
-					collapsible
+					breakpoint="sm"
+					onBreakpoint={(broken) => !broken && setCollapsed(true)}
+					collapsible={breakpoint.sm}
+					collapsedWidth={60}
 					collapsed={collapsed}
 					onCollapse={(value) => setCollapsed(value)}
 				>
@@ -86,15 +91,13 @@ export function PublicLayout() {
 						items={items}
 					/>
 				</Sider>
-				<div className="layout-content">
-					{' '}
-					<Content>
-						<div className="layout-outlet">
-
-							<Outlet />
-						</div>
+				<Layout>
+					<Content
+						className={`layout-content ${breakpoint.sm ? '' : 'mobile'}`}
+					>
+						<Outlet />
 					</Content>
-				</div>
+				</Layout>
 			</Layout>
 		</>
 	);

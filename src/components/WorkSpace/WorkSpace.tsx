@@ -112,6 +112,7 @@ const WorkSpace = () => {
 					total: listWorkSpace?.count,
 					onChange: handlePaginationChange,
 				}}
+				style={{ overflowX: 'auto' }}
 				loading={isLoading}
 			/>
 		</>

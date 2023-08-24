@@ -1,11 +1,9 @@
 .layout-content {
+	width: 90%;
 	margin: 0 auto;
 }
 
-
-@media (min-width: 700px) {
-	.layout-content {
-		min-width: 75vw;
-	}
+.layout-content.mobile {
+	width: 100%;
+	padding: 10px;
 }
-
