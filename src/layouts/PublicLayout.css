@@ -2,8 +2,10 @@
 	margin: 0 auto;
 }
 
+
 @media (min-width: 700px) {
 	.layout-content {
 		min-width: 75vw;
 	}
 }
+

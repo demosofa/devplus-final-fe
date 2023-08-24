@@ -90,6 +90,7 @@ export function PublicLayout() {
 					{' '}
 					<Content>
 						<div className="layout-outlet">
+
 							<Outlet />
 						</div>
 					</Content>
