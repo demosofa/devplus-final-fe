@@ -1,6 +1,6 @@
 import { API_URL } from '@constants';
 import axios from 'axios';
-import { CREATEWORKSPACE } from 'types';
+import { CreateWorkspaceType } from '@types';
 
-export const createWorkSpace = (data: CREATEWORKSPACE) =>
+export const createWorkSpace = (data: CreateWorkspaceType) =>
 	axios.post(API_URL.WORKSPACE, data);

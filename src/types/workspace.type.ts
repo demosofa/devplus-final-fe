@@ -4,7 +4,7 @@ export type WorkspaceType = {
 	status: string;
 };
 
-export type CREATEWORKSPACE = {
+export type CreateWorkspaceType = {
 	id: number;
 	title_workspace: string;
 	email: string;
