@@ -26,7 +26,7 @@ export const UpdateCampaign = () => {
 			data.id = +id!;
 			await updateCampaignHandle.mutateAsync(data);
 
-			message.success('Campaign created successfully');
+			message.success('Campaign update successfully');
 
 			form.resetFields();
 		} catch (error) {
