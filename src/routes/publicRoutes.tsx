@@ -3,6 +3,7 @@ import { PublicLayout } from '@layouts/PublicLayout';
 import WorkSpace from 'components/WorkSpace/WorkSpace';
 import { CampainTest } from '../components/CaimpainTest/CampainTest';
 import { CreateWorkSpace } from 'components/WorkSpace/CreateWorkSpace';
+import { UpdateCampaign } from 'components/Campaign/UpdateCampaign';
 
 const publicRoutes: RouteObject[] = [
 	{
@@ -21,6 +22,11 @@ const publicRoutes: RouteObject[] = [
 			{
 				path: '/create-ws',
 				element: <CreateWorkSpace />,
+			},
+
+			{
+				path: '/update-campaign/:id',
+				element: <UpdateCampaign />,
 			},
 		],
 	},
