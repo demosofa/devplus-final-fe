@@ -3,10 +3,6 @@ import { QUERY_KEY } from '@constants';
 import { notification } from 'antd';
 
 import { createCampaign } from 'services/campaign.services';
-
-import { CampaignType } from '@types';
-import { NOTIFICATION } from 'enums/Notification';
-
 import { CampaignType } from '@types';
 import { NOTIFICATION } from '../enums/Notification';
 
