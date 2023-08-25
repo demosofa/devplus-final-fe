@@ -1,8 +1,8 @@
+import { UseQueryResult, useQuery } from '@tanstack/react-query';
+
 import { QUERY_KEY } from '@constants';
 import { getListWorkSpace } from '@services';
-import { UseQueryResult, useQuery } from '@tanstack/react-query';
-import { WorkspaceType } from '@types';
-import { PageMeta } from './../types/pageMeta.type';
+import { WorkspaceType, PageMeta } from '@types';
 
 export const useGetListWorkSpace = (
 	page: number

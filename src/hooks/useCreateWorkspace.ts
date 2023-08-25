@@ -3,7 +3,7 @@ import { notification } from 'antd';
 
 import { CreateWorkspaceType } from '@types';
 import { QUERY_KEY } from '@constants';
-import { createWorkSpace } from 'services/createWorkspace';
+import { createWorkSpace } from '@services';
 import { NOTIFICATION } from '@enums';
 
 export const useCreateWorkSpace = () => {

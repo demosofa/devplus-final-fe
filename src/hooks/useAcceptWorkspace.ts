@@ -1,8 +1,9 @@
+import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { notification } from 'antd';
+
 import { QUERY_KEY } from '@constants';
 import { acceptWorkspace } from '@services';
-import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { WorkspaceType } from '@types';
-import { notification } from 'antd';
 import { WORKSPACE } from '@enums';
 
 export function useAcceptWorkspace() {
