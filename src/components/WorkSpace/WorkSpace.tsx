@@ -18,10 +18,10 @@ const WorkSpace = () => {
 	const [currentPage, setCurrentPage] = useState(1);
 	const { data: listWorkSpace, isLoading } = useGetListWorkSpace(currentPage);
 
-	const [pageSize, setPageSize] = useState(7);
+	const [pageSize, setPageSize] = useState(5);
 	const acceptWorkspace = useAcceptWorkspace();
 	const rejectWorkspace = useRejectWorkspace();
-
+	console.log(listWorkSpace);
 	const handlePaginationChange = (page: number, pageSize?: number) => {
 		setCurrentPage(page);
 		if (pageSize) {
@@ -109,7 +109,7 @@ const WorkSpace = () => {
 					defaultPageSize: pageSize,
 					showSizeChanger: true,
 					current: currentPage,
-					total: listWorkSpace?.count,
+					total: listWorkSpace?.meta.itemCount,
 					onChange: handlePaginationChange,
 				}}
 				style={{ overflowX: 'auto' }}
