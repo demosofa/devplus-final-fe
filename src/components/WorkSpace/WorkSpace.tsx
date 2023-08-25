@@ -14,14 +14,15 @@ import {
 	useRejectWorkspace,
 } from '@hooks';
 
-const WorkSpace = () => {
+export const WorkSpace = () => {
 	const [currentPage, setCurrentPage] = useState(1);
 	const { data: listWorkSpace, isLoading } = useGetListWorkSpace(currentPage);
 
 	const [pageSize, setPageSize] = useState(5);
+
 	const acceptWorkspace = useAcceptWorkspace();
 	const rejectWorkspace = useRejectWorkspace();
-	console.log(listWorkSpace);
+
 	const handlePaginationChange = (page: number, pageSize?: number) => {
 		setCurrentPage(page);
 		if (pageSize) {
@@ -118,5 +119,3 @@ const WorkSpace = () => {
 		</>
 	);
 };
-
-export default WorkSpace;
