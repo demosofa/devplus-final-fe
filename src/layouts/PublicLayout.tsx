@@ -3,9 +3,10 @@ import Sider from 'antd/es/layout/Sider';
 import { Content } from 'antd/es/layout/layout';
 import { useState } from 'react';
 import { Outlet } from 'react-router-dom';
+
 import './PublicLayout.css';
 import { superAdminNav } from './navigation';
-import { MenuItem } from '../types';
+import { findClickedItem } from '@utils';
 
 export function PublicLayout() {
 	const [collapsed, setCollapsed] = useState(false);
@@ -14,21 +15,6 @@ export function PublicLayout() {
 
 	const breakpoint = Grid.useBreakpoint();
 
-	const findClickedItem: any = (items: MenuItem[], key: string) => {
-		for (const item of items) {
-			if (item.key === key) {
-				return item;
-			}
-			if (item.children && item.children.length > 0) {
-				const subItem = findClickedItem(item.children, key);
-				if (subItem) {
-					return subItem;
-				}
-			}
-		}
-		return null;
-	};
-
 	const handleMenuItemClick = (menuItem: any) => {
 		const clickedItem = findClickedItem(superAdminNav, menuItem.key);
 		const clickedLabel = clickedItem?.label;
@@ -36,6 +22,11 @@ export function PublicLayout() {
 			setBreadcrumItem(clickedLabel);
 		}
 	};
+
+	const breadcrumb =
+		breadcrumbItem === 'Main Account' || breadcrumbItem === 'Sub Account'
+			? [{ title: 'User' }, { title: breadcrumbItem }]
+			: [{ title: breadcrumbItem }];
 
 	return (
 		<Layout style={{ minHeight: '100vh' }}>
@@ -59,18 +50,10 @@ export function PublicLayout() {
 			</Sider>
 			<Layout>
 				<Content className={`layout-content ${breakpoint.sm ? '' : 'mobile'}`}>
-					<Breadcrumb style={{ margin: '16px 0' }}>
-						<Breadcrumb.Item>DP06</Breadcrumb.Item>
-						{breadcrumbItem === 'Main Account' ||
-						breadcrumbItem === 'Sub Account' ? (
-							<>
-								<Breadcrumb.Item>User</Breadcrumb.Item>
-								<Breadcrumb.Item>{breadcrumbItem}</Breadcrumb.Item>
-							</>
-						) : (
-							<Breadcrumb.Item>{breadcrumbItem}</Breadcrumb.Item>
-						)}
-					</Breadcrumb>
+					<Breadcrumb
+						style={{ margin: '16px 0' }}
+						items={[{ title: 'DP06' }].concat(breadcrumb)}
+					/>
 
 					<Outlet />
 				</Content>
