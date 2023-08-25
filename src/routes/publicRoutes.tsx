@@ -3,8 +3,8 @@ import { PublicLayout } from '@layouts/PublicLayout';
 import { WorkSpace } from 'components/WorkSpace/WorkSpace';
 import { CampainTest } from '../components/CaimpainTest/CampainTest';
 import { CreateWorkSpace } from 'components/WorkSpace/CreateWorkSpace';
-import { UpdateCampaign } from 'components/Campaign/UpdateCampaign';
 import WorkSpaceDetail from 'components/WorkSpace/WorkSpaceDetail';
+import { ModalCampaign } from 'components/Campaign/ModalCampaign';
 
 const publicRoutes: RouteObject[] = [
 	{
@@ -27,7 +27,7 @@ const publicRoutes: RouteObject[] = [
 
 			{
 				path: '/update-campaign/:id',
-				element: <UpdateCampaign />,
+				element: <ModalCampaign />,
 			},
 
 			{
