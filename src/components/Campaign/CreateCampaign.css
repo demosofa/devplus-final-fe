@@ -1,0 +1,29 @@
+.main-container .full-btn .btn-submit {
+	margin-top: 40px;
+	margin-left: 45px;
+}
+
+.main-container .full-form .text-select {
+	margin-right: 30px;
+}
+
+.main-container .full-form {
+	max-width: 800px;
+}
+
+.btn-cancel {
+	color: #0f0f0f;
+	background-color: #fff;
+	margin-right: 10px;
+	border: 0.5px solid black;
+}
+
+@media (max-width: 907px) {
+	.main-container .full-form .text-select {
+		margin-right: 0px;
+	}
+	.main-container .full-btn .btn-submit {
+		margin-left: 0px;
+		margin-top: 0px;
+	}
+}

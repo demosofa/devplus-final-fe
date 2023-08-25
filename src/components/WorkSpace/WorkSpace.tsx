@@ -13,6 +13,7 @@ import {
 	useGetListWorkSpace,
 	useRejectWorkspace,
 } from '@hooks';
+import { Link } from 'react-router-dom';
 
 export const WorkSpace = () => {
 	const [currentPage, setCurrentPage] = useState(1);
@@ -67,6 +68,15 @@ export const WorkSpace = () => {
 			title: 'name',
 			dataIndex: 'title_workspace',
 			key: 'name',
+			render: (text: string, record: WorkspaceType) => (
+				<>
+					{record.status === 'accept' ? (
+						<Link to={`/workspace-detail/${record.id}`}>{text}</Link>
+					) : (
+						<span>{text}</span>
+					)}
+				</>
+			),
 		},
 		{
 			title: 'status',

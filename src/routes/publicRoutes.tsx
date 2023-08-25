@@ -4,13 +4,14 @@ import { WorkSpace } from 'components/WorkSpace/WorkSpace';
 import { CampainTest } from '../components/CaimpainTest/CampainTest';
 import { CreateWorkSpace } from 'components/WorkSpace/CreateWorkSpace';
 import { UpdateCampaign } from 'components/Campaign/UpdateCampaign';
+import WorkSpaceDetail from 'components/WorkSpace/WorkSpaceDetail';
 
 const publicRoutes: RouteObject[] = [
 	{
 		element: <PublicLayout />,
 		children: [
 			{
-				path: '/hehe',
+				path: '/workspace',
 				element: <WorkSpace />,
 			},
 
@@ -27,6 +28,11 @@ const publicRoutes: RouteObject[] = [
 			{
 				path: '/update-campaign/:id',
 				element: <UpdateCampaign />,
+			},
+
+			{
+				path: '/workspace-detail/:id',
+				element: <WorkSpaceDetail />,
 			},
 		],
 	},
