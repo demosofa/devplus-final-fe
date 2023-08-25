@@ -1,10 +1,10 @@
 import { useMutation } from '@tanstack/react-query';
-import { QUERY_KEY } from '@constants';
 import { notification } from 'antd';
 
-import { createCampaign } from 'services/campaign.services';
-import { NOTIFICATION } from 'constants/notification';
+import { QUERY_KEY } from '@constants';
 import { CampaignType } from '@types';
+import { NOTIFICATION } from '@enums';
+import { createCampaign } from '@services';
 
 export const useCreateCampaign = () => {
 	return useMutation({
