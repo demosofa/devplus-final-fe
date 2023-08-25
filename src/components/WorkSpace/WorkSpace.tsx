@@ -20,10 +20,9 @@ export const WorkSpace = () => {
 	const { data: listWorkSpace, isLoading } = useGetListWorkSpace(currentPage);
 
 	const [pageSize, setPageSize] = useState(5);
-
 	const acceptWorkspace = useAcceptWorkspace();
 	const rejectWorkspace = useRejectWorkspace();
-
+	console.log(listWorkSpace);
 	const handlePaginationChange = (page: number, pageSize?: number) => {
 		setCurrentPage(page);
 		if (pageSize) {
