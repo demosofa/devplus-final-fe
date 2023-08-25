@@ -1,10 +1,10 @@
 import { RouteObject } from 'react-router-dom';
 import { PublicLayout } from '@layouts/PublicLayout';
 import { WorkSpace } from 'components/WorkSpace/WorkSpace';
-import { CampainTest } from '../components/CaimpainTest/CampainTest';
 import { CreateWorkSpace } from 'components/WorkSpace/CreateWorkSpace';
 import { UpdateCampaign } from 'components/Campaign/UpdateCampaign';
 import WorkSpaceDetail from 'components/WorkSpace/WorkSpaceDetail';
+import { Campaign } from '../components';
 
 const publicRoutes: RouteObject[] = [
 	{
@@ -16,12 +16,12 @@ const publicRoutes: RouteObject[] = [
 			},
 
 			{
-				path: 'campain',
-				element: <CampainTest />,
+				path: 'campaign',
+				element: <Campaign />,
 			},
 
 			{
-				path: '/create-ws',
+				path: 'create-ws',
 				element: <CreateWorkSpace />,
 			},
 
