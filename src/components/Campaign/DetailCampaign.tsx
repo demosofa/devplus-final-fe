@@ -7,6 +7,7 @@ import { useMemo } from 'react';
 import { CampaignType } from '@types';
 import { clone } from '@utils';
 import { useFindOneCampaign } from '@hooks';
+import './DetailCampaign.css';
 
 export const DetailCampaign = () => {
 	const { id } = useParams();
@@ -29,7 +30,7 @@ export const DetailCampaign = () => {
 
 	if (detailCampaignLoading) {
 		return (
-			<div>
+			<div className="isLoading">
 				<LoadingOutlined /> &nbsp; Loading...
 			</div>
 		);
