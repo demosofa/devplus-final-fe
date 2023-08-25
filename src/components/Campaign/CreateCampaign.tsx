@@ -1,4 +1,4 @@
-import { Button, DatePicker, Form, Input, Space, notification } from 'antd';
+import { Button, DatePicker, Form, Input, Space } from 'antd';
 import customParseFormat from 'dayjs/plugin/customParseFormat';
 import { useState } from 'react';
 import { useParams } from 'react-router-dom';
@@ -25,17 +25,9 @@ const CreateCampaign = () => {
 	const onFinish = (values: CampaignType) => {
 		values.workspaceId = Number(id);
 
-		try {
-			CreateCampaign.mutate(values);
+		CreateCampaign.mutate(values);
 
-			notification.success({ message: 'Campaign created successfully' });
-
-			form.resetFields();
-		} catch (error) {
-			notification.error({
-				message: 'Email or Title campaign already exists. Please try again.',
-			});
-		}
+		form.resetFields();
 	};
 
 	const range = (start: number, end: number) => {
@@ -82,12 +74,12 @@ const CreateCampaign = () => {
 							<Form.Item
 								name="name"
 								noStyle
-								rules={[
-									{
-										required: true,
-										message: 'Please enter a name',
-									},
-								]}
+								// rules={[
+								// 	{
+								// 		required: true,
+								// 		message: 'Please enter a name',
+								// 	},
+								// ]}
 							>
 								<Input
 									type="input"
