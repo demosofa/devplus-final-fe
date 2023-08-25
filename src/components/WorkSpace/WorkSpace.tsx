@@ -53,6 +53,11 @@ const WorkSpace = () => {
 
 	const columns: ColumnsType<WorkspaceType> = [
 		{
+			title: 'STT',
+			key: 'index',
+			render: (_text, _record, index) => index + 1,
+		},
+		{
 			title: 'id',
 			dataIndex: 'id',
 			key: 'id',
