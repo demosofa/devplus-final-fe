@@ -1,104 +1,80 @@
-import {
-	GithubOutlined,
-	PieChartOutlined,
-	UserOutlined,
-	UserSwitchOutlined,
-	UsergroupAddOutlined,
-} from '@ant-design/icons';
-import { Grid, Layout, Menu } from 'antd';
+import { Breadcrumb, Grid, Layout, Menu } from 'antd';
 import Sider from 'antd/es/layout/Sider';
 import { Content } from 'antd/es/layout/layout';
-import React, { useState } from 'react';
-import { Link, Outlet } from 'react-router-dom';
+import { useState } from 'react';
+import { Outlet } from 'react-router-dom';
 import './PublicLayout.css';
-
-interface MenuItem {
-	key: string;
-	icon?: React.ReactNode;
-	children?: MenuItem[];
-	label: string;
-}
-
-function getItem(
-	label: string,
-	key: string,
-	icon?: React.ReactNode,
-	children?: MenuItem[]
-): MenuItem {
-	return {
-		key,
-		icon,
-		children,
-		label,
-	};
-}
+import { superAdminNav } from './navigation';
+import { MenuItem } from '../types';
 
 export function PublicLayout() {
 	const [collapsed, setCollapsed] = useState(false);
 
+	const [breadcrumbItem, setBreadcrumItem] = useState('Workspace');
+
 	const breakpoint = Grid.useBreakpoint();
 
-	const items: MenuItem[] = [
-		getItem(
-			'Workspace',
-			'1',
-			<Link to={'/hehe'}>
-				<GithubOutlined />
-			</Link>
-		),
-		getItem(
-			'Campaign',
-			'2',
-			<Link to={'/campain'}>
-				<PieChartOutlined />
-			</Link>
-		),
-		getItem('User', 'sub1', <UserOutlined />, [
-			getItem(
-				'Main Account',
-				'3',
-				<Link to={'/campain'}>
-					<UserSwitchOutlined />
-				</Link>
-			),
-			getItem(
-				'Sub Account',
-				'4',
-				<Link to={'/campain'}>
-					<UsergroupAddOutlined />
-				</Link>
-			),
-		]),
-	];
+	const findClickedItem: any = (items: MenuItem[], key: string) => {
+		for (const item of items) {
+			if (item.key === key) {
+				return item;
+			}
+			if (item.children && item.children.length > 0) {
+				const subItem = findClickedItem(item.children, key);
+				if (subItem) {
+					return subItem;
+				}
+			}
+		}
+		return null;
+	};
+
+	const handleMenuItemClick = (menuItem: any) => {
+		const clickedItem = findClickedItem(superAdminNav, menuItem.key);
+		const clickedLabel = clickedItem?.label;
+		if (clickedLabel !== undefined) {
+			setBreadcrumItem(clickedLabel);
+		}
+	};
 
 	return (
-		<>
-			<Layout style={{ minHeight: '100vh' }}>
-				<Sider
-					breakpoint="sm"
-					onBreakpoint={(broken) => !broken && setCollapsed(true)}
-					collapsible={breakpoint.sm}
-					collapsedWidth={60}
-					collapsed={collapsed}
-					onCollapse={(value) => setCollapsed(value)}
-				>
-					<div className="demo-logo-vertical" />
-					<br />
-					<Menu
-						theme="dark"
-						defaultSelectedKeys={['1']}
-						mode="inline"
-						items={items}
-					/>
-				</Sider>
-				<Layout>
-					<Content
-						className={`layout-content ${breakpoint.sm ? '' : 'mobile'}`}
-					>
-						<Outlet />
-					</Content>
-				</Layout>
+		<Layout style={{ minHeight: '100vh' }}>
+			<Sider
+				breakpoint="sm"
+				onBreakpoint={(broken) => !broken && setCollapsed(true)}
+				collapsible={breakpoint.sm}
+				collapsedWidth={60}
+				collapsed={collapsed}
+				onCollapse={(value) => setCollapsed(value)}
+			>
+				<div className="demo-logo-vertical" />
+				<br />
+				<Menu
+					theme="dark"
+					defaultSelectedKeys={['1']}
+					mode="inline"
+					items={superAdminNav}
+					onClick={handleMenuItemClick}
+				/>
+			</Sider>
+			<Layout>
+				<Content className={`layout-content ${breakpoint.sm ? '' : 'mobile'}`}>
+					<Breadcrumb style={{ margin: '16px 0' }}>
+						<Breadcrumb.Item>DP06</Breadcrumb.Item>
+						{breadcrumbItem === 'Main Account' ||
+						breadcrumbItem === 'Sub Account' ? (
+							<>
+								<Breadcrumb.Item>User</Breadcrumb.Item>
+								<Breadcrumb.Item>{breadcrumbItem}</Breadcrumb.Item>
+							</>
+						) : (
+							<Breadcrumb.Item>{breadcrumbItem}</Breadcrumb.Item>
+						)}
+					</Breadcrumb>
+
+					<Outlet />
+				</Content>
 			</Layout>
-		</>
+		</Layout>
 	);
 }
