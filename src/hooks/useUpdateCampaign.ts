@@ -17,7 +17,7 @@ export const useUpdateCampaign = () => {
 		onSuccess: (data) => {
 			notification.success({
 				message: NOTIFICATION.SUCCESS,
-				description: 'Create campaign successfully.',
+				description: 'Update campaign successfully.',
 			});
 			queryClient.setQueryData<CampaignType[]>(
 				[QUERY_KEY.LIST_CAMPAIGN],
@@ -34,7 +34,7 @@ export const useUpdateCampaign = () => {
 		onError: () => {
 			notification.error({
 				message: NOTIFICATION.ERROR,
-				description: 'Create campaign failed',
+				description: 'Update campaign failed',
 			});
 		},
 	});
