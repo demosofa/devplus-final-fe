@@ -42,8 +42,8 @@ export function PublicLayout() {
 				<br />
 				<Menu
 					theme="dark"
-					defaultSelectedKeys={['1']}
 					mode="inline"
+					defaultSelectedKeys={['1']}
 					items={superAdminNav}
 					onClick={handleMenuItemClick}
 				/>

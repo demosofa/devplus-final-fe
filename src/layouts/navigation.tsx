@@ -26,14 +26,14 @@ export const superAdminNav: MenuItem[] = [
 	getItem(
 		'Workspace',
 		'1',
-		<Link to={'/hehe'}>
+		<Link to={'/workspace'}>
 			<GithubOutlined />
 		</Link>
 	),
 	getItem(
 		'Campaign',
 		'2',
-		<Link to={'/campain'}>
+		<Link to={'/campaign'}>
 			<PieChartOutlined />
 		</Link>
 	),
@@ -41,14 +41,14 @@ export const superAdminNav: MenuItem[] = [
 		getItem(
 			'Main Account',
 			'3',
-			<Link to={'/campain'}>
+			<Link to={'/campaign'}>
 				<UserSwitchOutlined />
 			</Link>
 		),
 		getItem(
 			'Sub Account',
 			'4',
-			<Link to={'/campain'}>
+			<Link to={'/campaign'}>
 				<UsergroupAddOutlined />
 			</Link>
 		),
@@ -59,7 +59,7 @@ export const adminNav: MenuItem[] = [
 	getItem(
 		'Campaign',
 		'2',
-		<Link to={'/campain'}>
+		<Link to={'/campaign'}>
 			<PieChartOutlined />
 		</Link>
 	),
@@ -67,14 +67,14 @@ export const adminNav: MenuItem[] = [
 		getItem(
 			'Main Account',
 			'3',
-			<Link to={'/campain'}>
+			<Link to={'/campaign'}>
 				<UserSwitchOutlined />
 			</Link>
 		),
 		getItem(
 			'Sub Account',
 			'4',
-			<Link to={'/campain'}>
+			<Link to={'/campaign'}>
 				<UsergroupAddOutlined />
 			</Link>
 		),
@@ -85,7 +85,7 @@ export const userNav: MenuItem[] = [
 	getItem(
 		'Campaign',
 		'2',
-		<Link to={'/campain'}>
+		<Link to={'/campaign'}>
 			<PieChartOutlined />
 		</Link>
 	),

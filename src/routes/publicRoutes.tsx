@@ -1,9 +1,9 @@
 import { RouteObject } from 'react-router-dom';
 import { PublicLayout } from '@layouts/PublicLayout';
 import { WorkSpace } from 'components/WorkSpace/WorkSpace';
-import { CampainTest } from '../components/CaimpainTest/CampainTest';
 import { CreateWorkSpace } from 'components/WorkSpace/CreateWorkSpace';
 import WorkSpaceDetail from 'components/WorkSpace/WorkSpaceDetail';
+import { Campaign } from '../components';
 import { ModalCampaign } from 'components/Campaign/ModalCampaign';
 import { ModalDetailCampaign } from 'components/Campaign/ModalDetailCampaign';
 
@@ -17,12 +17,12 @@ const publicRoutes: RouteObject[] = [
 			},
 
 			{
-				path: 'campain',
-				element: <CampainTest />,
+				path: 'campaign',
+				element: <Campaign />,
 			},
 
 			{
-				path: '/create-ws',
+				path: 'create-ws',
 				element: <CreateWorkSpace />,
 			},
 
