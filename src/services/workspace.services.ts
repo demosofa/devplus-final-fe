@@ -13,7 +13,7 @@ export const getListWorkSpace = (
 export const detailWorkSpace = (
 	id: number
 ): Promise<AxiosResponse<WorkspaceType[]>> =>
-	axios.get<WorkspaceType[]>(API_URL.DETAIL_WORKSPACE + id);
+	axios.get<WorkspaceType[]>(API_URL.WORKSPACE + id);
 
 export const acceptWorkspace = (id: number) =>
 	axios.patch(API_URL.WORKSPACE + `/accept/${id}`);
