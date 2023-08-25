@@ -1,42 +1,60 @@
-import { SoundFilled } from '@ant-design/icons';
-import { Button, DatePicker, Form, Input, message } from 'antd';
-import { useState } from 'react';
+import { LoadingOutlined, SoundFilled } from '@ant-design/icons';
+import { Button, DatePicker, Form, Input } from 'antd';
+import { useMemo, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import dayjs from 'dayjs';
-import TextArea from 'antd/es/input/TextArea';
+import dayjs, { Dayjs } from 'dayjs';
+import 'react-quill/dist/quill.snow.css';
 
 import './UpdateCampaign.css';
 import { useFindOneCampaign, useUpdateCampaign } from '@hooks';
 import { CampaignType } from '@types';
+import { clone } from '@utils';
+import ReactQuill from 'react-quill';
 
 export const UpdateCampaign = () => {
 	const { id } = useParams();
-	const { data: campaign, isLoading: campaignLoading } = useFindOneCampaign(
-		+id!
-	);
+	const { data, isLoading: campaignLoading } = useFindOneCampaign(+id!);
 	const [form] = Form.useForm();
 	const [submitting, setSubmitting] = useState(false);
+
+	const [description, setDescription] = useState('');
+	const handleDescriptionChange = (value: string) => {
+		setDescription(value);
+	};
+
+	const detailCampaign = useMemo(() => {
+		if (campaignLoading || !data) {
+			return undefined;
+		}
+
+		const cloned = clone(data) as Omit<CampaignType, 'expired_time'> & {
+			expired_time: Dayjs;
+		};
+
+		cloned.expired_time = dayjs(data.expired_time);
+
+		return cloned;
+	}, [data, campaignLoading]);
 
 	const updateCampaignHandle = useUpdateCampaign();
 
 	const handleUpdateCampaign = async (data: CampaignType) => {
-		try {
-			setSubmitting(true);
+		setSubmitting(true);
 
-			data.id = +id!;
-			await updateCampaignHandle.mutateAsync(data);
+		data.id = +id!;
+		await updateCampaignHandle.mutateAsync(data);
 
-			message.success('Campaign update successfully');
+		form.resetFields();
 
-			form.resetFields();
-		} catch (error) {
-			message.error('Please try again.');
-		} finally {
-			setSubmitting(false);
-		}
+		setSubmitting(false);
 	};
 
-	if (campaignLoading) return null;
+	if (campaignLoading)
+		return (
+			<div>
+				<LoadingOutlined /> &nbsp; Loading...
+			</div>
+		);
 
 	return (
 		<div>
@@ -47,6 +65,7 @@ export const UpdateCampaign = () => {
 			</div>
 			<hr />
 			<Form
+				initialValues={detailCampaign}
 				form={form}
 				onFinish={handleUpdateCampaign}
 				labelCol={{ span: 10 }}
@@ -62,7 +81,7 @@ export const UpdateCampaign = () => {
 						},
 					]}
 				>
-					<Input placeholder="Input name" defaultValue={campaign.name} />
+					<Input placeholder="Input name" />
 				</Form.Item>
 
 				<Form.Item
@@ -70,9 +89,10 @@ export const UpdateCampaign = () => {
 					name={'description'}
 					rules={[{ required: true, message: 'Please input new description!' }]}
 				>
-					<TextArea
-						placeholder="Input description"
-						defaultValue={campaign.description}
+					<ReactQuill
+						value={description}
+						onChange={handleDescriptionChange}
+						style={{ width: '275px' }}
 					/>
 				</Form.Item>
 
@@ -81,7 +101,7 @@ export const UpdateCampaign = () => {
 					label="Expired time"
 					name={'expired_time'}
 				>
-					<DatePicker defaultValue={dayjs(campaign.expired_time)} showTime />
+					<DatePicker showTime />
 				</Form.Item>
 
 				<Form.Item className="submit-button">

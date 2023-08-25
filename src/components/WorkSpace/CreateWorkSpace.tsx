@@ -1,10 +1,10 @@
-import { Button, Form, Input, message } from 'antd';
+import { Button, Form, Input } from 'antd';
 import { useCreateWorkSpace } from 'hooks/useCreateWorkspace';
 import { CreateWorkspaceType } from 'types';
+import { UserOutlined } from '@ant-design/icons';
+import { useState } from 'react';
 
 import './CreateWorkSpace.css';
-import { useState } from 'react';
-import { UserOutlined } from '@ant-design/icons';
 
 export const CreateWorkSpace = () => {
 	const [form] = Form.useForm();
@@ -12,21 +12,13 @@ export const CreateWorkSpace = () => {
 	const [submitting, setSubmitting] = useState(false);
 
 	const addWorkSpace = async (values: CreateWorkspaceType) => {
-		try {
-			setSubmitting(true);
+		setSubmitting(true);
 
-			await createWSpace.mutateAsync(values);
+		await createWSpace.mutateAsync(values);
 
-			message.success('Workspace created successfully');
+		form.resetFields();
 
-			form.resetFields();
-		} catch (error) {
-			message.error(
-				'Email or Title workspace is exist in Workspace. Please try again.'
-			);
-		} finally {
-			setSubmitting(false);
-		}
+		setSubmitting(false);
 	};
 
 	return (

@@ -2,9 +2,10 @@ import { RouteObject } from 'react-router-dom';
 import { PublicLayout } from '@layouts/PublicLayout';
 import { WorkSpace } from 'components/WorkSpace/WorkSpace';
 import { CreateWorkSpace } from 'components/WorkSpace/CreateWorkSpace';
-import { UpdateCampaign } from 'components/Campaign/UpdateCampaign';
 import WorkSpaceDetail from 'components/WorkSpace/WorkSpaceDetail';
 import { Campaign } from '../components';
+import { ModalCampaign } from 'components/Campaign/ModalCampaign';
+import { ModalDetailCampaign } from 'components/Campaign/ModalDetailCampaign';
 
 const publicRoutes: RouteObject[] = [
 	{
@@ -27,12 +28,17 @@ const publicRoutes: RouteObject[] = [
 
 			{
 				path: '/update-campaign/:id',
-				element: <UpdateCampaign />,
+				element: <ModalCampaign />,
 			},
 
 			{
 				path: '/workspace-detail/:id',
 				element: <WorkSpaceDetail />,
+			},
+
+			{
+				path: '/detail-campaign/:id',
+				element: <ModalDetailCampaign />,
 			},
 		],
 	},
