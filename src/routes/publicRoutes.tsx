@@ -4,7 +4,7 @@ import { WorkSpace } from 'components/WorkSpace/WorkSpace';
 import { CampainTest } from '../components/CaimpainTest/CampainTest';
 import { CreateWorkSpace } from 'components/WorkSpace/CreateWorkSpace';
 import { UpdateCampaign } from 'components/Campaign/UpdateCampaign';
-import CreateCampaign from 'components/Campaign/CreateCampaign';
+import WorkSpaceDetail from 'components/WorkSpace/WorkSpaceDetail';
 
 const publicRoutes: RouteObject[] = [
 	{
@@ -32,7 +32,7 @@ const publicRoutes: RouteObject[] = [
 
 			{
 				path: '/workspace-detail/:id',
-				element: <CreateCampaign />,
+				element: <WorkSpaceDetail />,
 			},
 		],
 	},

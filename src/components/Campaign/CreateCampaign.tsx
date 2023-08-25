@@ -1,4 +1,4 @@
-import { Button, DatePicker, Form, Input, Space, message } from 'antd';
+import { Button, DatePicker, Form, Input, Space, notification } from 'antd';
 import customParseFormat from 'dayjs/plugin/customParseFormat';
 import { useState } from 'react';
 import { useParams } from 'react-router-dom';
@@ -11,38 +11,39 @@ import { useCreateCampaign } from 'hooks/useCreateCampaign';
 import { CampaignType } from '@types';
 
 const CreateCampaign = () => {
+	dayjs.extend(customParseFormat);
+
 	const { id } = useParams();
+
 	const [form] = Form.useForm();
+
 	const CreateCampaign = useCreateCampaign();
-	const [submitting, setSubmitting] = useState(false);
+
 	const [description, setDescription] = useState('');
 
 	const onFinish = (values: CampaignType) => {
-		try {
-			setSubmitting(true);
+		values.workspaceId = Number(id);
 
-			values.workspaceId = +id!;
+		try {
 			CreateCampaign.mutate(values);
 
-			message.success('campaign created successfully');
+			notification.success({ message: 'Campaign created successfully' });
 
 			form.resetFields();
 		} catch (error) {
-			message.error(
-				'Email or Title campaign is exist in campaign. Please try again.'
-			);
-		} finally {
-			setSubmitting(false);
+			notification.error({
+				message: 'Email or Title campaign already exists. Please try again.',
+			});
 		}
 	};
 
-	dayjs.extend(customParseFormat);
-
 	const range = (start: number, end: number) => {
 		const result = [];
+
 		for (let i = start; i < end; i++) {
 			result.push(i);
 		}
+
 		return result;
 	};
 
@@ -90,7 +91,7 @@ const CreateCampaign = () => {
 								<Input
 									type="input"
 									style={{
-										width: '200px',
+										width: '300px',
 									}}
 									placeholder="abc..."
 								/>
@@ -118,7 +119,7 @@ const CreateCampaign = () => {
 							<ReactQuill
 								value={description}
 								onChange={handleDescriptionChange}
-								style={{ width: '200px' }}
+								style={{ width: '300px' }}
 							/>
 						</Form.Item>
 					</Form.Item>
@@ -140,6 +141,7 @@ const CreateCampaign = () => {
 										disabledDate={disabledDate}
 										disabledTime={disabledDateTime}
 										showTime={{ defaultValue: dayjs('00:00:00', 'HH:mm:ss') }}
+										style={{ width: '300px' }}
 									/>
 								</Form.Item>
 							</Space.Compact>
@@ -150,13 +152,8 @@ const CreateCampaign = () => {
 						<Button type="primary" className="btn-cancel">
 							Cancel
 						</Button>
-						<Button
-							className="submit-button"
-							type="primary"
-							htmlType="submit"
-							loading={submitting}
-						>
-							{submitting ? 'Registering...' : 'Register'}
+						<Button className="submit-button" type="primary" htmlType="submit">
+							Create
 						</Button>
 					</Form.Item>
 				</Form>

@@ -11,9 +11,11 @@
 	max-width: 800px;
 }
 
-.main-container .full-btn .btn-cancel {
+.btn-cancel {
 	color: #0f0f0f;
 	background-color: #fff;
+	margin-right: 10px;
+	border: 0.5px solid black;
 }
 
 @media (max-width: 907px) {
