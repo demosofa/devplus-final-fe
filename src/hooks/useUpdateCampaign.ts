@@ -3,6 +3,8 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { updateCampaign } from 'services/campaign.service';
 import { CampaignType } from '@types';
 import { QUERY_KEY } from '@constants';
+import { notification } from 'antd';
+import { NOTIFICATION } from 'constants/notification';
 
 export const useUpdateCampaign = () => {
 	const queryClient = useQueryClient();
@@ -12,7 +14,11 @@ export const useUpdateCampaign = () => {
 			const { data } = await updateCampaign(values);
 			return data;
 		},
-		onSuccess(data) {
+		onSuccess: (data) => {
+			notification.success({
+				message: NOTIFICATION.SUCCESS,
+				description: 'Create campaign successfully.',
+			});
 			queryClient.setQueryData<CampaignType[]>(
 				[QUERY_KEY.LIST_CAMPAIGN],
 				(listCampaign) => {
@@ -24,6 +30,12 @@ export const useUpdateCampaign = () => {
 					}
 				}
 			);
+		},
+		onError: () => {
+			notification.error({
+				message: NOTIFICATION.ERROR,
+				description: 'Create campaign failed',
+			});
 		},
 	});
 };

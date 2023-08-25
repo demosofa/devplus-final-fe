@@ -1,5 +1,5 @@
 import { LoadingOutlined, SoundFilled } from '@ant-design/icons';
-import { Button, DatePicker, Form, Input, notification } from 'antd';
+import { Button, DatePicker, Form, Input } from 'antd';
 import { useMemo, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import dayjs, { Dayjs } from 'dayjs';
@@ -39,22 +39,14 @@ export const UpdateCampaign = () => {
 	const updateCampaignHandle = useUpdateCampaign();
 
 	const handleUpdateCampaign = async (data: CampaignType) => {
-		try {
-			setSubmitting(true);
+		setSubmitting(true);
 
-			data.id = +id!;
-			await updateCampaignHandle.mutateAsync(data);
+		data.id = +id!;
+		await updateCampaignHandle.mutateAsync(data);
 
-			notification.success({ message: 'Campaign update successfully' });
+		form.resetFields();
 
-			form.resetFields();
-		} catch (error) {
-			notification.error({
-				message: 'Email or Title campaign already exists. Please try again.',
-			});
-		} finally {
-			setSubmitting(false);
-		}
+		setSubmitting(false);
 	};
 
 	if (campaignLoading)
