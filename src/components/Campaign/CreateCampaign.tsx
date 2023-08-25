@@ -8,7 +8,7 @@ import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import './CreateCampaign.css';
 import { useCreateCampaign } from 'hooks/useCreateCampaign';
-import { CreateCampaignType } from '@types';
+import { CampaignType } from '@types';
 
 const CreateCampaign = () => {
 	const { id } = useParams();
@@ -17,7 +17,7 @@ const CreateCampaign = () => {
 	const [submitting, setSubmitting] = useState(false);
 	const [description, setDescription] = useState('');
 
-	const onFinish = (values: CreateCampaignType) => {
+	const onFinish = (values: CampaignType) => {
 		try {
 			setSubmitting(true);
 
