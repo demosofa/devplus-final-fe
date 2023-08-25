@@ -1,18 +1,19 @@
-import { useQueryClient } from '@tanstack/react-query';
+import { QueryKey, useQueryClient } from '@tanstack/react-query';
 import { Statistic } from 'antd';
-import { memo } from 'react';
 
 import { CAMPAIGN } from '@enums';
-import { CampaignType } from '@types';
+import { CampaignType, ImPartial, PartialBy } from '@types';
 
 const { Countdown } = Statistic;
 
-function CountdownTimer({
+export function CampaignCountdown({
 	queryKey,
 	campaign,
+	onFinish,
 }: {
-	queryKey: string;
-	campaign: CampaignType;
+	queryKey: QueryKey;
+	campaign: ImPartial<CampaignType, 'id' | 'status' | 'expired_time'>;
+	onFinish: (() => void) | undefined;
 }) {
 	const queryClient = useQueryClient();
 
@@ -23,18 +24,23 @@ function CountdownTimer({
 			value={campaign.expired_time}
 			format="DD : HH : mm : ss"
 			onFinish={() => {
-				queryClient.setQueryData<CampaignType[]>([queryKey], (oldData) => {
-					const cloned = oldData!.concat();
+				queryClient.setQueryData<PartialBy<CampaignType, 'workspaceId'>[]>(
+					queryKey,
+					(lstCampaign) => {
+						if (!lstCampaign || !lstCampaign.length) return [];
 
-					const idx = cloned.findIndex((item) => item.id === campaign.id);
+						const cloned = lstCampaign.concat();
 
-					cloned[idx].status = CAMPAIGN.INACTIVE;
+						const idx = cloned.findIndex((item) => item.id === campaign.id);
 
-					return cloned;
-				});
+						cloned[idx].status = CAMPAIGN.INACTIVE;
+
+						return cloned;
+					}
+				);
+
+				onFinish?.();
 			}}
 		/>
 	);
 }
-
-export const CampaignCountdown = memo(CountdownTimer);
