@@ -26,7 +26,7 @@ export const superAdminNav: MenuItem[] = [
 	getItem(
 		'Workspace',
 		'1',
-		<Link to={'/hehe'}>
+		<Link to={'/workspace'}>
 			<GithubOutlined />
 		</Link>
 	),
