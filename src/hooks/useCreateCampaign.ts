@@ -2,7 +2,6 @@ import { useMutation } from '@tanstack/react-query';
 import { notification } from 'antd';
 
 import { QUERY_KEY } from '@constants';
-
 import { CampaignType } from '@types';
 import { NOTIFICATION } from '@enums';
 import { createCampaign } from '@services';
