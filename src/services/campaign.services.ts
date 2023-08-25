@@ -1,6 +1,6 @@
 import { API_URL } from '@constants';
 import axios from 'axios';
-import { CreateCampaignType } from '@types';
+import { CampaignType } from '@types';
 
-export const createCampaign = (data: CreateCampaignType) =>
+export const createCampaign = (data: CampaignType) =>
 	axios.post(API_URL.CAMPAIGN, data);
