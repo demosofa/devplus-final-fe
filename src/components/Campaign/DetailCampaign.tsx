@@ -1,19 +1,40 @@
-import { SoundFilled } from '@ant-design/icons';
+import { LoadingOutlined, SoundFilled } from '@ant-design/icons';
 import { useParams } from 'react-router-dom';
-
-import './DetailCampaign.css';
-import { useFindOneCampaign } from '@hooks';
 import { DatePicker, Form, Input } from 'antd';
-import TextArea from 'antd/es/input/TextArea';
-import dayjs from 'dayjs';
+import dayjs, { Dayjs } from 'dayjs';
+import { useMemo } from 'react';
+
+import { CampaignType } from '@types';
+import { clone } from '@utils';
+import { useFindOneCampaign } from '@hooks';
 
 export const DetailCampaign = () => {
 	const { id } = useParams();
-	const { data: detailCampaign, isLoading: detailCampaignLoading } =
-		useFindOneCampaign(+id!);
+
+	const { data, isLoading: detailCampaignLoading } = useFindOneCampaign(+id!);
+
+	const detailCampaign = useMemo(() => {
+		if (detailCampaignLoading || !data) {
+			return undefined;
+		}
+
+		const cloned = clone(data) as Omit<CampaignType, 'expired_time'> & {
+			expired_time: Dayjs;
+		};
+
+		cloned.expired_time = dayjs(data.expired_time);
+
+		return cloned;
+	}, [data, detailCampaignLoading]);
+
 	if (detailCampaignLoading) {
-		return null;
+		return (
+			<div>
+				<LoadingOutlined /> &nbsp; Loading...
+			</div>
+		);
 	}
+
 	return (
 		<div>
 			<div className="register_workspace">
@@ -22,33 +43,25 @@ export const DetailCampaign = () => {
 				<span> Update Campaign</span>
 			</div>
 			<hr />
-			<Form labelCol={{ span: 10 }} wrapperCol={{ span: 20 }}>
-				<Form.Item label="Name" name={'name'}>
-					<Input
-						disabled
-						placeholder="Input name"
-						defaultValue={detailCampaign.name}
-					/>
+			<Form
+				initialValues={detailCampaign}
+				labelCol={{ span: 10 }}
+				wrapperCol={{ span: 20 }}
+			>
+				<Form.Item label="Name" name="name">
+					<Input disabled placeholder="Input name" />
 				</Form.Item>
 
-				<Form.Item label="Description" name={'description'}>
-					<TextArea
-						disabled
-						placeholder="Input description"
-						defaultValue={detailCampaign.description}
-					/>
+				<Form.Item label="Description" name="description">
+					<Input.TextArea disabled placeholder="Input description" />
 				</Form.Item>
 
 				<Form.Item
 					className="timestampInitial"
 					label="Expired time"
-					name={'expired_time'}
+					name="expired_time"
 				>
-					<DatePicker
-						disabled
-						defaultValue={dayjs(detailCampaign.expired_time)}
-						showTime
-					/>
+					<DatePicker disabled showTime />
 				</Form.Item>
 			</Form>
 		</div>
