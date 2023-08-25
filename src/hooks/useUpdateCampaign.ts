@@ -1,10 +1,10 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { notification } from 'antd';
 
-import { updateCampaign } from 'services/campaign.service';
+import { updateCampaign } from '@services';
 import { CampaignType } from '@types';
 import { QUERY_KEY } from '@constants';
-import { notification } from 'antd';
-import { NOTIFICATION } from 'constants/notification';
+import { NOTIFICATION } from '@enums';
 
 export const useUpdateCampaign = () => {
 	const queryClient = useQueryClient();

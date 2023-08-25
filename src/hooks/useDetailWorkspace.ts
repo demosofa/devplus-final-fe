@@ -1,6 +1,7 @@
+import { UseQueryResult, useQuery } from '@tanstack/react-query';
+
 import { QUERY_KEY } from '@constants';
 import { detailWorkSpace } from '@services';
-import { UseQueryResult, useQuery } from '@tanstack/react-query';
 import { WorkspaceType } from '@types';
 
 export const useDetailWorkspace = (

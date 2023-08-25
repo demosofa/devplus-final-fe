@@ -1,18 +1,19 @@
-import { API_URL } from '@constants';
-import axios, { AxiosResponse } from 'axios';
-import { WorkspaceType } from '@types';
+import axios from 'axios';
 
-export const getListWorkSpace = (
-	page: number
-): Promise<AxiosResponse<WorkspaceType[]>> =>
+import { API_URL } from '@constants';
+import { CreateWorkspaceType, WorkspaceType } from '@types';
+
+export const createWorkSpace = (data: CreateWorkspaceType) =>
+	axios.post(API_URL.WORKSPACE, data);
+
+export const getListWorkSpace = (page: number) =>
 	axios.get<WorkspaceType[]>(API_URL.WORKSPACE, {
 		params: {
 			page,
 		},
 	});
-export const detailWorkSpace = (
-	id: number
-): Promise<AxiosResponse<WorkspaceType[]>> =>
+
+export const detailWorkSpace = (id: number) =>
 	axios.get<WorkspaceType[]>(API_URL.WORKSPACE + id);
 
 export const acceptWorkspace = (id: number) =>

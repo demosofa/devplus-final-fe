@@ -1,9 +1,8 @@
-import { QUERY_KEY } from '@constants';
 import { UseQueryResult, useQuery } from '@tanstack/react-query';
 
-import { CampaignType } from '@types';
-import { PageMeta } from '../types/pageMeta.type';
-import { getListCampaign } from '../services/campaign.service';
+import { QUERY_KEY } from '@constants';
+import { CampaignType, PageMeta } from '@types';
+import { getListCampaign } from '@services';
 
 export const useGetListCampaign = (
 	page: number

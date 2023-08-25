@@ -1,7 +1,8 @@
-import { QUERY_KEY } from '@constants';
-import { rejectWorkspace } from '@services';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { notification } from 'antd';
+
+import { QUERY_KEY } from '@constants';
+import { rejectWorkspace } from '@services';
 
 export function useRejectWorkspace() {
 	const [api] = notification.useNotification();
