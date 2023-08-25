@@ -74,12 +74,12 @@ const CreateCampaign = () => {
 							<Form.Item
 								name="name"
 								noStyle
-								rules={[
-									{
-										required: true,
-										message: 'Please enter a name',
-									},
-								]}
+								// rules={[
+								// 	{
+								// 		required: true,
+								// 		message: 'Please enter a name',
+								// 	},
+								// ]}
 							>
 								<Input
 									type="input"
