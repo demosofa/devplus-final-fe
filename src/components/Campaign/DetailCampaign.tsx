@@ -2,7 +2,9 @@ import { LoadingOutlined, SoundFilled } from '@ant-design/icons';
 import { useParams } from 'react-router-dom';
 import { DatePicker, Form, Input } from 'antd';
 import dayjs, { Dayjs } from 'dayjs';
-import { useMemo } from 'react';
+import { useMemo, useState } from 'react';
+import 'react-quill/dist/quill.snow.css';
+import ReactQuill from 'react-quill';
 
 import { CampaignType } from '@types';
 import { clone } from '@utils';
@@ -10,6 +12,10 @@ import { useFindOneCampaign } from '@hooks';
 import './DetailCampaign.css';
 
 export const DetailCampaign = () => {
+	const [description, setDescription] = useState('');
+	const handleDescriptionChange = (value: string) => {
+		setDescription(value);
+	};
 	const { id } = useParams();
 
 	const { data, isLoading: detailCampaignLoading } = useFindOneCampaign(+id!);
@@ -41,7 +47,7 @@ export const DetailCampaign = () => {
 			<div className="register_workspace">
 				<SoundFilled />
 				&nbsp;
-				<span> Update Campaign</span>
+				<span> Detail Campaign</span>
 			</div>
 			<hr />
 			<Form
@@ -50,11 +56,15 @@ export const DetailCampaign = () => {
 				wrapperCol={{ span: 20 }}
 			>
 				<Form.Item label="Name" name="name">
-					<Input disabled placeholder="Input name" />
+					<Input placeholder="Input name" />
 				</Form.Item>
 
 				<Form.Item label="Description" name="description">
-					<Input.TextArea disabled placeholder="Input description" />
+					<ReactQuill
+						value={description}
+						onChange={handleDescriptionChange}
+						style={{ width: '275px' }}
+					/>
 				</Form.Item>
 
 				<Form.Item
@@ -62,7 +72,7 @@ export const DetailCampaign = () => {
 					label="Expired time"
 					name="expired_time"
 				>
-					<DatePicker disabled showTime />
+					<DatePicker showTime />
 				</Form.Item>
 			</Form>
 		</div>
