@@ -2,16 +2,13 @@ import { Breadcrumb, Grid, Layout, Menu } from 'antd';
 import Sider from 'antd/es/layout/Sider';
 import { Content } from 'antd/es/layout/layout';
 import { useState } from 'react';
-import { Outlet, useLocation } from 'react-router-dom';
+import { Outlet } from 'react-router-dom';
 
 import './PublicLayout.css';
 import { superAdminNav } from './navigation';
 import { findClickedItem } from '@utils';
 
 export function PublicLayout() {
-	const location = useLocation();
-	console.log(location.pathname);
-
 	const [collapsed, setCollapsed] = useState(false);
 
 	const [breadcrumbItem, setBreadcrumItem] = useState('Workspace');
