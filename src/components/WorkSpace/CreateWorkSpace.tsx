@@ -1,15 +1,21 @@
-import { Button, Form, Input, message } from 'antd';
+import { Button, Col, Form, Input, Row } from 'antd';
 import { useCreateWorkSpace } from 'hooks/useCreateWorkspace';
 import { CreateWorkspaceType } from 'types';
 
 import './CreateWorkSpace.css';
 import { useState } from 'react';
-import { UserOutlined } from '@ant-design/icons';
+import {
+	CheckCircleOutlined,
+	ExclamationCircleOutlined,
+	UserOutlined,
+} from '@ant-design/icons';
 
 export const CreateWorkSpace = () => {
 	const [form] = Form.useForm();
 	const createWSpace = useCreateWorkSpace();
 	const [submitting, setSubmitting] = useState(false);
+	const [successMessageVisible, setSuccessMessageVisible] = useState(false);
+	const [errorMessage, setErrorMessage] = useState(false);
 
 	const addWorkSpace = async (values: CreateWorkspaceType) => {
 		try {
@@ -17,13 +23,18 @@ export const CreateWorkSpace = () => {
 
 			await createWSpace.mutateAsync(values);
 
-			message.success('Workspace created successfully');
+			setSuccessMessageVisible(true);
+			setTimeout(() => {
+				setSuccessMessageVisible(false);
+			}, 3000);
 
 			form.resetFields();
 		} catch (error) {
-			message.error(
-				'Email or Title workspace is exist in Workspace. Please try again.'
-			);
+			setErrorMessage(true);
+
+			setTimeout(() => {
+				setErrorMessage(false);
+			}, 3000);
 		} finally {
 			setSubmitting(false);
 		}
@@ -113,6 +124,20 @@ export const CreateWorkSpace = () => {
 						</Button>
 					</Form.Item>
 				</Form>
+
+				{successMessageVisible && (
+					<div className="success-message">
+						<CheckCircleOutlined className="success-icon" /> &nbsp; Workspace
+						created successfully
+					</div>
+				)}
+
+				{errorMessage && (
+					<div className="error-message">
+						<ExclamationCircleOutlined className="error-icon" /> &nbsp; Email or
+						Title workspace is exist in Workspace.
+					</div>
+				)}
 			</div>
 		</>
 	);
