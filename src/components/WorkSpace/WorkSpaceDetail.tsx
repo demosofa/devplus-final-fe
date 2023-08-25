@@ -1,6 +1,7 @@
 import { Button, Modal } from 'antd';
-import CreateCampaign from 'components/Campaign/CreateCampaign';
 import { useState } from 'react';
+
+import CreateCampaign from 'components/Campaign/CreateCampaign';
 
 const WorkSpaceDetail = () => {
 	const [isModalOpen, setIsModalOpen] = useState(false);

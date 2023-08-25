@@ -3,9 +3,10 @@ import customParseFormat from 'dayjs/plugin/customParseFormat';
 import { useState } from 'react';
 import { useParams } from 'react-router-dom';
 import dayjs from 'dayjs';
-import { RangePickerProps } from 'antd/es/date-picker';
-import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
+import ReactQuill from 'react-quill';
+import { RangePickerProps } from 'antd/es/date-picker';
+
 import './CreateCampaign.css';
 import { useCreateCampaign } from 'hooks/useCreateCampaign';
 import { CampaignType } from '@types';
