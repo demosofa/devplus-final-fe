@@ -14,11 +14,12 @@ import {
 	useRejectWorkspace,
 } from '@hooks';
 
-const WorkSpace = () => {
+export const WorkSpace = () => {
 	const [currentPage, setCurrentPage] = useState(1);
 	const { data: listWorkSpace, isLoading } = useGetListWorkSpace(currentPage);
 
-	const [pageSize, setPageSize] = useState(7);
+	const [pageSize, setPageSize] = useState(5);
+
 	const acceptWorkspace = useAcceptWorkspace();
 	const rejectWorkspace = useRejectWorkspace();
 
@@ -52,6 +53,11 @@ const WorkSpace = () => {
 	};
 
 	const columns: ColumnsType<WorkspaceType> = [
+		{
+			title: 'STT',
+			key: 'index',
+			render: (_text, _record, index) => index + 1,
+		},
 		{
 			title: 'id',
 			dataIndex: 'id',
@@ -109,7 +115,7 @@ const WorkSpace = () => {
 					defaultPageSize: pageSize,
 					showSizeChanger: true,
 					current: currentPage,
-					total: listWorkSpace?.count,
+					total: listWorkSpace?.meta.itemCount,
 					onChange: handlePaginationChange,
 				}}
 				style={{ overflowX: 'auto' }}
@@ -118,5 +124,3 @@ const WorkSpace = () => {
 		</>
 	);
 };
-
-export default WorkSpace;

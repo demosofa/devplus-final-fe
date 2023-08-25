@@ -1,6 +1,6 @@
 import { RouteObject } from 'react-router-dom';
 import { PublicLayout } from '@layouts/PublicLayout';
-import WorkSpace from 'components/WorkSpace/WorkSpace';
+import { WorkSpace } from 'components/WorkSpace/WorkSpace';
 import { CampainTest } from '../components/CaimpainTest/CampainTest';
 import { CreateWorkSpace } from 'components/WorkSpace/CreateWorkSpace';
 import { UpdateCampaign } from 'components/Campaign/UpdateCampaign';
