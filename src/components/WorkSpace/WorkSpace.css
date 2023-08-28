@@ -1,13 +1,10 @@
-.action-icons {
-}
-
-.icons-check {
+.icons-check-workspace {
 	color: green;
 	font-size: 24px;
 	padding-right: 5px;
 }
 
-.icons-close {
+.icons-close-workspace {
 	color: red;
 	font-size: 24px;
 }

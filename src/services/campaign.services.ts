@@ -3,10 +3,11 @@ import axios from 'axios';
 import { API_URL } from '@constants';
 import { CampaignType } from '@types';
 
-export const getListCampaign = (page: number) =>
+export const getListCampaign = (page: number, take: number) =>
 	axios.get<CampaignType[]>(API_URL.CAMPAIGN, {
 		params: {
 			page,
+			take,
 		},
 	});
 
