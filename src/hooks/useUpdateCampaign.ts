@@ -3,7 +3,6 @@ import { notification } from 'antd';
 
 import { updateCampaign } from '@services';
 import { CampaignType } from '@types';
-import { QUERY_KEY } from '@constants';
 import { NOTIFICATION } from '@enums';
 
 export const useUpdateCampaign = () => {
@@ -14,22 +13,23 @@ export const useUpdateCampaign = () => {
 			const { data } = await updateCampaign(values);
 			return data;
 		},
-		onSuccess: (data) => {
+		onSuccess: () => {
 			notification.success({
 				message: NOTIFICATION.SUCCESS,
 				description: 'Create campaign successfully.',
 			});
-			queryClient.setQueryData<CampaignType[]>(
-				[QUERY_KEY.LIST_CAMPAIGN],
-				(listCampaign) => {
-					if (listCampaign) {
-						const idx = listCampaign.findIndex((item) => item.id == data.id);
-						const cloned = listCampaign.concat();
-						cloned[idx] = data;
-						return cloned;
-					}
-				}
-			);
+			// queryClient.setQueryData<CampaignType[]>(
+			// 	[QUERY_KEY.LIST_CAMPAIGN],
+			// 	(listCampaign) => {
+			// 		if (listCampaign) {
+			// 			const idx = listCampaign.findIndex((item) => item.id == data.id);
+			// 			const cloned = listCampaign.concat();
+			// 			cloned[idx] = data;
+			// 			return cloned;
+			// 		}
+			// 	}
+			// );
+			queryClient.refetchQueries();
 		},
 		onError: () => {
 			notification.error({

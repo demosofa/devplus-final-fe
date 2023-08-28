@@ -1,19 +1,18 @@
-import { LoadingOutlined, SoundFilled } from '@ant-design/icons';
+import { SoundFilled } from '@ant-design/icons';
 import { Button, DatePicker, Form, Input } from 'antd';
 import { useMemo, useState } from 'react';
-import { useParams } from 'react-router-dom';
 import dayjs, { Dayjs } from 'dayjs';
 import 'react-quill/dist/quill.snow.css';
 
 import './UpdateCampaign.css';
-import { useFindOneCampaign, useUpdateCampaign } from '@hooks';
+import { useUpdateCampaign } from '@hooks';
 import { CampaignType } from '@types';
 import { clone } from '@utils';
 import ReactQuill from 'react-quill';
 
-export const UpdateCampaign = () => {
-	const { id } = useParams();
-	const { data, isLoading: campaignLoading } = useFindOneCampaign(+id!);
+export const UpdateCampaign = ({ data }: { data: CampaignType }) => {
+	// const { id } = useParams();
+	// const { data, isLoading: campaignLoading } = useFindOneCampaign(+id!);
 	const [form] = Form.useForm();
 	const [submitting, setSubmitting] = useState(false);
 
@@ -23,10 +22,6 @@ export const UpdateCampaign = () => {
 	};
 
 	const detailCampaign = useMemo(() => {
-		if (campaignLoading || !data) {
-			return undefined;
-		}
-
 		const cloned = clone(data) as Omit<CampaignType, 'expired_time'> & {
 			expired_time: Dayjs;
 		};
@@ -34,27 +29,20 @@ export const UpdateCampaign = () => {
 		cloned.expired_time = dayjs(data.expired_time);
 
 		return cloned;
-	}, [data, campaignLoading]);
+	}, [data]);
 
 	const updateCampaignHandle = useUpdateCampaign();
 
-	const handleUpdateCampaign = async (data: CampaignType) => {
+	const handleUpdateCampaign = async (values: CampaignType) => {
 		setSubmitting(true);
 
-		data.id = +id!;
-		await updateCampaignHandle.mutateAsync(data);
+		values.id = data.id;
+		await updateCampaignHandle.mutateAsync(values);
 
 		form.resetFields();
 
 		setSubmitting(false);
 	};
-
-	if (campaignLoading)
-		return (
-			<div>
-				<LoadingOutlined /> &nbsp; Loading...
-			</div>
-		);
 
 	return (
 		<div>
