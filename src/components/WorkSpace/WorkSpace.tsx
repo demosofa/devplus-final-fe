@@ -90,11 +90,11 @@ export const WorkSpace = () => {
 			title: 'Action',
 			key: 'action',
 			render: (record: WorkspaceType) => (
-				<div className="action-icons">
+				<div className="action-icons-workspace">
 					{record.status === 'pending' ? (
 						<>
 							<CheckCircleOutlined
-								className="icons-check"
+								className="icons-check-workspace"
 								onClick={(e) => {
 									e.preventDefault();
 									e.stopPropagation();
@@ -102,7 +102,7 @@ export const WorkSpace = () => {
 								}}
 							/>
 							<CloseCircleOutlined
-								className="icons-close"
+								className="icons-close-workspace"
 								onClick={(e) => {
 									e.preventDefault();
 									e.stopPropagation();

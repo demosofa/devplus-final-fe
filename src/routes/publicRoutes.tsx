@@ -3,10 +3,10 @@ import { PublicLayout } from '@layouts/PublicLayout';
 import { WorkSpace } from 'components/WorkSpace/WorkSpace';
 import { CampaignTest } from 'components/CampaignTest/CampaignTest';
 import { CreateWorkSpace } from 'components/WorkSpace/CreateWorkSpace';
-import WorkSpaceDetail from 'components/WorkSpace/WorkSpaceDetail';
 import { Campaign } from '../components';
 import { ModalCampaign } from 'components/Campaign/ModalCampaign';
 import { ModalDetailCampaign } from 'components/Campaign/ModalDetailCampaign';
+import { WorkSpaceDetail } from 'pages/WorkspaceDetail';
 
 const publicRoutes: RouteObject[] = [
 	{

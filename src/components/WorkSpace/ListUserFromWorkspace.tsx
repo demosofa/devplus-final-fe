@@ -1,34 +1,55 @@
-import { useMemo, useState } from 'react';
-import { Input, Table } from 'antd';
-import { ColumnsType } from 'antd/es/table';
-import './Campaign.css';
+import { ExclamationCircleFilled } from '@ant-design/icons';
+import { Modal, Table } from 'antd';
 import { CampaignType } from '@types';
-import { useGetListCampaign } from '../../hooks';
+import { useState } from 'react';
+import './WorkSpace.css';
+import { ColumnsType } from 'antd/es/table';
+import { useAcceptWorkspace, useRejectWorkspace } from '@hooks';
+import { Link, useParams } from 'react-router-dom';
+
 import { CAMPAIGN } from '@enums';
+import { useListUserWithWorkspace } from 'hooks/useListUserWithWorkspace';
 
-export const Campaign = () => {
+export const ListUserFromWorkspace = () => {
 	const [currentPage, setCurrentPage] = useState(1);
-	const { data: listCampaign, isLoading } = useGetListCampaign(currentPage);
-
 	const [pageSize, setPageSize] = useState(5);
+	const { id } = useParams();
+	const { data: campaign, isLoading } = useListUserWithWorkspace(
+		Number(id),
+		currentPage,
+		pageSize
+	);
 
-	const [searchName, setSearchName] = useState(''); // Thêm state searchName
-
-	const filteredCampaigns = useMemo(() => {
-		if (!listCampaign?.data) return [];
-
-		if (!searchName) return listCampaign.data;
-
-		return listCampaign.data.filter((campaign) =>
-			campaign.name.toLowerCase().includes(searchName.toLowerCase())
-		);
-	}, [listCampaign?.data, searchName]);
+	const acceptWorkspace = useAcceptWorkspace();
+	const rejectWorkspace = useRejectWorkspace();
 
 	const handlePaginationChange = (page: number, pageSize?: number) => {
 		setCurrentPage(page);
 		if (pageSize) {
 			setPageSize(pageSize);
 		}
+	};
+
+	const handleAcceptWorkspace = (id: number) => {
+		Modal.confirm({
+			title: `Accept Workspace ${id}`,
+			icon: <ExclamationCircleFilled />,
+			content: 'Do you Want to accept this workspace?',
+			onOk() {
+				acceptWorkspace.mutate(id);
+			},
+		});
+	};
+
+	const handleRejectWorkspace = (id: number) => {
+		Modal.confirm({
+			title: `Reject Workspace ${id}`,
+			icon: <ExclamationCircleFilled />,
+			content: 'Do you Want to reject this workspace?',
+			onOk() {
+				rejectWorkspace.mutate(id);
+			},
+		});
 	};
 
 	const columns: ColumnsType<CampaignType> = [
@@ -38,30 +59,36 @@ export const Campaign = () => {
 			render: (_text, _record, index) => index + 1,
 		},
 		{
-			title: 'id',
+			title: 'Id',
 			dataIndex: 'id',
 			key: 'id',
 		},
 		{
-			title: 'name',
+			title: 'Name',
 			dataIndex: 'name',
 			key: 'name',
-		},
-		{
-			title: 'description',
-			dataIndex: 'description',
-			key: 'description',
-			render: (description) => (
-				<p dangerouslySetInnerHTML={{ __html: description }} />
+			render: (text: string, record) => (
+				<>
+					{record.status === CAMPAIGN.ACTIVE ? (
+						<Link to={`/workspace-detail/${record.id}`}>{text}</Link>
+					) : (
+						<span>{text}</span>
+					)}
+				</>
 			),
 		},
 		{
-			title: 'expired time',
-			dataIndex: 'expired_time',
-			key: 'expired_time',
+			title: 'Email',
+			dataIndex: 'email',
+			key: 'email',
 		},
 		{
-			title: 'status',
+			title: 'Phone Number',
+			dataIndex: 'phone_number',
+			key: 'phone_number',
+		},
+		{
+			title: 'Status',
 			dataIndex: 'status',
 			key: 'status',
 		},
@@ -76,6 +103,11 @@ export const Campaign = () => {
 								xmlns="http://www.w3.org/2000/svg"
 								viewBox="0 0 24 24"
 								className="icons-check"
+								onClick={(e) => {
+									e.preventDefault();
+									e.stopPropagation();
+									handleAcceptWorkspace(record.id);
+								}}
 							>
 								<path
 									fill="currentColor"
@@ -87,6 +119,11 @@ export const Campaign = () => {
 								xmlns="http://www.w3.org/2000/svg"
 								viewBox="0 0 24 24"
 								className="icons-close"
+								onClick={(e) => {
+									e.preventDefault();
+									e.stopPropagation();
+									handleRejectWorkspace(record.id);
+								}}
 							>
 								<path
 									fill="currentColor"
@@ -104,21 +141,15 @@ export const Campaign = () => {
 
 	return (
 		<>
-			<Input.Search
-				placeholder="Search by name"
-				allowClear
-				onSearch={setSearchName}
-				style={{ marginBottom: 16, width: '400px' }}
-			/>
 			<Table<CampaignType>
 				columns={columns}
-				dataSource={filteredCampaigns}
+				dataSource={campaign?.data}
 				rowKey={(record) => record.id}
 				pagination={{
 					defaultPageSize: pageSize,
 					showSizeChanger: true,
 					current: currentPage,
-					total: listCampaign?.meta.itemCount,
+					total: campaign?.meta.itemCount,
 					onChange: handlePaginationChange,
 				}}
 				style={{ overflowX: 'auto' }}

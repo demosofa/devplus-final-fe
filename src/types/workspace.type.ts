@@ -2,6 +2,8 @@ export type WorkspaceType = {
 	id: number;
 	title_workspace: string;
 	status: string;
+	campaign: [];
+	user: [];
 };
 
 export type CreateWorkspaceType = {

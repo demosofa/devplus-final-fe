@@ -1,0 +1,15 @@
+.icons-check {
+	color: green;
+	height: 30px;
+	width: 30px;
+	cursor: pointer;
+	display: inline;
+}
+
+.icons-close {
+	color: red;
+	height: 32px;
+	width: 32px;
+	cursor: pointer;
+	display: inline;
+}
