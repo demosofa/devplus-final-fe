@@ -64,52 +64,61 @@ export const UpdateCampaign = () => {
 				<span> Update Campaign</span>
 			</div>
 			<hr />
-			<Form
-				initialValues={detailCampaign}
-				form={form}
-				onFinish={handleUpdateCampaign}
-				labelCol={{ span: 10 }}
-				wrapperCol={{ span: 20 }}
-			>
-				<Form.Item
-					label="Name"
-					name={'name'}
-					rules={[
-						{
-							required: true,
-							message: 'Please input your new name!',
-						},
-					]}
+			<div>
+				<Form
+					style={{ marginRight: 175 }}
+					initialValues={detailCampaign}
+					form={form}
+					onFinish={handleUpdateCampaign}
+					labelCol={{ span: 10 }}
+					wrapperCol={{ span: 20 }}
 				>
-					<Input placeholder="Input name" />
-				</Form.Item>
+					<Form.Item
+						label="Name"
+						name={'name'}
+						rules={[
+							{
+								required: true,
+								message: 'Please input your new name!',
+							},
+						]}
+					>
+						<Input placeholder="Input name" />
+					</Form.Item>
 
-				<Form.Item
-					label="Description"
-					name={'description'}
-					rules={[{ required: true, message: 'Please input new description!' }]}
-				>
-					<ReactQuill
-						value={description}
-						onChange={handleDescriptionChange}
-						style={{ width: '275px' }}
-					/>
-				</Form.Item>
+					<Form.Item
+						label="Description"
+						name={'description'}
+						rules={[
+							{ required: true, message: 'Please input new description!' },
+						]}
+					>
+						<ReactQuill
+							value={description}
+							onChange={handleDescriptionChange}
+						/>
+					</Form.Item>
 
-				<Form.Item
-					className="timestampInitial"
-					label="Expired time"
-					name={'expired_time'}
-				>
-					<DatePicker showTime />
-				</Form.Item>
+					<Form.Item
+						className="timestampInitial"
+						label="Expired time"
+						name={'expired_time'}
+					>
+						<DatePicker showTime />
+					</Form.Item>
 
-				<Form.Item className="submit-button">
-					<Button type="primary" htmlType="submit" loading={submitting}>
-						{submitting ? 'Update...' : 'Update'}
-					</Button>
-				</Form.Item>
-			</Form>
+					<Form.Item className="submit-button">
+						<Button
+							style={{ marginLeft: 80 }}
+							type="primary"
+							htmlType="submit"
+							loading={submitting}
+						>
+							{submitting ? 'Update...' : 'Update'}
+						</Button>
+					</Form.Item>
+				</Form>
+			</div>
 		</div>
 	);
 };

@@ -19,11 +19,11 @@ export const ModalCampaign = () => {
 				Update Campaign
 			</Button>
 			<Modal
-				title="Update Campaign"
 				open={isModalOpen}
 				onOk={handleOk}
 				onCancel={handleCancel}
 				footer={null}
+				width={800}
 			>
 				<UpdateCampaign />
 			</Modal>

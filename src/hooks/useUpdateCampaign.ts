@@ -2,9 +2,10 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { notification } from 'antd';
 
 import { updateCampaign } from '@services';
-import { CampaignType } from '@types';
+import { CampaignType, PageMeta } from '@types';
 import { QUERY_KEY } from '@constants';
 import { NOTIFICATION } from '@enums';
+import { clone } from '@utils';
 
 export const useUpdateCampaign = () => {
 	const queryClient = useQueryClient();
@@ -19,13 +20,15 @@ export const useUpdateCampaign = () => {
 				message: NOTIFICATION.SUCCESS,
 				description: 'Update campaign successfully.',
 			});
-			queryClient.setQueryData<CampaignType[]>(
+			queryClient.setQueryData<PageMeta<CampaignType>>(
 				[QUERY_KEY.LIST_CAMPAIGN],
 				(listCampaign) => {
 					if (listCampaign) {
-						const idx = listCampaign.findIndex((item) => item.id == data.id);
-						const cloned = listCampaign.concat();
-						cloned[idx] = data;
+						const idx = listCampaign.data.findIndex(
+							(item) => item.id == data.id
+						);
+						const cloned = clone(listCampaign);
+						cloned.data[idx] = data;
 						return cloned;
 					}
 				}
