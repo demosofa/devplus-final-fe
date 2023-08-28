@@ -5,12 +5,13 @@ import { CampaignType, PageMeta } from '@types';
 import { getListCampaign } from '@services';
 
 export const useGetListCampaign = (
-	page: number
+	page: number,
+	pageSize: number
 ): UseQueryResult<PageMeta<CampaignType>> => {
 	return useQuery({
-		queryKey: [QUERY_KEY.LIST_CAMPAIGN, page],
+		queryKey: [QUERY_KEY.LIST_CAMPAIGN, page, pageSize],
 		queryFn: async () => {
-			const { data } = await getListCampaign(page);
+			const { data } = await getListCampaign(page, pageSize);
 			return data;
 		},
 	});

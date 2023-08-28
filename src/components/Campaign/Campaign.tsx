@@ -12,7 +12,10 @@ export const Campaign = () => {
 	const [pageSize, setPageSize] = useState(5);
 	const [searchName, setSearchName] = useState('');
 
-	const { data: listCampaign, isLoading } = useGetListCampaign(currentPage);
+	const { data: listCampaign, isLoading } = useGetListCampaign(
+		currentPage,
+		pageSize
+	);
 
 	const filteredCampaigns = useMemo(() => {
 		if (!listCampaign?.data) return [];
