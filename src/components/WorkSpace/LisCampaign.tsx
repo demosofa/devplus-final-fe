@@ -1,11 +1,12 @@
 import { ExclamationCircleFilled } from '@ant-design/icons';
 import { Modal, Table } from 'antd';
-import { CampaignType } from '@types';
 import { useState } from 'react';
+import { Link, useParams } from 'react-router-dom';
+
 import './WorkSpace.css';
 import { ColumnsType } from 'antd/es/table';
 import { useAcceptWorkspace, useRejectWorkspace } from '@hooks';
-import { Link, useParams } from 'react-router-dom';
+import { CampaignType } from '@types';
 
 import { CAMPAIGN } from '@enums';
 import { useListCampaignWithWorkspace } from 'hooks/useListCampaignWithWorkspace';

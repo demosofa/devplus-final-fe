@@ -1,12 +1,13 @@
 import { useParams } from 'react-router-dom';
+import { Button, Card, Modal } from 'antd';
+import { useState } from 'react';
 
 import { useGetWorkspaceDetail } from 'hooks/useGetWorkspaceDetail';
-import { Button, Card, Modal } from 'antd';
 import CreateCampaign from 'components/Campaign/CreateCampaign';
-import { useState } from 'react';
 
 export const WorkSpaceDetail = () => {
 	const { id } = useParams();
+
 	const { data: workspace, isLoading } = useGetWorkspaceDetail(Number(id));
 
 	const [isModalOpen, setIsModalOpen] = useState(false);

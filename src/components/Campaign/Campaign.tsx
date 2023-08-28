@@ -1,6 +1,7 @@
 import { useMemo, useState } from 'react';
 import { Input, Table } from 'antd';
 import { ColumnsType } from 'antd/es/table';
+
 import './Campaign.css';
 import { CampaignType } from '@types';
 import { useGetListCampaign } from '../../hooks';
@@ -8,11 +9,10 @@ import { CAMPAIGN } from '@enums';
 
 export const Campaign = () => {
 	const [currentPage, setCurrentPage] = useState(1);
-	const { data: listCampaign, isLoading } = useGetListCampaign(currentPage);
-
 	const [pageSize, setPageSize] = useState(5);
+	const [searchName, setSearchName] = useState('');
 
-	const [searchName, setSearchName] = useState(''); // Thêm state searchName
+	const { data: listCampaign, isLoading } = useGetListCampaign(currentPage);
 
 	const filteredCampaigns = useMemo(() => {
 		if (!listCampaign?.data) return [];
