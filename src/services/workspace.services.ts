@@ -6,15 +6,16 @@ import { CreateWorkspaceType, WorkspaceType } from '@types';
 export const createWorkSpace = (data: CreateWorkspaceType) =>
 	axios.post(API_URL.WORKSPACE, data);
 
-export const getListWorkSpace = (page: number) =>
+export const getListWorkSpace = (page: number, pageSize: number) =>
 	axios.get<WorkspaceType[]>(API_URL.WORKSPACE, {
 		params: {
 			page,
+			pageSize,
 		},
 	});
 
 export const detailWorkSpace = (id: number) =>
-	axios.get<WorkspaceType[]>(API_URL.WORKSPACE + id);
+	axios.get(API_URL.WORKSPACE + id);
 
 export const acceptWorkspace = (id: number) =>
 	axios.patch(API_URL.WORKSPACE + `/accept/${id}`);

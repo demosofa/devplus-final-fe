@@ -17,12 +17,16 @@ import { Link } from 'react-router-dom';
 
 export const WorkSpace = () => {
 	const [currentPage, setCurrentPage] = useState(1);
-	const { data: listWorkSpace, isLoading } = useGetListWorkSpace(currentPage);
-
 	const [pageSize, setPageSize] = useState(5);
+
+	const { data: listWorkSpace, isLoading } = useGetListWorkSpace(
+		currentPage,
+		pageSize
+	);
+
 	const acceptWorkspace = useAcceptWorkspace();
 	const rejectWorkspace = useRejectWorkspace();
-	console.log(listWorkSpace);
+
 	const handlePaginationChange = (page: number, pageSize?: number) => {
 		setCurrentPage(page);
 		if (pageSize) {
@@ -59,12 +63,12 @@ export const WorkSpace = () => {
 			render: (_text, _record, index) => index + 1,
 		},
 		{
-			title: 'id',
+			title: 'Id',
 			dataIndex: 'id',
 			key: 'id',
 		},
 		{
-			title: 'name',
+			title: 'Name',
 			dataIndex: 'title_workspace',
 			key: 'name',
 			render: (text: string, record: WorkspaceType) => (
@@ -78,7 +82,7 @@ export const WorkSpace = () => {
 			),
 		},
 		{
-			title: 'status',
+			title: 'Status',
 			dataIndex: 'status',
 			key: 'status',
 		},
