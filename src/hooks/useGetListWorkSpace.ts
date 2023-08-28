@@ -1,6 +1,6 @@
 import { UseQueryResult, useQuery } from '@tanstack/react-query';
-
 import { QUERY_KEY } from '@constants';
+
 import { getListWorkSpace } from '@services';
 import { WorkspaceType, PageMeta } from '@types';
 
