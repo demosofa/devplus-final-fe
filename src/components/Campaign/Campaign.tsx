@@ -1,11 +1,12 @@
-import { useMemo, useState } from 'react';
-import { Input, Modal, Table } from 'antd';
+import { Modal, Table } from 'antd';
 import { ColumnsType } from 'antd/es/table';
+import { useMemo, useState } from 'react';
 
-import './Campaign.css';
+import { CAMPAIGN } from '@enums';
 import { CampaignType } from '@types';
 import { useGetListCampaign } from '../../hooks';
-import { CAMPAIGN } from '@enums';
+import { SearchBar } from '../SearchBar/SearchBar';
+import './Campaign.css';
 import { UpdateCampaign } from './UpdateCampaign';
 
 export const Campaign = () => {
@@ -121,12 +122,7 @@ export const Campaign = () => {
 
 	return (
 		<>
-			<Input.Search
-				placeholder="Search by name"
-				allowClear
-				onSearch={setSearchName}
-				style={{ marginBottom: 16, width: '400px' }}
-			/>
+			<SearchBar placeholder="Search by name" onSearch={setSearchName} />
 
 			<Table<CampaignType>
 				columns={columns}
