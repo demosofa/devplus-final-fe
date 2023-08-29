@@ -1,5 +1,5 @@
 import { useMemo, useState } from 'react';
-import { Input, Modal, Table } from 'antd';
+import { Input, Table } from 'antd';
 import { ColumnsType } from 'antd/es/table';
 
 import './Campaign.css';
@@ -26,7 +26,7 @@ export const Campaign = () => {
 		return listCampaign.data.filter((campaign) =>
 			campaign.name.toLowerCase().includes(searchName.toLowerCase())
 		);
-	}, [listCampaign?.data, searchName]);
+	}, [listCampaign, searchName]);
 
 	const handlePaginationChange = (page: number, pageSize?: number) => {
 		setCurrentPage(page);
@@ -39,10 +39,6 @@ export const Campaign = () => {
 
 	const showModal = (record: CampaignType) => {
 		setIsModalOpen(record);
-	};
-
-	const handleCancel = () => {
-		setIsModalOpen(null);
 	};
 
 	const columns: ColumnsType<CampaignType> = [
@@ -144,9 +140,7 @@ export const Campaign = () => {
 			/>
 
 			{isModalOpen ? (
-				<Modal open footer={null} onCancel={handleCancel}>
-					<UpdateCampaign data={isModalOpen} />
-				</Modal>
+				<UpdateCampaign data={isModalOpen} setData={setIsModalOpen} />
 			) : null}
 		</>
 	);

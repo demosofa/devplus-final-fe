@@ -1,5 +1,5 @@
 import { SoundFilled } from '@ant-design/icons';
-import { Button, DatePicker, Form, Input } from 'antd';
+import { DatePicker, Form, Input, Modal } from 'antd';
 import { useMemo, useState } from 'react';
 import dayjs, { Dayjs } from 'dayjs';
 import 'react-quill/dist/quill.snow.css';
@@ -10,9 +10,13 @@ import { CampaignType } from '@types';
 import { clone } from '@utils';
 import ReactQuill from 'react-quill';
 
-export const UpdateCampaign = ({ data }: { data: CampaignType }) => {
-	// const { id } = useParams();
-	// const { data, isLoading: campaignLoading } = useFindOneCampaign(+id!);
+export const UpdateCampaign = ({
+	data,
+	setData,
+}: {
+	data: CampaignType;
+	setData: React.Dispatch<React.SetStateAction<CampaignType | null>>;
+}) => {
 	const [form] = Form.useForm();
 	const [submitting, setSubmitting] = useState(false);
 
@@ -42,10 +46,21 @@ export const UpdateCampaign = ({ data }: { data: CampaignType }) => {
 		form.resetFields();
 
 		setSubmitting(false);
+
+		handleCancel();
+	};
+
+	const handleCancel = () => {
+		setData(null);
 	};
 
 	return (
-		<div>
+		<Modal
+			open
+			onCancel={handleCancel}
+			onOk={() => form.submit()}
+			confirmLoading={submitting}
+		>
 			<div className="register_workspace">
 				<SoundFilled />
 				&nbsp;
@@ -94,19 +109,8 @@ export const UpdateCampaign = ({ data }: { data: CampaignType }) => {
 					>
 						<DatePicker showTime />
 					</Form.Item>
-
-					<Form.Item className="submit-button">
-						<Button
-							style={{ marginLeft: 80 }}
-							type="primary"
-							htmlType="submit"
-							loading={submitting}
-						>
-							{submitting ? 'Update...' : 'Update'}
-						</Button>
-					</Form.Item>
 				</Form>
 			</div>
-		</div>
+		</Modal>
 	);
 };
