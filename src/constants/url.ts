@@ -1,5 +1,5 @@
 export enum API_URL {
-	WORKSPACE = '/workspace',
+	WORKSPACE = '/workspace/',
 	CAMPAIGN = '/campaign/',
 	USER = '/user/',
 }

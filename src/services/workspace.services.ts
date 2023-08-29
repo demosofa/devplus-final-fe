@@ -15,7 +15,7 @@ export const getListWorkSpace = (page: number, take: number) =>
 	});
 
 export const getWorkspaceDetail = (id: number) =>
-	axios.get(API_URL.WORKSPACE + '/' + id);
+	axios.get(API_URL.WORKSPACE + id);
 
 export const listCampaignFromWorkspace = (
 	page: number,
@@ -38,10 +38,10 @@ export const listUserFromWorkspace = (page: number, take: number, id: number) =>
 	});
 
 export const acceptWorkspace = (id: number) =>
-	axios.patch(API_URL.WORKSPACE + `/accept/${id}`);
+	axios.patch(API_URL.WORKSPACE + `accept/${id}`);
 
 export const rejectWorkspace = (id: number) =>
-	axios.delete(API_URL.WORKSPACE + `/reject/${id}`);
+	axios.delete(API_URL.WORKSPACE + `reject/${id}`);
 
 export const deleteCampaign = (id: number) =>
 	axios.delete(API_URL.CAMPAIGN + id);
