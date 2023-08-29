@@ -70,16 +70,11 @@ export const Cv = () => {
 			title: 'File',
 			dataIndex: 'file',
 			key: 'file',
-			render: (text) => {
-				const startIndex = text.indexOf('/d/') + 3;
-				const endIndex = text.indexOf('/view');
-				const fileId = text.substring(startIndex, endIndex);
-				return (
-					<Link to={`https://drive.google.com/uc?id=${fileId}`} target="_blank">
-						Follow me
-					</Link>
-				);
-			},
+			render: (text) => (
+				<Link to={text} target="_blank">
+					Follow me
+				</Link>
+			),
 		},
 		{
 			title: 'Create At',
