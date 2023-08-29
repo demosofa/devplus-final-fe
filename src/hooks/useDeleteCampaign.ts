@@ -1,13 +1,13 @@
-import { useMutation } from '@tanstack/react-query';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { notification } from 'antd';
 
-import { QUERY_KEY } from '@constants';
 import { deleteCampaign } from '@services';
 import { NOTIFICATION } from '@enums';
 
 export function useDeleteCampaign() {
+	const queryClient = useQueryClient();
+
 	return useMutation({
-		mutationKey: [QUERY_KEY.LIST_WORKSPACE],
 		mutationFn: async (id: number) => {
 			const { data } = await deleteCampaign(id);
 			return data;
@@ -17,6 +17,7 @@ export function useDeleteCampaign() {
 				message: NOTIFICATION.SUCCESS,
 				description: 'Delete campaign successfully.',
 			});
+			queryClient.refetchQueries();
 		},
 		onError: () => {
 			notification.error({
