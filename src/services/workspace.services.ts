@@ -42,3 +42,6 @@ export const acceptWorkspace = (id: number) =>
 
 export const rejectWorkspace = (id: number) =>
 	axios.delete(API_URL.WORKSPACE + `/reject/${id}`);
+
+export const deleteCampaign = (id: number) =>
+	axios.delete(API_URL.CAMPAIGN + id);

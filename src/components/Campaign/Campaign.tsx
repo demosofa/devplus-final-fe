@@ -9,6 +9,8 @@ import { SearchBar } from '../SearchBar/SearchBar';
 import './Campaign.css';
 import { UpdateCampaign } from './UpdateCampaign';
 import { useNavigate } from 'react-router-dom';
+import { useDeleteCampaign } from 'hooks/useDeleteCampaign';
+import { ExclamationCircleFilled } from '@ant-design/icons';
 
 export const Campaign = () => {
 	const [currentPage, setCurrentPage] = useState(1);
@@ -21,6 +23,19 @@ export const Campaign = () => {
 		currentPage,
 		pageSize
 	);
+
+	const deleteCampaign = useDeleteCampaign();
+
+	const handleDeleteCampaign = (id: number) => {
+		Modal.confirm({
+			title: `Accept Workspace ${id}`,
+			icon: <ExclamationCircleFilled />,
+			content: 'Do you Want to delete this campaign?',
+			onOk() {
+				deleteCampaign.mutate(id);
+			},
+		});
+	};
 
 	const filteredCampaigns = useMemo(() => {
 		if (!listCampaign?.data) return [];
@@ -121,6 +136,11 @@ export const Campaign = () => {
 									xmlns="http://www.w3.org/2000/svg"
 									viewBox="0 0 24 24"
 									className="icons-close"
+									onClick={(e) => {
+										e.preventDefault();
+										e.stopPropagation();
+										handleDeleteCampaign(record.id);
+									}}
 								>
 									<path
 										fill="currentColor"
