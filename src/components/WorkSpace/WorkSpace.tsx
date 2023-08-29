@@ -13,7 +13,8 @@ import {
 	useGetListWorkSpace,
 	useRejectWorkspace,
 } from '@hooks';
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+import { WORKSPACE } from '@enums';
 
 export const WorkSpace = () => {
 	const [currentPage, setCurrentPage] = useState(1);
@@ -24,9 +25,11 @@ export const WorkSpace = () => {
 		pageSize
 	);
 
+	const navigate = useNavigate();
+
 	const acceptWorkspace = useAcceptWorkspace();
 	const rejectWorkspace = useRejectWorkspace();
-	console.log(listWorkSpace);
+
 	const handlePaginationChange = (page: number, pageSize?: number) => {
 		setCurrentPage(page);
 		if (pageSize) {
@@ -56,6 +59,17 @@ export const WorkSpace = () => {
 		});
 	};
 
+	const onRow = (record: WorkspaceType) => {
+		return {
+			onClick: (e: any) => {
+				e.stopPropagation();
+				if (record.status === WORKSPACE.ACCEPT) {
+					navigate('/workspace-detail/' + record.id);
+				}
+			},
+		};
+	};
+
 	const columns: ColumnsType<WorkspaceType> = [
 		{
 			title: 'STT',
@@ -71,15 +85,6 @@ export const WorkSpace = () => {
 			title: 'Name',
 			dataIndex: 'title_workspace',
 			key: 'name',
-			render: (text: string, record: WorkspaceType) => (
-				<>
-					{record.status === 'accept' ? (
-						<Link to={`/workspace-detail/${record.id}`}>{text}</Link>
-					) : (
-						<span>{text}</span>
-					)}
-				</>
-			),
 		},
 		{
 			title: 'Status',
@@ -133,6 +138,7 @@ export const WorkSpace = () => {
 				}}
 				style={{ overflowX: 'auto' }}
 				loading={isLoading}
+				onRow={onRow}
 			/>
 		</>
 	);

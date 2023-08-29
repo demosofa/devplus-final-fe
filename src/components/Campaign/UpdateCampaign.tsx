@@ -69,7 +69,7 @@ export const UpdateCampaign = ({
 			<hr />
 			<div>
 				<Form
-					style={{ marginRight: 175 }}
+					style={{ marginRight: 65 }}
 					initialValues={detailCampaign}
 					form={form}
 					onFinish={handleUpdateCampaign}

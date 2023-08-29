@@ -26,16 +26,6 @@ export const WorkSpaceDetail = () => {
 
 	return (
 		<>
-			<div>
-				{isLoading ? (
-					<p>Loading...</p>
-				) : (
-					<Card>
-						<h1>Name: {workspace?.title_workspace}</h1>
-						<p>Status: {workspace?.status}</p>
-					</Card>
-				)}
-			</div>
 			<Button type="primary" onClick={showModal} className="btn-wrap-campaign">
 				Create Campaign
 			</Button>
@@ -48,6 +38,16 @@ export const WorkSpaceDetail = () => {
 			>
 				<CreateCampaign />
 			</Modal>
+			<div>
+				{isLoading ? (
+					<p>Loading...</p>
+				) : (
+					<Card>
+						<h1>Name: {workspace?.title_workspace}</h1>
+						<p>Status: {workspace?.status}</p>
+					</Card>
+				)}
+			</div>
 		</>
 	);
 };
