@@ -6,3 +6,4 @@ export * from './useFindOneCampaign';
 export * from './useUpdateCampaign';
 export * from './useGetListCampaign';
 export * from './useLogin';
+export * from './useGetListCv';
