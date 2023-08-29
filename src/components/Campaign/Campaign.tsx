@@ -8,11 +8,14 @@ import { useGetListCampaign } from '../../hooks';
 import { SearchBar } from '../SearchBar/SearchBar';
 import './Campaign.css';
 import { UpdateCampaign } from './UpdateCampaign';
+import { useNavigate } from 'react-router-dom';
 
 export const Campaign = () => {
 	const [currentPage, setCurrentPage] = useState(1);
 	const [pageSize, setPageSize] = useState(5);
 	const [searchName, setSearchName] = useState('');
+
+	const navigate = useNavigate();
 
 	const { data: listCampaign, isLoading } = useGetListCampaign(
 		currentPage,
@@ -42,6 +45,15 @@ export const Campaign = () => {
 		setIsModalOpen(record);
 	};
 
+	const onRow = (record: CampaignType) => {
+		return {
+			onClick: (e: any) => {
+				e.stopPropagation();
+				navigate('/detail-campaign/' + record.id);
+			},
+		};
+	};
+
 	const columns: ColumnsType<CampaignType> = [
 		{
 			title: 'STT',
@@ -49,17 +61,17 @@ export const Campaign = () => {
 			render: (_text, _record, index) => index + 1,
 		},
 		{
-			title: 'id',
+			title: 'Id',
 			dataIndex: 'id',
 			key: 'id',
 		},
 		{
-			title: 'name',
+			title: 'Name',
 			dataIndex: 'name',
-			key: 'name',
+			key: 'Name',
 		},
 		{
-			title: 'description',
+			title: 'Description',
 			dataIndex: 'description',
 			key: 'description',
 			render: (description) => (
@@ -67,12 +79,17 @@ export const Campaign = () => {
 			),
 		},
 		{
-			title: 'expired time',
+			title: 'Workspace',
+			dataIndex: ['workspace', 'title_workspace'],
+			key: 'workspace',
+		},
+		{
+			title: 'Expired Time',
 			dataIndex: 'expired_time',
 			key: 'expired_time',
 		},
 		{
-			title: 'status',
+			title: 'Status',
 			dataIndex: 'status',
 			key: 'status',
 		},
@@ -88,7 +105,11 @@ export const Campaign = () => {
 									xmlns="http://www.w3.org/2000/svg"
 									viewBox="0 0 24 24"
 									className="icons-check"
-									onClick={() => showModal(record)}
+									onClick={(e) => {
+										e.preventDefault();
+										e.stopPropagation();
+										showModal(record);
+									}}
 								>
 									<path
 										fill="currentColor"
@@ -133,6 +154,7 @@ export const Campaign = () => {
 				}}
 				style={{ overflowX: 'auto' }}
 				loading={isLoading}
+				onRow={onRow}
 			/>
 
 			{isModalOpen ? (

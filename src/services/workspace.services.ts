@@ -15,7 +15,7 @@ export const getListWorkSpace = (page: number, take: number) =>
 	});
 
 export const getWorkspaceDetail = (id: number) =>
-	axios.get(API_URL.WORKSPACE + id);
+	axios.get(API_URL.WORKSPACE + '/' + id);
 
 export const listCampaignFromWorkspace = (
 	page: number,
