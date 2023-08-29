@@ -16,25 +16,14 @@ export const useUpdateCampaign = () => {
 		onSuccess: () => {
 			notification.success({
 				message: NOTIFICATION.SUCCESS,
-				description: 'Create campaign successfully.',
+				description: 'Update campaign successfully.',
 			});
-			// queryClient.setQueryData<CampaignType[]>(
-			// 	[QUERY_KEY.LIST_CAMPAIGN],
-			// 	(listCampaign) => {
-			// 		if (listCampaign) {
-			// 			const idx = listCampaign.findIndex((item) => item.id == data.id);
-			// 			const cloned = listCampaign.concat();
-			// 			cloned[idx] = data;
-			// 			return cloned;
-			// 		}
-			// 	}
-			// );
 			queryClient.refetchQueries();
 		},
 		onError: () => {
 			notification.error({
 				message: NOTIFICATION.ERROR,
-				description: 'Create campaign failed',
+				description: 'Update campaign failed',
 			});
 		},
 	});
