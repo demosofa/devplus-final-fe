@@ -6,11 +6,17 @@ import { CreateWorkSpace } from 'components/WorkSpace/CreateWorkSpace';
 import { Campaign } from '../components';
 import { WorkSpaceDetail } from 'pages/WorkspaceDetail';
 import { DetailCampaign } from 'components/Campaign/DetailCampaign';
+import { Login } from '@pages';
 
 const publicRoutes: RouteObject[] = [
 	{
 		element: <PublicLayout />,
 		children: [
+			{
+				path: '/login',
+				element: <Login />,
+			},
+
 			{
 				path: '/workspace',
 				element: <WorkSpace />,

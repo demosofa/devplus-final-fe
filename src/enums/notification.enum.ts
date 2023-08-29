@@ -1,6 +1,6 @@
 export enum NOTIFICATION {
-	SUCCESS = 'success',
-	INFO = 'info',
-	WARNING = 'warning',
-	ERROR = 'error',
+	SUCCESS = 'SUCCESS',
+	INFO = 'INFO',
+	WARNING = 'WARNING',
+	ERROR = 'ERROR',
 }
