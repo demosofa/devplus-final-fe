@@ -7,3 +7,4 @@ export * from './useUpdateCampaign';
 export * from './useGetListCampaign';
 export * from './useLogin';
 export * from './useCreateUser';
+export * from './useGetListCv';
