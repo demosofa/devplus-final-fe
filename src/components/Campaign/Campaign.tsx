@@ -1,5 +1,5 @@
 import { useMemo, useState } from 'react';
-import { Table } from 'antd';
+import { Modal, Table } from 'antd';
 import { ColumnsType } from 'antd/es/table';
 
 import { CAMPAIGN } from '@enums';

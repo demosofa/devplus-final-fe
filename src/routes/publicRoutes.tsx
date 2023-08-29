@@ -4,8 +4,8 @@ import { WorkSpace } from 'components/WorkSpace/WorkSpace';
 import { CampaignTest } from 'components/CampaignTest/CampaignTest';
 import { CreateWorkSpace } from 'components/WorkSpace/CreateWorkSpace';
 import { Campaign } from '../components';
-import { ModalDetailCampaign } from 'components/Campaign/ModalDetailCampaign';
 import { WorkSpaceDetail } from 'pages/WorkspaceDetail';
+import { DetailCampaign } from 'components/Campaign/DetailCampaign';
 
 const publicRoutes: RouteObject[] = [
 	{
@@ -38,7 +38,7 @@ const publicRoutes: RouteObject[] = [
 
 			{
 				path: '/detail-campaign/:id',
-				element: <ModalDetailCampaign />,
+				element: <DetailCampaign />,
 			},
 		],
 	},
