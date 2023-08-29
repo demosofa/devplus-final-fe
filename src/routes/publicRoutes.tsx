@@ -6,7 +6,7 @@ import { CreateWorkSpace } from 'components/WorkSpace/CreateWorkSpace';
 import { Campaign } from '../components';
 import { WorkSpaceDetail } from 'pages/WorkspaceDetail';
 import { DetailCampaign } from 'components/Campaign/DetailCampaign';
-import { Login } from '@pages';
+import { CreateUser, Login } from '@pages';
 
 const publicRoutes: RouteObject[] = [
 	{
@@ -16,6 +16,8 @@ const publicRoutes: RouteObject[] = [
 				path: '/login',
 				element: <Login />,
 			},
+
+			{ path: '/create-user', element: <CreateUser /> },
 
 			{
 				path: '/workspace',

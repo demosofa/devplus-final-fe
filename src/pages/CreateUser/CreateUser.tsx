@@ -1,30 +1,36 @@
 import { Button, Form, Input } from 'antd';
 import { Link, useNavigate } from 'react-router-dom';
 
-import { useAuth, useLogin } from '@hooks';
-import { UserLogin } from '@types';
-import { useEffect } from 'react';
+import { useCreateUser } from '@hooks';
+import { UserCreate } from '@types';
 
-export function Login() {
-	const { getAuth, setAuth } = useAuth();
-
+export function CreateUser() {
+	const [form] = Form.useForm();
 	const navigate = useNavigate();
-	const { mutateAsync: login, isLoading } = useLogin();
 
-	const onFinish = async (values: UserLogin) => {
-		const token = await login(values);
-		setAuth(token);
+	const { mutateAsync: createUser, isLoading } = useCreateUser();
+
+	const onFinish = async (values: UserCreate) => {
+		await createUser(values);
+		navigate('/');
 	};
 
-	useEffect(() => {
-		const auth = getAuth();
-
-		if (auth) navigate('/');
-	}, [getAuth, navigate]);
-
 	return (
-		<div>
-			<Form className="register-form" size="large" onFinish={onFinish}>
+		<div className="register-container">
+			<Form
+				className="register-form"
+				size="large"
+				form={form}
+				onFinish={onFinish}
+			>
+				<Form.Item name="name" required>
+					<Input placeholder="Your name" />
+				</Form.Item>
+
+				<Form.Item name="phone_number" required>
+					<Input type="tel" placeholder="Phone number" />
+				</Form.Item>
+
 				<Form.Item
 					name="email"
 					rules={[
@@ -58,7 +64,7 @@ export function Login() {
 						className="register-btn"
 						htmlType="submit"
 					>
-						Login
+						Create User
 					</Button>
 				</Form.Item>
 			</Form>
