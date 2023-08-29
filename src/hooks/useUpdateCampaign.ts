@@ -18,17 +18,6 @@ export const useUpdateCampaign = () => {
 				message: NOTIFICATION.SUCCESS,
 				description: 'Update campaign successfully.',
 			});
-			// queryClient.setQueryData<CampaignType[]>(
-			// 	[QUERY_KEY.LIST_CAMPAIGN],
-			// 	(listCampaign) => {
-			// 		if (listCampaign) {
-			// 			const idx = listCampaign.findIndex((item) => item.id == data.id);
-			// 			const cloned = listCampaign.concat();
-			// 			cloned[idx] = data;
-			// 			return cloned;
-			// 		}
-			// 	}
-			// );
 			queryClient.refetchQueries();
 		},
 		onError: () => {
