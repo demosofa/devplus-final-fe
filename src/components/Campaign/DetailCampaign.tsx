@@ -1,14 +1,14 @@
-import { LoadingOutlined, SoundFilled } from '@ant-design/icons';
-import { useParams } from 'react-router-dom';
+import { LoadingOutlined } from '@ant-design/icons';
 import { DatePicker, Form, Input } from 'antd';
 import dayjs, { Dayjs } from 'dayjs';
 import { useMemo, useState } from 'react';
-import 'react-quill/dist/quill.snow.css';
 import ReactQuill from 'react-quill';
+import 'react-quill/dist/quill.snow.css';
+import { useParams } from 'react-router-dom';
 
+import { useFindOneCampaign } from '@hooks';
 import { CampaignType } from '@types';
 import { clone } from '@utils';
-import { useFindOneCampaign } from '@hooks';
 import './DetailCampaign.css';
 
 export const DetailCampaign = () => {
@@ -45,8 +45,6 @@ export const DetailCampaign = () => {
 	return (
 		<div>
 			<div className="register_workspace">
-				<SoundFilled />
-				&nbsp;
 				<span> Detail Campaign</span>
 			</div>
 			<hr />

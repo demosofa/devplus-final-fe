@@ -8,3 +8,4 @@ export * from './useGetListCampaign';
 export * from './useLogin';
 export * from './useCreateUser';
 export * from './useGetListCv';
+export * from './useCreateWorkspace';

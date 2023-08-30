@@ -1,15 +1,15 @@
 import { useMemo, useState } from 'react';
 import { Modal, Table } from 'antd';
 import { ColumnsType } from 'antd/es/table';
+import { ExclamationCircleFilled } from '@ant-design/icons';
+import { useNavigate } from 'react-router-dom';
 
 import { CAMPAIGN } from '@enums';
 import { CampaignType } from '@types';
 import { useGetListCampaign } from '../../hooks';
 import { SearchBar } from '../SearchBar/SearchBar';
 import './Campaign.css';
-import { useNavigate } from 'react-router-dom';
 import { useDeleteCampaign } from 'hooks/useDeleteCampaign';
-import { ExclamationCircleFilled } from '@ant-design/icons';
 
 export const Campaign = () => {
 	const [currentPage, setCurrentPage] = useState(1);
