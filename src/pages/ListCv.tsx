@@ -1,5 +1,5 @@
 import { CheckCircleOutlined, CloseCircleOutlined } from '@ant-design/icons';
-import { Input, Table } from 'antd';
+import { Button, Input, Table } from 'antd';
 import { useState } from 'react';
 import { ColumnsType } from 'antd/es/table';
 import { Link, useNavigate } from 'react-router-dom';
@@ -8,8 +8,6 @@ import { CvType, WorkspaceType } from '@types';
 import { useGetListCv } from '@hooks';
 import { CV } from '@enums';
 import './ListCv.css';
-
-const { Search } = Input;
 
 export const ListCv = () => {
 	const [currentPage, setCurrentPage] = useState(1);
@@ -125,13 +123,17 @@ export const ListCv = () => {
 
 	return (
 		<>
-			<Search
+			<Input
+				type="text"
 				placeholder="Search"
 				value={searchValue}
 				onChange={(e) => setSearchValue(e.target.value)}
-				onSearch={handleSearchClick}
-				className="btn-search-cv"
+				style={{ width: '300px' }}
+				className="input-search-cv"
 			/>
+			<Button className="btn-search-cv" onClick={handleSearchClick}>
+				Search
+			</Button>
 
 			<Table<CvType>
 				columns={columns}

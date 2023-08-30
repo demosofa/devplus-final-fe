@@ -1,12 +1,8 @@
-.ant-btn {
-	background: black;
-}
-
-.anticon {
-	color: white;
-}
-
 .btn-search-cv {
+	margin-left: 25px;
+}
+
+.input-search-cv {
 	margin-bottom: 20px;
 	width: 300px;
 }
