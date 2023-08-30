@@ -1,16 +1,16 @@
 import { Button, Card, DatePicker, Form, Input, Space } from 'antd';
 import customParseFormat from 'dayjs/plugin/customParseFormat';
-import { useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
 import dayjs from 'dayjs';
 import 'react-quill/dist/quill.snow.css';
 import ReactQuill from 'react-quill';
 import { RangePickerProps } from 'antd/es/date-picker';
+import { PlusCircleOutlined } from '@ant-design/icons';
 
 import './CreateCampaign.css';
 import { useCreateCampaign } from 'hooks/useCreateCampaign';
 import { CampaignType } from '@types';
-import { PlusCircleOutlined } from '@ant-design/icons';
 
 const CreateCampaign = () => {
 	dayjs.extend(customParseFormat);
@@ -53,6 +53,16 @@ const CreateCampaign = () => {
 	const handleDescriptionChange = (value: string) => {
 		setDescription(value);
 	};
+
+	const navigate = useNavigate();
+
+	useEffect(() => {
+		if (registrationSuccess) {
+			setTimeout(() => {
+				navigate('/campaign');
+			}, 1000);
+		}
+	}, [navigate, registrationSuccess]);
 
 	return (
 		<div>
