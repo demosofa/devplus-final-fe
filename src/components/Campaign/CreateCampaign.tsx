@@ -1,7 +1,7 @@
 import { Button, DatePicker, Form, Input, Space } from 'antd';
 import customParseFormat from 'dayjs/plugin/customParseFormat';
-import { useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
 import dayjs from 'dayjs';
 import 'react-quill/dist/quill.snow.css';
 import ReactQuill from 'react-quill';
@@ -10,11 +10,12 @@ import { RangePickerProps } from 'antd/es/date-picker';
 import './CreateCampaign.css';
 import { useCreateCampaign } from 'hooks/useCreateCampaign';
 import { CampaignType } from '@types';
+import { PlusCircleOutlined, SoundFilled } from '@ant-design/icons';
 
 const CreateCampaign = () => {
 	dayjs.extend(customParseFormat);
 
-	const { id } = useParams();
+	const { workspaceId } = useParams();
 
 	const [form] = Form.useForm();
 
@@ -22,12 +23,18 @@ const CreateCampaign = () => {
 
 	const [description, setDescription] = useState('');
 
+	const [registrationSuccess, setRegistrationSuccess] = useState(false);
+
 	const onFinish = (values: CampaignType) => {
-		values.workspaceId = Number(id);
+		try {
+			values.workspaceId = Number(workspaceId);
 
-		CreateCampaign.mutate(values);
-
-		form.resetFields();
+			CreateCampaign.mutate(values);
+			setRegistrationSuccess(true);
+			form.resetFields();
+		} catch (error) {
+			console.error('Registration failed:', error);
+		}
 	};
 
 	const range = (start: number, end: number) => {
@@ -54,8 +61,23 @@ const CreateCampaign = () => {
 		setDescription(value);
 	};
 
+	const navigate = useNavigate();
+
+	useEffect(() => {
+		if (registrationSuccess) {
+			setTimeout(() => {
+				navigate('/campaign');
+			}, 1000);
+		}
+	}, [navigate, registrationSuccess]);
+
 	return (
-		<>
+		<div>
+			<div className="register_workspace">
+				<SoundFilled />
+				<span> Create Campaign</span>
+			</div>
+			<hr />
 			<div className="main-container">
 				<Form
 					form={form}
@@ -74,19 +96,19 @@ const CreateCampaign = () => {
 							<Form.Item
 								name="name"
 								noStyle
-								// rules={[
-								// 	{
-								// 		required: true,
-								// 		message: 'Please enter a name',
-								// 	},
-								// ]}
+								rules={[
+									{
+										required: true,
+										message: 'Please enter your name',
+									},
+								]}
 							>
 								<Input
 									type="input"
 									style={{
-										width: '300px',
+										width: '800px',
 									}}
-									placeholder="abc..."
+									placeholder="Input your name"
 								/>
 							</Form.Item>
 						</Space>
@@ -99,10 +121,12 @@ const CreateCampaign = () => {
 						}}
 					>
 						<Form.Item
+							className="checkValid"
 							name="description"
 							rules={[
 								{
 									required: true,
+									message: 'Please input your description',
 								},
 							]}
 							style={{
@@ -112,46 +136,40 @@ const CreateCampaign = () => {
 							<ReactQuill
 								value={description}
 								onChange={handleDescriptionChange}
-								style={{ width: '300px' }}
+								style={{ width: '800px', height: '120px' }}
 							/>
 						</Form.Item>
 					</Form.Item>
-					<div className="form-container">
-						<Form.Item label="Expired Time" className="full-form">
-							<Space.Compact>
-								<Form.Item
-									name="expired_time"
-									noStyle
-									rules={[
-										{
-											required: true,
-											message: 'Please select a date',
-										},
-									]}
-								>
-									<DatePicker
-										format="YYYY-MM-DD HH:mm:ss"
-										disabledDate={disabledDate}
-										disabledTime={disabledDateTime}
-										showTime={{ defaultValue: dayjs('00:00:00', 'HH:mm:ss') }}
-										style={{ width: '300px' }}
-									/>
-								</Form.Item>
-							</Space.Compact>
-						</Form.Item>
-					</div>
+					<Form.Item style={{ marginTop: 45 }} label="Expired Time">
+						<Space.Compact>
+							<Form.Item
+								name="expired_time"
+								noStyle
+								rules={[
+									{
+										required: true,
+										message: 'Please select a date',
+									},
+								]}
+							>
+								<DatePicker
+									format="YYYY-MM-DD HH:mm:ss"
+									disabledDate={disabledDate}
+									disabledTime={disabledDateTime}
+									showTime={{ defaultValue: dayjs('00:00:00', 'HH:mm:ss') }}
+								/>
+							</Form.Item>
+						</Space.Compact>
+					</Form.Item>
 
 					<Form.Item label=" " colon={false} className="full-btn">
-						<Button type="primary" className="btn-cancel">
-							Cancel
-						</Button>
 						<Button className="submit-button" type="primary" htmlType="submit">
-							Create
+							<PlusCircleOutlined /> Create Campaign
 						</Button>
 					</Form.Item>
 				</Form>
 			</div>
-		</>
+		</div>
 	);
 };
 

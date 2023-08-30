@@ -1,25 +1,40 @@
 import { Button, Form, Input } from 'antd';
-import { useCreateWorkSpace } from 'hooks/useCreateWorkspace';
-import { CreateWorkspaceType } from 'types';
-import { UserOutlined } from '@ant-design/icons';
-import { useState } from 'react';
+import { PlusCircleOutlined, UserOutlined } from '@ant-design/icons';
+import { useEffect, useState } from 'react';
 
+import { CreateWorkspaceType } from 'types';
+import { useCreateWorkSpace } from 'hooks/useCreateWorkspace';
 import './CreateWorkSpace.css';
+import { useNavigate } from 'react-router-dom';
 
 export const CreateWorkSpace = () => {
 	const [form] = Form.useForm();
 	const createWSpace = useCreateWorkSpace();
 	const [submitting, setSubmitting] = useState(false);
-
+	const [registrationSuccess, setRegistrationSuccess] = useState(false);
 	const addWorkSpace = async (values: CreateWorkspaceType) => {
 		setSubmitting(true);
 
-		await createWSpace.mutateAsync(values);
-
-		form.resetFields();
+		try {
+			await createWSpace.mutateAsync(values);
+			setRegistrationSuccess(true);
+			form.resetFields();
+		} catch (error) {
+			console.error('Registration failed:', error);
+		}
 
 		setSubmitting(false);
 	};
+
+	const navigate = useNavigate();
+
+	useEffect(() => {
+		if (registrationSuccess) {
+			setTimeout(() => {
+				navigate('/workspace');
+			}, 1000);
+		}
+	}, [navigate, registrationSuccess]);
 
 	return (
 		<>
@@ -31,6 +46,7 @@ export const CreateWorkSpace = () => {
 
 			<div className="container">
 				<Form
+					className="formWorkspace"
 					form={form}
 					onFinish={addWorkSpace}
 					labelCol={{ span: 10 }}
@@ -46,7 +62,7 @@ export const CreateWorkSpace = () => {
 							},
 						]}
 					>
-						<Input placeholder="Input workspace" />
+						<Input className="inputWorkspace" placeholder="Input workspace" />
 					</Form.Item>
 
 					<Form.Item
@@ -54,7 +70,7 @@ export const CreateWorkSpace = () => {
 						name={'name'}
 						rules={[{ required: true, message: 'Please input your name!' }]}
 					>
-						<Input placeholder="Input name" />
+						<Input className="inputWorkspace" placeholder="Input name" />
 					</Form.Item>
 
 					<Form.Item
@@ -65,7 +81,7 @@ export const CreateWorkSpace = () => {
 							{ type: 'email', message: 'Please enter a valid email!' },
 						]}
 					>
-						<Input placeholder="Input email" />
+						<Input className="inputWorkspace" placeholder="Input email" />
 					</Form.Item>
 
 					<Form.Item
@@ -79,7 +95,10 @@ export const CreateWorkSpace = () => {
 							},
 						]}
 					>
-						<Input.Password placeholder="Input password" />
+						<Input.Password
+							className="inputWorkspace"
+							placeholder="Input password"
+						/>
 					</Form.Item>
 
 					<Form.Item
@@ -96,11 +115,20 @@ export const CreateWorkSpace = () => {
 							},
 						]}
 					>
-						<Input placeholder="Input phone number" />
+						<Input
+							className="inputWorkspace"
+							placeholder="Input phone number"
+						/>
 					</Form.Item>
 
-					<Form.Item className="submit-button">
-						<Button type="primary" htmlType="submit" loading={submitting}>
+					<Form.Item>
+						<Button
+							className="submit-button"
+							type="primary"
+							htmlType="submit"
+							loading={submitting}
+						>
+							<PlusCircleOutlined />{' '}
 							{submitting ? 'Registering...' : 'Register'}
 						</Button>
 					</Form.Item>

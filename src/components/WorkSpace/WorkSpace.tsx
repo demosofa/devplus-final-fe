@@ -2,8 +2,9 @@ import {
 	CheckCircleOutlined,
 	CloseCircleOutlined,
 	ExclamationCircleFilled,
+	PlusCircleOutlined,
 } from '@ant-design/icons';
-import { Modal, Table } from 'antd';
+import { Button, Modal, Table } from 'antd';
 import { WorkspaceType } from '@types';
 import { useState } from 'react';
 import './WorkSpace.css';
@@ -13,7 +14,7 @@ import {
 	useGetListWorkSpace,
 	useRejectWorkspace,
 } from '@hooks';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { WORKSPACE } from '@enums';
 
 export const WorkSpace = () => {
@@ -72,11 +73,6 @@ export const WorkSpace = () => {
 
 	const columns: ColumnsType<WorkspaceType> = [
 		{
-			title: 'STT',
-			key: 'index',
-			render: (_text, _record, index) => index + 1,
-		},
-		{
 			title: 'Id',
 			dataIndex: 'id',
 			key: 'id',
@@ -125,6 +121,11 @@ export const WorkSpace = () => {
 
 	return (
 		<>
+			<Button className="btn-wrap-campaign">
+				<Link style={{ color: 'white' }} to={'/create-ws'}>
+					<PlusCircleOutlined /> Create Workspace
+				</Link>
+			</Button>
 			<Table<WorkspaceType>
 				columns={columns}
 				dataSource={listWorkSpace?.data}

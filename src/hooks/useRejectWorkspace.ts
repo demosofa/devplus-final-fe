@@ -1,11 +1,11 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { notification } from 'antd';
 
 import { QUERY_KEY } from '@constants';
 import { rejectWorkspace } from '@services';
+import { notification } from 'antd';
+import { NOTIFICATION } from '@enums';
 
 export function useRejectWorkspace() {
-	const [api] = notification.useNotification();
 	const queryClient = useQueryClient();
 	return useMutation({
 		mutationKey: [QUERY_KEY.LIST_WORKSPACE],
@@ -13,12 +13,18 @@ export function useRejectWorkspace() {
 			const { data } = await rejectWorkspace(id);
 			return data;
 		},
-		onSuccess() {
-			api.success({ message: 'Success accept workspace' });
-			queryClient.refetchQueries([QUERY_KEY.LIST_WORKSPACE]);
+		onSuccess: () => {
+			notification.success({
+				message: NOTIFICATION.SUCCESS,
+				description: 'Reject workspace successfully.',
+			});
+			queryClient.refetchQueries();
 		},
-		onError() {
-			api.error({ message: 'Fail to reject workspace' });
+		onError: () => {
+			notification.error({
+				message: NOTIFICATION.ERROR,
+				description: 'Reject workspace failed',
+			});
 		},
 	});
 }

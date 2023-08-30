@@ -1,35 +1,29 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { notification } from 'antd';
 
-import { QUERY_KEY } from '@constants';
 import { acceptWorkspace } from '@services';
 import { WorkspaceType } from '@types';
-import { WORKSPACE } from '@enums';
+import { NOTIFICATION } from '@enums';
 
 export function useAcceptWorkspace() {
-	const [api] = notification.useNotification();
 	const queryClient = useQueryClient();
 	return useMutation({
 		mutationFn: async (id: number) => {
 			const { data } = await acceptWorkspace(id);
 			return data as WorkspaceType;
 		},
-		onSuccess(_, id) {
-			api.success({ message: 'Success accept workspace' });
-			queryClient.setQueryData<WorkspaceType[]>(
-				[QUERY_KEY.LIST_WORKSPACE],
-				(lstWorkspace) => {
-					if (lstWorkspace) {
-						const idx = lstWorkspace.findIndex((item) => item.id == id);
-						const cloned = lstWorkspace.concat();
-						cloned[idx].status = WORKSPACE.ACCEPT;
-						return cloned;
-					}
-				}
-			);
+		onSuccess() {
+			notification.success({
+				message: NOTIFICATION.SUCCESS,
+				description: 'Accept workspace successfully.',
+			});
+			queryClient.refetchQueries();
 		},
-		onError() {
-			api.error({ message: 'Fail to accept workspace' });
+		onError: () => {
+			notification.error({
+				message: NOTIFICATION.ERROR,
+				description: 'Accept workspace failed',
+			});
 		},
 	});
 }

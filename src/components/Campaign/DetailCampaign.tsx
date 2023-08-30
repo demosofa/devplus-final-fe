@@ -50,31 +50,39 @@ export const DetailCampaign = () => {
 				<span> Detail Campaign</span>
 			</div>
 			<hr />
-			<Form
-				initialValues={detailCampaign}
-				labelCol={{ span: 10 }}
-				wrapperCol={{ span: 20 }}
-			>
-				<Form.Item label="Name" name="name">
-					<Input placeholder="Input name" />
-				</Form.Item>
-
-				<Form.Item label="Description" name="description">
-					<ReactQuill
-						value={description}
-						onChange={handleDescriptionChange}
-						style={{ width: '275px' }}
-					/>
-				</Form.Item>
-
-				<Form.Item
-					className="timestampInitial"
-					label="Expired time"
-					name="expired_time"
+			<div className="container-detail">
+				<Form
+					initialValues={detailCampaign}
+					labelCol={{ span: 10 }}
+					wrapperCol={{ span: 20 }}
 				>
-					<DatePicker showTime />
-				</Form.Item>
-			</Form>
+					<Form.Item label="Name" name="name">
+						<Input
+							placeholder="Input name"
+							style={{ width: '800px' }}
+							disabled
+						/>
+					</Form.Item>
+
+					<Form.Item label="Description" name="description">
+						<ReactQuill
+							value={description}
+							onChange={handleDescriptionChange}
+							style={{ width: '800px', height: 150 }}
+							readOnly={true}
+						/>
+					</Form.Item>
+
+					<Form.Item
+						style={{ marginTop: 70 }}
+						className="timestampInitial"
+						label="Expired time"
+						name="expired_time"
+					>
+						<DatePicker showTime disabled />
+					</Form.Item>
+				</Form>
+			</div>
 		</div>
 	);
 };

@@ -8,6 +8,8 @@ import { WorkSpaceDetail } from 'pages/WorkspaceDetail';
 import { DetailCampaign } from 'components/Campaign/DetailCampaign';
 import { CreateUser, Login } from '@pages';
 import { ListCv } from '@pages';
+import CreateCampaign from 'components/Campaign/CreateCampaign';
+import { UpdateCampaign } from 'components/Campaign/UpdateCampaign';
 
 const publicRoutes: RouteObject[] = [
 	{
@@ -53,6 +55,16 @@ const publicRoutes: RouteObject[] = [
 			{
 				path: '/cv',
 				element: <ListCv />,
+			},
+
+			{
+				path: '/create-campaign/:workspaceId',
+				element: <CreateCampaign />,
+			},
+
+			{
+				path: '/update-campaign/:id',
+				element: <UpdateCampaign />,
 			},
 		],
 	},
