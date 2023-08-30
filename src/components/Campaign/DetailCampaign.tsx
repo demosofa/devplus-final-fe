@@ -1,5 +1,5 @@
 import { LoadingOutlined } from '@ant-design/icons';
-import { DatePicker, Form, Input } from 'antd';
+import { Card, DatePicker, Form, Input } from 'antd';
 import dayjs, { Dayjs } from 'dayjs';
 import { useMemo, useState } from 'react';
 import ReactQuill from 'react-quill';
@@ -44,43 +44,46 @@ export const DetailCampaign = () => {
 
 	return (
 		<div>
-			<div className="register_workspace">
-				<span> Detail Campaign</span>
-			</div>
-			<hr />
-			<div className="container-detail">
-				<Form
-					initialValues={detailCampaign}
-					labelCol={{ span: 10 }}
-					wrapperCol={{ span: 20 }}
-				>
-					<Form.Item label="Name" name="name">
-						<Input
-							placeholder="Input name"
-							style={{ width: '800px' }}
-							disabled
-						/>
-					</Form.Item>
-
-					<Form.Item label="Description" name="description">
-						<ReactQuill
-							value={description}
-							onChange={handleDescriptionChange}
-							style={{ width: '800px', height: 150 }}
-							readOnly={true}
-						/>
-					</Form.Item>
-
-					<Form.Item
-						style={{ marginTop: 70 }}
-						className="timestampInitial"
-						label="Expired time"
-						name="expired_time"
+			<Card style={{ marginBottom: 15 }}>
+				<div className="register_workspace">
+					<span> Detail Campaign</span>
+				</div>
+			</Card>
+			<Card>
+				<div className="container-detail">
+					<Form
+						initialValues={detailCampaign}
+						labelCol={{ span: 3 }}
+						wrapperCol={{ span: 16 }}
 					>
-						<DatePicker showTime disabled />
-					</Form.Item>
-				</Form>
-			</div>
+						<Form.Item label="Name" name="name">
+							<Input
+								placeholder="Input name"
+								style={{ width: '800px' }}
+								disabled
+							/>
+						</Form.Item>
+
+						<Form.Item label="Description" name="description">
+							<ReactQuill
+								value={description}
+								onChange={handleDescriptionChange}
+								style={{ width: '800px', height: 150 }}
+								readOnly={true}
+							/>
+						</Form.Item>
+
+						<Form.Item
+							style={{ marginTop: 70 }}
+							className="timestampInitial"
+							label="Expired time"
+							name="expired_time"
+						>
+							<DatePicker showTime disabled />
+						</Form.Item>
+					</Form>
+				</div>
+			</Card>
 		</div>
 	);
 };
