@@ -4,6 +4,7 @@ import { Button, Card, Form, Input } from 'antd';
 import { useCreateWorkSpace } from '@hooks';
 import { CreateWorkspaceType } from 'types';
 import './CreateWorkSpace.css';
+import { useNavigate } from 'react-router-dom';
 
 export const CreateWorkSpace = () => {
 	const [form] = Form.useForm();
@@ -13,6 +14,16 @@ export const CreateWorkSpace = () => {
 		await createWSpace(values);
 		form.resetFields();
 	};
+
+	const navigate = useNavigate();
+
+	useEffect(() => {
+		if (registrationSuccess) {
+			setTimeout(() => {
+				navigate('/workspace');
+			}, 1000);
+		}
+	}, [navigate, registrationSuccess]);
 
 	return (
 		<div>
