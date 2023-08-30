@@ -50,14 +50,3 @@
 .register_workspace svg {
 	margin-right: 8px;
 }
-
-.form-row {
-	margin-bottom: 8px;
-}
-.form-row label {
-	display: block;
-	font-weight: bold;
-}
-.form-row .ant-form-item-control-input {
-	width: 100%;
-}
