@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react';
+import { useState } from 'react';
 import { Modal, Table } from 'antd';
 import { ColumnsType } from 'antd/es/table';
 import { ExclamationCircleFilled } from '@ant-design/icons';
@@ -7,14 +7,12 @@ import { useNavigate } from 'react-router-dom';
 import { CAMPAIGN } from '@enums';
 import { CampaignType } from '@types';
 import { useGetListCampaign } from '../../hooks';
-import { SearchBar } from '../SearchBar/SearchBar';
 import './Campaign.css';
 import { useDeleteCampaign } from 'hooks/useDeleteCampaign';
 
 export const Campaign = () => {
 	const [currentPage, setCurrentPage] = useState(1);
 	const [pageSize, setPageSize] = useState(5);
-	const [searchName, setSearchName] = useState('');
 
 	const navigate = useNavigate();
 
@@ -35,16 +33,6 @@ export const Campaign = () => {
 			},
 		});
 	};
-
-	const filteredCampaigns = useMemo(() => {
-		if (!listCampaign?.data) return [];
-
-		if (!searchName) return listCampaign.data;
-
-		return listCampaign.data.filter((campaign) =>
-			campaign.name.toLowerCase().includes(searchName.toLowerCase())
-		);
-	}, [listCampaign, searchName]);
 
 	const handlePaginationChange = (page: number, pageSize?: number) => {
 		setCurrentPage(page);
@@ -145,11 +133,9 @@ export const Campaign = () => {
 
 	return (
 		<>
-			<SearchBar placeholder="Search by name" onSearch={setSearchName} />
-
 			<Table<CampaignType>
 				columns={columns}
-				dataSource={filteredCampaigns}
+				dataSource={listCampaign?.data}
 				rowKey={(record) => record.id}
 				pagination={{
 					defaultPageSize: pageSize,
