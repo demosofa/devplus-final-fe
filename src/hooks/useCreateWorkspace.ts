@@ -1,4 +1,5 @@
 import { useMutation } from '@tanstack/react-query';
+import { useNavigate } from 'react-router-dom';
 import { notification } from 'antd';
 
 import { CreateWorkspaceType } from '@types';
@@ -7,6 +8,8 @@ import { createWorkSpace } from '@services';
 import { NOTIFICATION } from '@enums';
 
 export const useCreateWorkSpace = () => {
+	const navigate = useNavigate();
+
 	return useMutation({
 		mutationKey: [QUERY_KEY.CREATE_WORKSPACE],
 		mutationFn: async (values: CreateWorkspaceType) => {
@@ -18,6 +21,7 @@ export const useCreateWorkSpace = () => {
 				message: NOTIFICATION.SUCCESS,
 				description: 'Create workspace successfully.',
 			});
+			navigate('/workspace');
 		},
 		onError: () => {
 			notification.error({

@@ -1,21 +1,18 @@
-import { useMemo, useState } from 'react';
+import { useState } from 'react';
 import { Modal, Table } from 'antd';
 import { ColumnsType } from 'antd/es/table';
+import { ExclamationCircleFilled } from '@ant-design/icons';
+import { useNavigate } from 'react-router-dom';
 
 import { CAMPAIGN } from '@enums';
 import { CampaignType } from '@types';
 import { useGetListCampaign } from '../../hooks';
-import { SearchBar } from '../SearchBar/SearchBar';
 import './Campaign.css';
-import { UpdateCampaign } from './UpdateCampaign';
-import { useNavigate } from 'react-router-dom';
 import { useDeleteCampaign } from 'hooks/useDeleteCampaign';
-import { ExclamationCircleFilled } from '@ant-design/icons';
 
 export const Campaign = () => {
 	const [currentPage, setCurrentPage] = useState(1);
 	const [pageSize, setPageSize] = useState(5);
-	const [searchName, setSearchName] = useState('');
 
 	const navigate = useNavigate();
 
@@ -37,27 +34,11 @@ export const Campaign = () => {
 		});
 	};
 
-	const filteredCampaigns = useMemo(() => {
-		if (!listCampaign?.data) return [];
-
-		if (!searchName) return listCampaign.data;
-
-		return listCampaign.data.filter((campaign) =>
-			campaign.name.toLowerCase().includes(searchName.toLowerCase())
-		);
-	}, [listCampaign, searchName]);
-
 	const handlePaginationChange = (page: number, pageSize?: number) => {
 		setCurrentPage(page);
 		if (pageSize) {
 			setPageSize(pageSize);
 		}
-	};
-
-	const [isModalOpen, setIsModalOpen] = useState<CampaignType | null>(null);
-
-	const showModal = (record: CampaignType) => {
-		setIsModalOpen(record);
 	};
 
 	const onRow = (record: CampaignType) => {
@@ -71,11 +52,6 @@ export const Campaign = () => {
 
 	const columns: ColumnsType<CampaignType> = [
 		{
-			title: 'STT',
-			key: 'index',
-			render: (_text, _record, index) => index + 1,
-		},
-		{
 			title: 'Id',
 			dataIndex: 'id',
 			key: 'id',
@@ -86,14 +62,6 @@ export const Campaign = () => {
 			key: 'Name',
 		},
 		{
-			title: 'Description',
-			dataIndex: 'description',
-			key: 'description',
-			render: (description) => (
-				<p dangerouslySetInnerHTML={{ __html: description }} />
-			),
-		},
-		{
 			title: 'Workspace',
 			dataIndex: ['workspace', 'title_workspace'],
 			key: 'workspace',
@@ -102,6 +70,10 @@ export const Campaign = () => {
 			title: 'Expired Time',
 			dataIndex: 'expired_time',
 			key: 'expired_time',
+			render: (timestamp) => {
+				const date = new Date(timestamp);
+				return date.toLocaleDateString();
+			},
 		},
 		{
 			title: 'Status',
@@ -116,6 +88,7 @@ export const Campaign = () => {
 					<div className="action-icons">
 						{record.status === CAMPAIGN.ACTIVE ? (
 							<div className="campaign-action">
+								{/* <Link to={'/update-campaign/' + record.id}> */}
 								<svg
 									xmlns="http://www.w3.org/2000/svg"
 									viewBox="0 0 24 24"
@@ -123,7 +96,7 @@ export const Campaign = () => {
 									onClick={(e) => {
 										e.preventDefault();
 										e.stopPropagation();
-										showModal(record);
+										navigate('/update-campaign/' + record.id);
 									}}
 								>
 									<path
@@ -131,6 +104,7 @@ export const Campaign = () => {
 										d="m7 14.94l6.06-6.06l2.06 2.06L9.06 17H7v-2.06M12 20a8 8 0 0 0 8-8a8 8 0 0 0-8-8a8 8 0 0 0-8 8a8 8 0 0 0 8 8m4.7-10.65l-1 1l-2.05-2.05l1-1c.21-.22.56-.22.77 0l1.28 1.28c.22.21.22.56 0 .77M12 2a10 10 0 0 1 10 10a10 10 0 0 1-10 10A10 10 0 0 1 2 12A10 10 0 0 1 12 2"
 									/>
 								</svg>
+								{/* </Link> */}
 
 								<svg
 									xmlns="http://www.w3.org/2000/svg"
@@ -159,11 +133,9 @@ export const Campaign = () => {
 
 	return (
 		<>
-			<SearchBar placeholder="Search by name" onSearch={setSearchName} />
-
 			<Table<CampaignType>
 				columns={columns}
-				dataSource={filteredCampaigns}
+				dataSource={listCampaign?.data}
 				rowKey={(record) => record.id}
 				pagination={{
 					defaultPageSize: pageSize,
@@ -176,10 +148,6 @@ export const Campaign = () => {
 				loading={isLoading}
 				onRow={onRow}
 			/>
-
-			{isModalOpen ? (
-				<UpdateCampaign data={isModalOpen} setData={setIsModalOpen} />
-			) : null}
 		</>
 	);
 };

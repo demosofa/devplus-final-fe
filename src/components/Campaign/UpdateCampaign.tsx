@@ -1,24 +1,22 @@
-import { SoundFilled } from '@ant-design/icons';
-import { DatePicker, Form, Input, Modal } from 'antd';
+import { PlusCircleOutlined } from '@ant-design/icons';
+import { Button, Card, DatePicker, Form, Input, Spin } from 'antd';
 import { useMemo, useState } from 'react';
 import dayjs, { Dayjs } from 'dayjs';
 import 'react-quill/dist/quill.snow.css';
-
-import './UpdateCampaign.css';
-import { useUpdateCampaign } from '@hooks';
-import { CampaignType } from '@types';
-import { clone } from '@utils';
+import { useParams } from 'react-router-dom';
 import ReactQuill from 'react-quill';
 
-export const UpdateCampaign = ({
-	data,
-	setData,
-}: {
-	data: CampaignType;
-	setData: React.Dispatch<React.SetStateAction<CampaignType | null>>;
-}) => {
+import './UpdateCampaign.css';
+import { useFindOneCampaign, useUpdateCampaign } from '@hooks';
+import { CampaignType } from '@types';
+import { clone } from '@utils';
+
+export const UpdateCampaign = () => {
 	const [form] = Form.useForm();
-	const [submitting, setSubmitting] = useState(false);
+
+	const { id } = useParams();
+
+	const { data, isLoading: loadCampaign } = useFindOneCampaign(+id!);
 
 	const [description, setDescription] = useState('');
 	const handleDescriptionChange = (value: string) => {
@@ -26,91 +24,101 @@ export const UpdateCampaign = ({
 	};
 
 	const detailCampaign = useMemo(() => {
-		const cloned = clone(data) as Omit<CampaignType, 'expired_time'> & {
-			expired_time: Dayjs;
-		};
+		if (data) {
+			const cloned = clone(data) as Omit<CampaignType, 'expired_time'> & {
+				expired_time: Dayjs;
+			};
 
-		cloned.expired_time = dayjs(data.expired_time);
+			cloned.expired_time = dayjs(data.expired_time);
 
-		return cloned;
+			return cloned;
+		}
+		return;
 	}, [data]);
 
-	const updateCampaignHandle = useUpdateCampaign();
+	const { mutateAsync: updateCampaignHandle, isLoading } = useUpdateCampaign();
 
 	const handleUpdateCampaign = async (values: CampaignType) => {
-		setSubmitting(true);
+		values.id = Number(id);
 
-		values.id = data.id;
-		await updateCampaignHandle.mutateAsync(values);
-
+		await updateCampaignHandle(values);
 		form.resetFields();
-
-		setSubmitting(false);
-
-		handleCancel();
 	};
 
-	const handleCancel = () => {
-		setData(null);
-	};
-
-	return (
-		<Modal
-			open
-			onCancel={handleCancel}
-			onOk={() => form.submit()}
-			confirmLoading={submitting}
-		>
-			<div className="register_workspace">
-				<SoundFilled />
-				&nbsp;
-				<span> Update Campaign</span>
-			</div>
-			<hr />
+	if (loadCampaign) {
+		return (
 			<div>
-				<Form
-					style={{ marginRight: 65 }}
-					initialValues={detailCampaign}
-					form={form}
-					onFinish={handleUpdateCampaign}
-					labelCol={{ span: 10 }}
-					wrapperCol={{ span: 20 }}
-				>
-					<Form.Item
-						label="Name"
-						name={'name'}
-						rules={[
-							{
-								required: true,
-								message: 'Please input your new name!',
-							},
-						]}
-					>
-						<Input placeholder="Input name" />
-					</Form.Item>
-
-					<Form.Item
-						label="Description"
-						name={'description'}
-						rules={[
-							{ required: true, message: 'Please input new description!' },
-						]}
-					>
-						<ReactQuill
-							value={description}
-							onChange={handleDescriptionChange}
-						/>
-					</Form.Item>
-
-					<Form.Item
-						className="timestampInitial"
-						label="Expired time"
-						name={'expired_time'}
-					>
-						<DatePicker showTime />
-					</Form.Item>
-				</Form>
+				<Spin tip="Loading" size="large">
+					<div className="content" />
+				</Spin>
 			</div>
-		</Modal>
+		);
+	}
+	return (
+		<div>
+			<Card style={{ marginBottom: 15 }}>
+				<div className="register_workspace">
+					<span> Update Campaign</span>
+				</div>
+			</Card>
+			<Card>
+				<div>
+					<Form
+						style={{ marginRight: 65 }}
+						initialValues={detailCampaign}
+						form={form}
+						onFinish={handleUpdateCampaign}
+						labelCol={{ span: 3 }}
+						wrapperCol={{ span: 16 }}
+					>
+						<Form.Item
+							label="Name"
+							name={'name'}
+							rules={[
+								{
+									required: true,
+									message: 'Please input your new name!',
+								},
+							]}
+						>
+							<Input placeholder="Input name" />
+						</Form.Item>
+
+						<Form.Item
+							label="Description"
+							name={'description'}
+							rules={[
+								{ required: true, message: 'Please input new description!' },
+							]}
+						>
+							<ReactQuill
+								value={description}
+								onChange={handleDescriptionChange}
+								style={{ height: 150 }}
+							/>
+						</Form.Item>
+
+						<Form.Item
+							style={{ marginTop: 70 }}
+							className="timestampInitial"
+							label="Expired time"
+							name={'expired_time'}
+						>
+							<DatePicker showTime />
+						</Form.Item>
+						<Form.Item label=" " colon={false}>
+							<Button
+								loading={isLoading}
+								className="updateCampaign1"
+								type="primary"
+								htmlType="submit"
+							>
+								<PlusCircleOutlined /> Update Campaign
+							</Button>
+						</Form.Item>
+					</Form>
+				</div>
+			</Card>
+		</div>
 	);
 };

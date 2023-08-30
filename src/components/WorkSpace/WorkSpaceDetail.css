@@ -1,5 +1,6 @@
 .btn-wrap-campaign {
-	margin-bottom: 30px;
+	margin-bottom: 1%;
+	background-color: rgb(211, 164, 255);
 }
 
 .users-workspace {
@@ -7,6 +8,5 @@
 }
 
 .workspace-wrap-text {
-	color: black;
 	text-align: center;
 }

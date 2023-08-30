@@ -1,4 +1,4 @@
-import { Button, DatePicker, Form, Input, Space } from 'antd';
+import { Button, Card, DatePicker, Form, Input, Space } from 'antd';
 import customParseFormat from 'dayjs/plugin/customParseFormat';
 import { useState } from 'react';
 import { useParams } from 'react-router-dom';
@@ -10,23 +10,23 @@ import { RangePickerProps } from 'antd/es/date-picker';
 import './CreateCampaign.css';
 import { useCreateCampaign } from 'hooks/useCreateCampaign';
 import { CampaignType } from '@types';
+import { PlusCircleOutlined } from '@ant-design/icons';
 
 const CreateCampaign = () => {
 	dayjs.extend(customParseFormat);
 
-	const { id } = useParams();
+	const { workspaceId } = useParams();
 
 	const [form] = Form.useForm();
 
-	const CreateCampaign = useCreateCampaign();
+	const { mutate: CreateCampaign, isLoading } = useCreateCampaign();
 
 	const [description, setDescription] = useState('');
 
 	const onFinish = (values: CampaignType) => {
-		values.workspaceId = Number(id);
+		values.workspaceId = Number(workspaceId);
 
-		CreateCampaign.mutate(values);
-
+		CreateCampaign(values);
 		form.resetFields();
 	};
 
@@ -55,69 +55,76 @@ const CreateCampaign = () => {
 	};
 
 	return (
-		<>
-			<div className="main-container">
-				<Form
-					form={form}
-					onFinish={onFinish}
-					name="complex-form"
-					labelCol={{
-						span: 8,
-					}}
-					wrapperCol={{
-						span: 16,
-					}}
-					className="full-form"
-				>
-					<Form.Item label="Name">
-						<Space>
-							<Form.Item
-								name="name"
-								noStyle
-								// rules={[
-								// 	{
-								// 		required: true,
-								// 		message: 'Please enter a name',
-								// 	},
-								// ]}
-							>
-								<Input
-									type="input"
-									style={{
-										width: '300px',
-									}}
-									placeholder="abc..."
-								/>
-							</Form.Item>
-						</Space>
-					</Form.Item>
-					<Form.Item
-						label="Description"
-						name="description"
-						style={{
-							marginBottom: 0,
+		<div>
+			<Card style={{ marginBottom: 15 }}>
+				<div className="register_workspace">
+					<span> Create Campaign</span>
+				</div>
+			</Card>
+			<Card>
+				<div className="main-container">
+					<Form
+						form={form}
+						onFinish={onFinish}
+						name="complex-form"
+						labelCol={{
+							span: 3,
 						}}
+						wrapperCol={{
+							span: 16,
+						}}
+						className="full-form"
 					>
+						<Form.Item label="Name">
+							<Space>
+								<Form.Item
+									name="name"
+									noStyle
+									rules={[
+										{
+											required: true,
+											message: 'Please enter your name',
+										},
+									]}
+								>
+									<Input
+										type="input"
+										style={{
+											width: '800px',
+										}}
+										placeholder="Input your name"
+									/>
+								</Form.Item>
+							</Space>
+						</Form.Item>
 						<Form.Item
+							label="Description"
 							name="description"
-							rules={[
-								{
-									required: true,
-								},
-							]}
 							style={{
-								display: 'inline-block',
+								marginBottom: 0,
 							}}
 						>
-							<ReactQuill
-								value={description}
-								onChange={handleDescriptionChange}
-								style={{ width: '300px' }}
-							/>
+							<Form.Item
+								className="checkValid"
+								name="description"
+								rules={[
+									{
+										required: true,
+										message: 'Please input your description',
+									},
+								]}
+								style={{
+									display: 'inline-block',
+								}}
+							>
+								<ReactQuill
+									value={description}
+									onChange={handleDescriptionChange}
+									style={{ width: '800px', height: '120px' }}
+								/>
+							</Form.Item>
 						</Form.Item>
-					</Form.Item>
-					<div className="form-container">
-						<Form.Item label="Expired Time" className="full-form">
+						<Form.Item style={{ marginTop: 45 }} label="Expired Time">
 							<Space.Compact>
 								<Form.Item
 									name="expired_time"
@@ -134,24 +141,25 @@ const CreateCampaign = () => {
 										disabledDate={disabledDate}
 										disabledTime={disabledDateTime}
 										showTime={{ defaultValue: dayjs('00:00:00', 'HH:mm:ss') }}
-										style={{ width: '300px' }}
 									/>
 								</Form.Item>
 							</Space.Compact>
 						</Form.Item>
-					</div>
 
-					<Form.Item label=" " colon={false} className="full-btn">
-						<Button type="primary" className="btn-cancel">
-							Cancel
-						</Button>
-						<Button className="submit-button" type="primary" htmlType="submit">
-							Create
-						</Button>
-					</Form.Item>
-				</Form>
-			</div>
-		</>
+						<Form.Item colon={false} className="full-btn">
+							<Button
+								className="submit-button"
+								type="primary"
+								htmlType="submit"
+								loading={isLoading}
+							>
+								<PlusCircleOutlined /> Create Campaign
+							</Button>
+						</Form.Item>
+					</Form>
+				</div>
+			</Card>
+		</div>
 	);
 };
 

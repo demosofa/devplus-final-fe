@@ -1,43 +1,21 @@
-import { useParams } from 'react-router-dom';
-import { Button, Card, Modal } from 'antd';
-import { useState } from 'react';
-
+import { Link, useParams } from 'react-router-dom';
+import { Button, Card } from 'antd';
 import { useGetWorkspaceDetail } from 'hooks/useGetWorkspaceDetail';
-import CreateCampaign from 'components/Campaign/CreateCampaign';
+import { PlusCircleOutlined } from '@ant-design/icons';
+import '../components/WorkSpace/WorkSpaceDetail.css';
 
 export const WorkSpaceDetail = () => {
 	const { id } = useParams();
 
 	const { data: workspace, isLoading } = useGetWorkspaceDetail(Number(id));
 
-	const [isModalOpen, setIsModalOpen] = useState(false);
-
-	const showModal = () => {
-		setIsModalOpen(true);
-	};
-
-	const handleOk = () => {
-		setIsModalOpen(false);
-	};
-
-	const handleCancel = () => {
-		setIsModalOpen(false);
-	};
-
 	return (
 		<>
-			<Button type="primary" onClick={showModal} className="btn-wrap-campaign">
-				Create Campaign
+			<Button className="btn-wrap-campaign">
+				<Link style={{ color: 'white' }} to={'/create-campaign/' + id}>
+					<PlusCircleOutlined /> Create Campaign
+				</Link>
 			</Button>
-			<Modal
-				title="Create Campaign"
-				open={isModalOpen}
-				onOk={handleOk}
-				onCancel={handleCancel}
-				footer={null}
-			>
-				<CreateCampaign />
-			</Modal>
 			<div>
 				{isLoading ? (
 					<p>Loading...</p>

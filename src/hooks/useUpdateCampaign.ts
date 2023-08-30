@@ -1,5 +1,6 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { notification } from 'antd';
+import { useNavigate } from 'react-router-dom';
 
 import { updateCampaign } from '@services';
 import { CampaignType } from '@types';
@@ -7,6 +8,7 @@ import { NOTIFICATION } from '@enums';
 
 export const useUpdateCampaign = () => {
 	const queryClient = useQueryClient();
+	const navigate = useNavigate();
 
 	return useMutation({
 		mutationFn: async (values: CampaignType) => {
@@ -18,6 +20,8 @@ export const useUpdateCampaign = () => {
 				message: NOTIFICATION.SUCCESS,
 				description: 'Update campaign successfully.',
 			});
+			navigate('/campaign');
+
 			queryClient.refetchQueries();
 		},
 		onError: () => {

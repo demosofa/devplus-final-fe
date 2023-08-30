@@ -1,6 +1,5 @@
-.main-container .full-btn .btn-submit {
-	margin-top: 40px;
-	margin-left: 45px;
+.submit-button {
+	background-color: rgb(211, 164, 255);
 }
 
 .main-container .full-form .text-select {
@@ -8,14 +7,16 @@
 }
 
 .main-container .full-form {
-	max-width: 800px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+	margin-top: 30px;
+	display: inline-block;
 }
 
-.btn-cancel {
-	color: #0f0f0f;
-	background-color: #fff;
-	margin-right: 10px;
-	border: 0.5px solid black;
+.checkValid .ant-form-item-explain-error {
+	margin-top: 55px;
 }
 
 @media (max-width: 907px) {
