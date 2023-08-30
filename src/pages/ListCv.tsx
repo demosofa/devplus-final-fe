@@ -1,5 +1,9 @@
 import { CheckCircleOutlined, CloseCircleOutlined } from '@ant-design/icons';
+<<<<<<< HEAD
 import { Button, Input, Table } from 'antd';
+=======
+import { Input, Table } from 'antd';
+>>>>>>> ef72ec8 (feat: fix search)
 import { useState } from 'react';
 import { ColumnsType } from 'antd/es/table';
 import { Link, useNavigate } from 'react-router-dom';
@@ -8,6 +12,11 @@ import { CvType, WorkspaceType } from '@types';
 import { useGetListCv } from '@hooks';
 import { CV } from '@enums';
 import './ListCv.css';
+<<<<<<< HEAD
+=======
+
+const { Search } = Input;
+>>>>>>> ef72ec8 (feat: fix search)
 
 export const ListCv = () => {
 	const [currentPage, setCurrentPage] = useState(1);
