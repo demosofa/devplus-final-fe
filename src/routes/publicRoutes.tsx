@@ -7,6 +7,7 @@ import { Campaign } from '../components';
 import { WorkSpaceDetail } from 'pages/WorkspaceDetail';
 import { DetailCampaign } from 'components/Campaign/DetailCampaign';
 import { CreateUser, Login } from '@pages';
+import { ListCv } from '@pages';
 
 const publicRoutes: RouteObject[] = [
 	{
@@ -47,6 +48,11 @@ const publicRoutes: RouteObject[] = [
 			{
 				path: '/detail-campaign/:id',
 				element: <DetailCampaign />,
+			},
+
+			{
+				path: '/cv',
+				element: <ListCv />,
 			},
 		],
 	},
