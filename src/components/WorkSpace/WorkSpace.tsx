@@ -42,7 +42,7 @@ export const WorkSpace = () => {
 		Modal.confirm({
 			title: `Accept Workspace ${id}`,
 			icon: <ExclamationCircleFilled />,
-			content: 'Do you Want to accept this workspace?',
+			content: 'Do you want to accept this workspace?',
 			onOk() {
 				acceptWorkspace.mutate(id);
 			},
@@ -53,7 +53,7 @@ export const WorkSpace = () => {
 		Modal.confirm({
 			title: `Reject Workspace ${id}`,
 			icon: <ExclamationCircleFilled />,
-			content: 'Do you Want to reject this workspace?',
+			content: 'Do you want to reject this workspace?',
 			onOk() {
 				rejectWorkspace.mutate(id);
 			},

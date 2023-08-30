@@ -3,5 +3,5 @@ export enum API_URL {
 	CAMPAIGN = '/campaign/',
 	USER = '/user/',
 	AUTH = '/auth/',
-	CV = '/cv',
+	CV = '/cv/',
 }

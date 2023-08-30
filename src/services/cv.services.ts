@@ -11,3 +11,9 @@ export const getListCv = (page: number, take: number, search: string) =>
 			search,
 		},
 	});
+
+export const passCV = (id: number) =>
+	axios.patch<CvType>(API_URL.CV + `pass/${id}`);
+
+export const failCV = (id: number) =>
+	axios.patch<CvType>(API_URL.CV + `fail/${id}`);

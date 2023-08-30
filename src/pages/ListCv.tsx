@@ -1,5 +1,9 @@
-import { CheckCircleOutlined, CloseCircleOutlined } from '@ant-design/icons';
-import { Button, Input, Table } from 'antd';
+import {
+	CheckCircleOutlined,
+	CloseCircleOutlined,
+	ExclamationCircleFilled,
+} from '@ant-design/icons';
+import { Button, Input, Modal, Table } from 'antd';
 import { useState } from 'react';
 import { ColumnsType } from 'antd/es/table';
 import { Link, useNavigate } from 'react-router-dom';
@@ -8,6 +12,8 @@ import { CvType, WorkspaceType } from '@types';
 import { useGetListCv } from '@hooks';
 import { CV } from '@enums';
 import './ListCv.css';
+import { usePassCV } from '../hooks/usePassCV';
+import { useFailCV } from '../hooks/useFailCV';
 
 export const ListCv = () => {
 	const [currentPage, setCurrentPage] = useState(1);
@@ -22,6 +28,9 @@ export const ListCv = () => {
 	);
 
 	const navigate = useNavigate();
+
+	const passCV = usePassCV();
+	const failCV = useFailCV();
 
 	const handleSearchClick = () => {
 		setCurrentPage(1);
@@ -44,6 +53,28 @@ export const ListCv = () => {
 				}
 			},
 		};
+	};
+
+	const handlePassCV = (id: number) => {
+		Modal.confirm({
+			title: `Pass CV ${id}`,
+			icon: <ExclamationCircleFilled />,
+			content: 'Do you want to pass this CV?',
+			onOk() {
+				passCV.mutate(id);
+			},
+		});
+	};
+
+	const handleFailCV = (id: number) => {
+		Modal.confirm({
+			title: `Fail CV ${id}`,
+			icon: <ExclamationCircleFilled />,
+			content: 'Do you want to fail this CV?',
+			onOk() {
+				failCV.mutate(id);
+			},
+		});
 	};
 
 	const columns: ColumnsType<CvType> = [
@@ -101,6 +132,24 @@ export const ListCv = () => {
 			title: 'Status',
 			dataIndex: 'status',
 			key: 'status',
+			render: (status) => {
+				return (
+					<span
+						style={{
+							color:
+								status == CV.FAIL
+									? 'red'
+									: status == CV.PASS
+									? 'green'
+									: 'blue',
+							fontWeight: 'bold',
+							textTransform: 'uppercase',
+						}}
+					>
+						{status}
+					</span>
+				);
+			},
 		},
 
 		{
@@ -110,8 +159,22 @@ export const ListCv = () => {
 				<div className="action-icons-workspace">
 					{record.status === CV.NEW ? (
 						<>
-							<CheckCircleOutlined className="icons-check-Cv" />
-							<CloseCircleOutlined className="icons-close-Cv" />
+							<CheckCircleOutlined
+								className="icons-check-Cv"
+								onClick={(e) => {
+									e.preventDefault();
+									e.stopPropagation();
+									handlePassCV(record.id);
+								}}
+							/>
+							<CloseCircleOutlined
+								className="icons-close-Cv"
+								onClick={(e) => {
+									e.preventDefault();
+									e.stopPropagation();
+									handleFailCV(record.id);
+								}}
+							/>
 						</>
 					) : (
 						'No actions'
