@@ -1,0 +1,23 @@
+.ant-btn {
+	background: black;
+}
+
+.anticon {
+	color: white;
+}
+
+.btn-search-cv {
+	margin-bottom: 20px;
+	width: 300px;
+}
+
+.icons-check-Cv {
+	color: green !important;
+	font-size: 24px;
+	padding-right: 5px;
+}
+
+.icons-close-Cv {
+	color: red;
+	font-size: 24px;
+}

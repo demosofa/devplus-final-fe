@@ -6,12 +6,13 @@ import { getListCv } from 'services/cv.services';
 
 export const useGetListCv = (
 	page: number,
-	pageSize: number
+	pageSize: number,
+	searchTerm: string
 ): UseQueryResult<PageMeta<CvType>> => {
 	return useQuery({
-		queryKey: [QUERY_KEY.LIST_CV, page, pageSize],
+		queryKey: [QUERY_KEY.LIST_CV, page, pageSize, searchTerm],
 		queryFn: async () => {
-			const { data } = await getListCv(page, pageSize);
+			const { data } = await getListCv(page, pageSize, searchTerm);
 			return data;
 		},
 	});
