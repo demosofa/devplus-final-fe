@@ -1,0 +1,25 @@
+.login-container {
+	height: 100%;
+}
+
+.login-left {
+	background-color: #f37529;
+}
+
+.login-right.mobile {
+	background-color: #f37529;
+}
+
+.login-title {
+	text-align: center;
+}
+
+.login-title.mobile {
+	color: white;
+}
+
+.login-form.mobile {
+	background-color: white;
+	padding: 30px;
+	border-radius: 6px;
+}
