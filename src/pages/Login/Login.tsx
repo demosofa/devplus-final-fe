@@ -1,4 +1,4 @@
-import { Button, Col, Form, Grid, Input, Row, Typography } from 'antd';
+import { Button, Col, Form, Grid, Input, Row, Space, Typography } from 'antd';
 import { Link, useNavigate } from 'react-router-dom';
 
 import { useAuth, useLogin } from '@hooks';
@@ -91,7 +91,13 @@ export function Login() {
 										</Button>
 									</Form.Item>
 
-									<Link to={'/'}>Return to homepage</Link>
+									<Space.Compact
+										block
+										style={{ justifyContent: 'space-between' }}
+									>
+										<Link to="/">Return to homepage</Link>
+										<Link to="/create-ws">Create workspace</Link>
+									</Space.Compact>
 								</Form>
 							</Col>
 						</Row>

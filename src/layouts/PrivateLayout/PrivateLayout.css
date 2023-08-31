@@ -1,0 +1,8 @@
+.layout-content {
+	margin: 0 16px;
+	overflow: auto;
+}
+
+.layout-content.mobile {
+	margin: 0 10px;
+}
