@@ -113,7 +113,13 @@ export const ListCv = () => {
 			dataIndex: 'file',
 			key: 'file',
 			render: (text) => (
-				<Link to={text} target="_blank">
+				<Link
+					to={text}
+					target="_blank"
+					onClick={(e) => {
+						e.stopPropagation();
+					}}
+				>
 					Follow me
 				</Link>
 			),
