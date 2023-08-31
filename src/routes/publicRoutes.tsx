@@ -1,16 +1,12 @@
 import { RouteObject } from 'react-router-dom';
-import { PublicLayout } from '@layouts/PublicLayout';
-import { WorkSpace } from 'components/WorkSpace/WorkSpace';
-import { CampaignTest } from 'components/CampaignTest/CampaignTest';
-import { CreateWorkSpace } from 'components/WorkSpace/CreateWorkSpace';
-import { Campaign } from '../components';
-import { WorkSpaceDetail } from 'pages/WorkspaceDetail';
-import { DetailCampaign } from 'components/Campaign/DetailCampaign';
+
+import { PublicLayout } from '@layouts/PublicLayout/PublicLayout';
 import { CreateUser, Login } from '@pages';
 import { ListCv } from '@pages';
 import CreateCampaign from 'components/Campaign/CreateCampaign';
 import { UpdateCampaign } from 'components/Campaign/UpdateCampaign';
 import { ListUser } from 'components/User/ListUser';
+import { CreateWorkSpace } from 'components/WorkSpace/CreateWorkSpace';
 
 const publicRoutes: RouteObject[] = [
 	{
@@ -24,25 +20,10 @@ const publicRoutes: RouteObject[] = [
 			{ path: '/create-user', element: <CreateUser /> },
 
 			{
-				path: '/workspace',
-				element: <WorkSpace />,
-			},
-
-			{
-				path: 'campaign',
-				element: <Campaign />,
-			},
-
-			{
-				path: '/campaign-test',
-				element: <CampaignTest />,
-			},
-
-			{
 				path: 'create-ws',
 				element: <CreateWorkSpace />,
 			},
-
+      
 			{
 				path: '/workspace-detail/:id',
 				element: <WorkSpaceDetail />,
