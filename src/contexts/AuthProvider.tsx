@@ -7,22 +7,19 @@ import {
 } from 'react';
 import axios from 'axios';
 import jwtDecode from 'jwt-decode';
-import { getStorage, removeStorage, setStorage } from '@utils';
 
-type User = {
-	id: string;
-	username: string;
-	role: string;
-};
-type GetAuth = () => User | void;
-type SetAuth = (newToken?: string) => void;
-type AuthType = { getAuth: GetAuth; setAuth: SetAuth };
+import { getStorage, removeStorage, setStorage } from '@utils';
+import { AuthType, GetAuth, SetAuth } from '@types';
+import { ROLE } from '@enums';
 
 export const Auth = createContext<AuthType>({
 	getAuth: () => ({
 		id: '',
-		username: '',
-		role: '',
+		name: '',
+		email: '',
+		role: ROLE.USER,
+		status: '',
+		iat: 0,
 	}),
 	setAuth: () => null,
 });
