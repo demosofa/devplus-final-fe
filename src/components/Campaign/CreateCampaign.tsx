@@ -6,11 +6,11 @@ import dayjs from 'dayjs';
 import 'react-quill/dist/quill.snow.css';
 import ReactQuill from 'react-quill';
 import { RangePickerProps } from 'antd/es/date-picker';
+import { PlusCircleOutlined } from '@ant-design/icons';
 
 import './CreateCampaign.css';
 import { useCreateCampaign } from 'hooks/useCreateCampaign';
 import { CampaignType } from '@types';
-import { PlusCircleOutlined } from '@ant-design/icons';
 
 const CreateCampaign = () => {
 	dayjs.extend(customParseFormat);
@@ -67,12 +67,8 @@ const CreateCampaign = () => {
 						form={form}
 						onFinish={onFinish}
 						name="complex-form"
-						labelCol={{
-							span: 3,
-						}}
-						wrapperCol={{
-							span: 16,
-						}}
+						labelCol={{ span: 24 }}
+						wrapperCol={{ span: 24 }}
 						className="full-form"
 					>
 						<div className="form-row">

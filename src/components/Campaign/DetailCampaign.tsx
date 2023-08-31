@@ -53,8 +53,8 @@ export const DetailCampaign = () => {
 				<div className="container-detail">
 					<Form
 						initialValues={detailCampaign}
-						labelCol={{ span: 3 }}
-						wrapperCol={{ span: 16 }}
+						labelCol={{ span: 24 }}
+						wrapperCol={{ span: 24 }}
 					>
 						<div className="form-row">
 							<Form.Item label="Name" name="name">

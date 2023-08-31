@@ -68,8 +68,8 @@ export const UpdateCampaign = () => {
 						initialValues={detailCampaign}
 						form={form}
 						onFinish={handleUpdateCampaign}
-						labelCol={{ span: 3 }}
-						wrapperCol={{ span: 16 }}
+						labelCol={{ span: 24 }}
+						wrapperCol={{ span: 24 }}
 					>
 						<div className="form-row">
 							<Form.Item

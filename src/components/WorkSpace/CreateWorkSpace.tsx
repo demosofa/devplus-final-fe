@@ -27,8 +27,8 @@ export const CreateWorkSpace = () => {
 						className="formWorkspace"
 						form={form}
 						onFinish={addWorkSpace}
-						labelCol={{ span: 3 }}
-						wrapperCol={{ span: 20 }}
+						labelCol={{ span: 24 }}
+						wrapperCol={{ span: 24 }}
 					>
 						<div className="form-row">
 							<Form.Item
