@@ -75,76 +75,84 @@ const CreateCampaign = () => {
 						}}
 						className="full-form"
 					>
-						<Form.Item label="Name">
-							<Space>
-								<Form.Item
-									name="name"
-									noStyle
-									rules={[
-										{
-											required: true,
-											message: 'Please enter your name',
-										},
-									]}
-								>
-									<Input
-										type="input"
-										style={{
-											width: '800px',
-										}}
-										placeholder="Input your name"
-									/>
-								</Form.Item>
-							</Space>
-						</Form.Item>
-						<Form.Item
-							label="Description"
-							name="description"
-							style={{
-								marginBottom: 0,
-							}}
-						>
+						<div className="form-row">
+							<Form.Item label="Name">
+								<Space>
+									<Form.Item
+										name="name"
+										noStyle
+										rules={[
+											{
+												required: true,
+												message: 'Please enter your name',
+											},
+										]}
+									>
+										<Input
+											type="input"
+											style={{
+												width: '800px',
+											}}
+											placeholder="Input your name"
+										/>
+									</Form.Item>
+								</Space>
+							</Form.Item>
+						</div>
+
+						<div className="form-row">
 							<Form.Item
-								className="checkValid"
+								label="Description"
 								name="description"
-								rules={[
-									{
-										required: true,
-										message: 'Please input your description',
-									},
-								]}
 								style={{
-									display: 'inline-block',
+									marginBottom: 0,
 								}}
 							>
-								<ReactQuill
-									value={description}
-									onChange={handleDescriptionChange}
-									style={{ width: '800px', height: '120px' }}
-								/>
-							</Form.Item>
-						</Form.Item>
-						<Form.Item style={{ marginTop: 45 }} label="Expired Time">
-							<Space.Compact>
 								<Form.Item
-									name="expired_time"
-									noStyle
+									className="checkValid"
+									name="description"
 									rules={[
 										{
 											required: true,
-											message: 'Please select a date',
+											message: 'Please input your description',
 										},
 									]}
+									style={{
+										display: 'inline-block',
+									}}
 								>
-									<DatePicker
-										format="YYYY-MM-DD HH:mm:ss"
-										disabledDate={disabledDate}
-										disabledTime={disabledDateTime}
-										showTime={{ defaultValue: dayjs('00:00:00', 'HH:mm:ss') }}
+									<ReactQuill
+										value={description}
+										onChange={handleDescriptionChange}
+										style={{ width: '800px', height: '120px' }}
 									/>
 								</Form.Item>
-							</Space.Compact>
-						</Form.Item>
+							</Form.Item>
+						</div>
+
+						<div className="form-row">
+							<Form.Item style={{ marginTop: 45 }} label="Expired Time">
+								<Space.Compact>
+									<Form.Item
+										name="expired_time"
+										noStyle
+										rules={[
+											{
+												required: true,
+												message: 'Please select a date',
+											},
+										]}
+									>
+										<DatePicker
+											format="YYYY-MM-DD HH:mm:ss"
+											disabledDate={disabledDate}
+											disabledTime={disabledDateTime}
+											showTime={{ defaultValue: dayjs('00:00:00', 'HH:mm:ss') }}
+										/>
+									</Form.Item>
+								</Space.Compact>
+							</Form.Item>
+						</div>
 
 						<Form.Item colon={false} className="full-btn">
 							<Button
