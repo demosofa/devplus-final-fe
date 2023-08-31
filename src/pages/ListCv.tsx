@@ -113,15 +113,54 @@ export const ListCv = () => {
 			dataIndex: 'file',
 			key: 'file',
 			render: (text) => (
-				<Link
-					to={text}
-					target="_blank"
-					onClick={(e) => {
-						e.stopPropagation();
-					}}
-				>
-					Follow me
-				</Link>
+				<div>
+					{text === 'link' ? (
+						text.startsWith('https://drive.google.com/') ? (
+							<Link
+								to={text}
+								target="_blank"
+								rel="noopener noreferrer"
+								onClick={(e) => {
+									e.stopPropagation();
+								}}
+							>
+								{text}
+							</Link>
+						) : (
+							<Link
+								to={`http://localhost:3000/${text}`}
+								target="_blank"
+								onClick={(e) => {
+									e.stopPropagation();
+								}}
+							>
+								{text}
+							</Link>
+						)
+					) : text.startsWith('https://drive.google.com/') ? (
+						<Link
+							to={text}
+							target="_blank"
+							rel="noopener noreferrer"
+							onClick={(e) => {
+								e.stopPropagation();
+							}}
+						>
+							Follow me
+						</Link>
+					) : (
+						<Link
+							to={`http://localhost:3000/${text}`}
+							target="_blank"
+							rel="noopener noreferrer"
+							onClick={(e) => {
+								e.stopPropagation();
+							}}
+						>
+							Follow me
+						</Link>
+					)}
+				</div>
 			),
 		},
 		{
