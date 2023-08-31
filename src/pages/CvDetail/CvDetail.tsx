@@ -125,11 +125,17 @@ export const CvDetail = () => {
 											/>
 										</Link>
 									) : (
-										<img
-											src={`http://localhost:3000/${detailCampaign?.file}`}
-											alt="Image"
-											style={{ width: '300px', height: '300px' }}
-										/>
+										<Link
+											to={`http://localhost:3000/${detailCampaign?.file}`}
+											target="_blank"
+											rel="noopener noreferrer"
+										>
+											<img
+												src={`http://localhost:3000/${detailCampaign?.file}`}
+												alt="Image"
+												style={{ width: '300px', height: '300px' }}
+											/>
+										</Link>
 									)}
 								</Form.Item>
 							</Form.Item>
