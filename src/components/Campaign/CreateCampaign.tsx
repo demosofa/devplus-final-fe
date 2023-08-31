@@ -67,12 +67,8 @@ const CreateCampaign = () => {
 						form={form}
 						onFinish={onFinish}
 						name="complex-form"
-						labelCol={{
-							span: 3,
-						}}
-						wrapperCol={{
-							span: 16,
-						}}
+						labelCol={{ span: 24 }}
+						wrapperCol={{ span: 24 }}
 						className="full-form"
 					>
 						<div className="form-row">
