@@ -10,6 +10,7 @@ import { CreateUser, Login } from '@pages';
 import { ListCv } from '@pages';
 import CreateCampaign from 'components/Campaign/CreateCampaign';
 import { UpdateCampaign } from 'components/Campaign/UpdateCampaign';
+import { ListUser } from 'components/User/ListUser';
 
 const publicRoutes: RouteObject[] = [
 	{
@@ -65,6 +66,11 @@ const publicRoutes: RouteObject[] = [
 			{
 				path: '/update-campaign/:id',
 				element: <UpdateCampaign />,
+			},
+
+			{
+				path: '/user',
+				element: <ListUser />,
 			},
 		],
 	},
