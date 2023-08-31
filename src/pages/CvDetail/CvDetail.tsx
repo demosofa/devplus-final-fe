@@ -18,7 +18,7 @@ export const CvDetail = () => {
 
 	const [displayType, setDisplayType] = useState('link');
 
-	const detailCampaign = useMemo(() => {
+	const detailCv = useMemo(() => {
 		if (detailCampaignLoading || !data) {
 			return undefined;
 		}
@@ -41,12 +41,12 @@ export const CvDetail = () => {
 	}
 
 	return (
-		<Card>
+		<Card className="card-wrap-container">
 			<Row>
 				<Col span={24}>
 					<div className="main-container">
 						<Form
-							initialValues={detailCampaign}
+							initialValues={detailCv}
 							name="complex-form"
 							labelCol={{
 								span: 3,
@@ -76,14 +76,12 @@ export const CvDetail = () => {
 									<Input readOnly />
 								</Form.Item>
 							</Form.Item>
-
-							<Form.Item label="Status ">
-								<Form.Item name="status">
+							<Form.Item label="Create At">
+								<Form.Item name="create_at">
 									<Input readOnly />
 								</Form.Item>
 							</Form.Item>
-
-							<Form.Item label="File">
+							<Form.Item label="File" className="scrollable-card__form-item">
 								<Form.Item name="file">
 									<Select value={displayType} onChange={setDisplayType}>
 										<Option value="link">Link</Option>
@@ -92,51 +90,52 @@ export const CvDetail = () => {
 								</Form.Item>
 								<Form.Item noStyle>
 									{displayType === 'link' ? (
-										detailCampaign?.file.startsWith(
-											'https://drive.google.com/'
-										) ? (
+										detailCv?.file.startsWith('https://drive.google.com/') ? (
 											<Link
-												to={detailCampaign?.file}
+												to={detailCv?.file}
 												target="_blank"
 												rel="noopener noreferrer"
 											>
-												{detailCampaign?.file}
+												{detailCv?.file}
 											</Link>
 										) : (
 											<Link
-												to={`http://localhost:3000/${detailCampaign?.file}`}
+												to={`http://localhost:3000/${detailCv?.file}`}
 												target="_blank"
 											>
-												{detailCampaign?.file}
+												{detailCv?.file}
 											</Link>
 										)
-									) : detailCampaign?.file.startsWith(
-											'https://drive.google.com/'
-									  ) ? (
+									) : detailCv?.file.startsWith('https://drive.google.com/') ? (
 										<Link
-											to={detailCampaign?.file}
+											to={detailCv?.file}
 											target="_blank"
 											rel="noopener noreferrer"
 										>
 											<img
-												src={detailCampaign?.file}
+												src={detailCv?.file}
 												alt="Image"
 												style={{ width: '300px', height: '300px' }}
 											/>
 										</Link>
 									) : (
 										<Link
-											to={`http://localhost:3000/${detailCampaign?.file}`}
+											to={`http://localhost:3000/${detailCv?.file}`}
 											target="_blank"
 											rel="noopener noreferrer"
 										>
 											<img
-												src={`http://localhost:3000/${detailCampaign?.file}`}
+												src={`http://localhost:3000/${detailCv?.file}`}
 												alt="Image"
 												style={{ width: '300px', height: '300px' }}
 											/>
 										</Link>
 									)}
+								</Form.Item>
+							</Form.Item>
+							<Form.Item label="Status ">
+								<Form.Item name="status">
+									<Input readOnly />
 								</Form.Item>
 							</Form.Item>
 						</Form>

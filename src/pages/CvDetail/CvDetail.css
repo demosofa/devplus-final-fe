@@ -1,3 +1,13 @@
+.card-wrap-container {
+	max-height: 100vh;
+	overflow: auto;
+}
+
+.scrollable-card__form-item {
+	max-height: 200px;
+	overflow: auto;
+}
+
 .wrap-detail {
 	text-align: center;
 }

@@ -133,6 +133,10 @@ export const ListCv = () => {
 			title: 'Create At',
 			dataIndex: 'create_at',
 			key: 'create_at',
+			render: (timestamp) => {
+				const date = new Date(timestamp);
+				return date.toLocaleDateString();
+			},
 		},
 		{
 			title: 'Status',
