@@ -1,8 +1,8 @@
 .layout-content {
-	margin: 0 16px;
+	margin: 20px 16px 0;
 	overflow: auto;
 }
 
 .layout-content.mobile {
-	margin: 0 10px;
+	margin: 14px 10px 0;
 }

@@ -2,8 +2,9 @@ import { useMutation } from '@tanstack/react-query';
 import { notification } from 'antd';
 
 import { login } from '@services';
-import { UserLogin } from '@types';
+import { NestError, UserLogin } from '@types';
 import { NOTIFICATION } from '@enums';
+import { AxiosError } from 'axios';
 
 export function useLogin() {
 	return useMutation({
@@ -17,10 +18,10 @@ export function useLogin() {
 				description: 'Success Login',
 			});
 		},
-		onError: () => {
+		onError: (error: AxiosError<NestError>) => {
 			notification.error({
 				message: NOTIFICATION.ERROR,
-				description: 'Fail to Login',
+				description: error.response?.data.message,
 			});
 		},
 	});
