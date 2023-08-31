@@ -16,7 +16,7 @@ export function PublicLayout() {
 			{['login'].some((text) => location.pathname.includes(text)) ? null : (
 				<TopBar auth={auth} setAuth={setAuth} />
 			)}
-			<Content>
+			<Content style={{ overflow: 'auto' }}>
 				<Outlet />
 			</Content>
 		</Layout>
