@@ -1,11 +1,10 @@
 import { Link, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
+import { Spin } from 'antd';
+import Table, { ColumnsType } from 'antd/es/table';
 
-import './ListUser.css';
 import { useGetListUser } from 'hooks/useListUser';
 import { UserType } from '@types';
-import Table, { ColumnsType } from 'antd/es/table';
-import { Spin } from 'antd';
 
 export const ListUser = () => {
 	const [currentPage, setCurrentPage] = useState(1);

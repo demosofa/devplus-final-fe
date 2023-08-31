@@ -10,3 +10,6 @@ export const getListUser = (page: number, take: number) =>
 			take,
 		},
 	});
+
+export const getDetailUser = (id: number) =>
+	axios.get<UserType>(API_URL.USER + id);
