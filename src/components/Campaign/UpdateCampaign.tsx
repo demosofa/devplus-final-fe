@@ -71,41 +71,47 @@ export const UpdateCampaign = () => {
 						labelCol={{ span: 3 }}
 						wrapperCol={{ span: 16 }}
 					>
-						<Form.Item
-							label="Name"
-							name={'name'}
-							rules={[
-								{
-									required: true,
-									message: 'Please input your new name!',
-								},
-							]}
-						>
-							<Input placeholder="Input name" />
-						</Form.Item>
+						<div className="form-row">
+							<Form.Item
+								label="Name"
+								name={'name'}
+								rules={[
+									{
+										required: true,
+										message: 'Please input your new name!',
+									},
+								]}
+							>
+								<Input placeholder="Input name" />
+							</Form.Item>
+						</div>
 
-						<Form.Item
-							label="Description"
-							name={'description'}
-							rules={[
-								{ required: true, message: 'Please input new description!' },
-							]}
-						>
-							<ReactQuill
-								value={description}
-								onChange={handleDescriptionChange}
-								style={{ height: 150 }}
-							/>
-						</Form.Item>
+						<div className="form-row">
+							<Form.Item
+								label="Description"
+								name={'description'}
+								rules={[
+									{ required: true, message: 'Please input new description!' },
+								]}
+							>
+								<ReactQuill
+									value={description}
+									onChange={handleDescriptionChange}
+									style={{ height: 150 }}
+								/>
+							</Form.Item>
+						</div>
 
-						<Form.Item
-							style={{ marginTop: 70 }}
-							className="timestampInitial"
-							label="Expired time"
-							name={'expired_time'}
-						>
-							<DatePicker showTime />
-						</Form.Item>
+						<div className="form-row">
+							<Form.Item
+								style={{ marginTop: 70 }}
+								className="timestampInitial"
+								label="Expired time"
+								name={'expired_time'}
+							>
+								<DatePicker showTime />
+							</Form.Item>
+						</div>
 						<Form.Item label=" " colon={false}>
 							<Button
 								loading={isLoading}
