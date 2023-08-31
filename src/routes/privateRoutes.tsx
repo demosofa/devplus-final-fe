@@ -7,6 +7,8 @@ import { WorkSpaceDetail } from 'pages/WorkspaceDetail';
 import { DetailCampaign } from 'components/Campaign/DetailCampaign';
 import { ListCv } from '@pages';
 import { ROLE } from '@enums';
+import { ListUser } from 'components/User/ListUser';
+import { DetailUser } from 'components/User/DetailUser';
 
 const privateRoutes: Route[] = [
 	{
@@ -41,6 +43,16 @@ const privateRoutes: Route[] = [
 			{
 				path: '/cv',
 				element: <ListCv />,
+			},
+
+			{
+				path: '/user',
+				element: <ListUser />,
+			},
+
+			{
+				path: '/detail-user/:id',
+				element: <DetailUser />,
 			},
 		],
 	},
