@@ -1,5 +1,5 @@
 import { Grid, Layout, Menu, MenuProps } from 'antd';
-import { Navigate, Outlet, useLocation } from 'react-router-dom';
+import { Navigate, Outlet, useLocation, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 
 import { useAuth } from '@hooks';
@@ -19,6 +19,7 @@ export function PrivateLayout() {
 
 	const [collapsed, setCollapsed] = useState(true);
 	const location = useLocation();
+	const navigate = useNavigate();
 
 	const breakpoint = Grid.useBreakpoint();
 
@@ -69,6 +70,7 @@ export function PrivateLayout() {
 					mode="inline"
 					defaultSelectedKeys={[location.pathname]}
 					items={acceptedNav}
+					onClick={({ key }) => navigate(key)}
 				/>
 			</Sider>
 
