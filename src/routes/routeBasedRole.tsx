@@ -12,7 +12,7 @@ export function routeBasedRole(routes: Route[]) {
 		(prev, { element, roles, children, ...curr }) => {
 			const newRoute: RouteObject = curr;
 			if (element) {
-				if (roles != null) {
+				if (roles) {
 					newRoute.element = <PrivatePage roles={roles}>{element}</PrivatePage>;
 				} else newRoute.element = element;
 			}
