@@ -17,7 +17,7 @@ export const Auth = createContext<AuthType>({
 		id: '',
 		name: '',
 		email: '',
-		role: ROLE.USER,
+		role: ROLE.HR,
 		status: '',
 		iat: 0,
 	}),

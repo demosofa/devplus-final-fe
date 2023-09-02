@@ -1,26 +1,27 @@
 import { useMutation } from '@tanstack/react-query';
 import { notification } from 'antd';
 
-import { createUser } from '@services';
-import { UserCreate } from '@types';
+import { createHR } from '@services';
+import { NestError, UserCreate } from '@types';
 import { NOTIFICATION } from '@enums';
+import { AxiosError } from 'axios';
 
-export function useCreateUser() {
+export function useCreateHR() {
 	return useMutation({
 		mutationFn: async (values: UserCreate) => {
-			const { data } = await createUser(values);
+			const { data } = await createHR(values);
 			return data;
 		},
 		onSuccess: () => {
 			notification.success({
 				message: NOTIFICATION.SUCCESS,
-				description: 'Success Create User',
+				description: 'Success Create HR',
 			});
 		},
-		onError: () => {
+		onError: (data: AxiosError<NestError>) => {
 			notification.error({
 				message: NOTIFICATION.ERROR,
-				description: 'Fail to Create User',
+				description: data.response?.data.message,
 			});
 		},
 	});

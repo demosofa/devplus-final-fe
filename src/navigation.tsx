@@ -1,7 +1,9 @@
 import {
 	GithubOutlined,
 	PieChartOutlined,
+	UserAddOutlined,
 	UserOutlined,
+	UsergroupAddOutlined,
 } from '@ant-design/icons';
 
 import { ROLE } from '@enums';
@@ -19,13 +21,27 @@ export const navigation: AuthMenuItem[] = [
 		key: '/campaign',
 		label: 'Campaign',
 		icon: <PieChartOutlined />,
-		roles: [ROLE.ADMIN, ROLE.USER],
+		roles: [ROLE.ADMIN, ROLE.HR],
 	},
 
 	{
 		key: '/cv',
 		label: 'CV',
 		icon: <UserOutlined />,
+		roles: [ROLE.ADMIN],
+	},
+
+	{
+		key: '/user',
+		label: 'List HR',
+		icon: <UsergroupAddOutlined />,
+		roles: [ROLE.SUPER_ADMIN],
+	},
+
+	{
+		key: '/create-hr',
+		label: 'Create HR',
+		icon: <UserAddOutlined />,
 		roles: [ROLE.ADMIN],
 	},
 ];
