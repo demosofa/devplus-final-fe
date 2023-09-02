@@ -1,0 +1,7 @@
+.create-hr-form > .ant-form-item {
+	margin-bottom: 15px;
+}
+
+.create-hr-btn > .ant-form-item-row {
+	justify-content: center;
+}

@@ -5,7 +5,7 @@ import { CampaignTest } from 'components/CampaignTest/CampaignTest';
 import { Campaign } from '../components';
 import { WorkSpaceDetail } from 'pages/WorkspaceDetail';
 import { DetailCampaign } from 'components/Campaign/DetailCampaign';
-import { ListCv } from '@pages';
+import { CreateHR, ListCv } from '@pages';
 import { ROLE } from '@enums';
 import { ListUser } from 'components/User/ListUser';
 import { DetailUser } from 'components/User/DetailUser';
@@ -53,6 +53,12 @@ const privateRoutes: Route[] = [
 			{
 				path: '/detail-user/:id',
 				element: <DetailUser />,
+			},
+
+			{
+				path: '/create-hr',
+				element: <CreateHR />,
+				roles: [ROLE.ADMIN],
 			},
 		],
 	},
