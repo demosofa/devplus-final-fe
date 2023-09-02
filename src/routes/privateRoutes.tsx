@@ -9,6 +9,7 @@ import { CreateHR, ListCv } from '@pages';
 import { ROLE } from '@enums';
 import { ListUser } from 'components/User/ListUser';
 import { DetailUser } from 'components/User/DetailUser';
+import { UpdateCampaign } from '../components/Campaign/UpdateCampaign';
 
 const privateRoutes: Route[] = [
 	{
@@ -59,6 +60,11 @@ const privateRoutes: Route[] = [
 				path: '/create-hr',
 				element: <CreateHR />,
 				roles: [ROLE.ADMIN],
+			},
+
+			{
+				path: '/update-campaign/:id',
+				element: <UpdateCampaign />,
 			},
 		],
 	},

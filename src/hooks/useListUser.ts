@@ -2,7 +2,7 @@ import { UseQueryResult, useQuery } from '@tanstack/react-query';
 
 import { QUERY_KEY } from '@constants';
 import { PageMeta, UserType } from '@types';
-import { getListUser } from 'services/user.service';
+import { getListUser } from 'services/user.services';
 
 export const useGetListUser = (
 	page: number,
