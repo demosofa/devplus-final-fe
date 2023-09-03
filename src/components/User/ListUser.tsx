@@ -1,22 +1,40 @@
-import { Link, useNavigate } from 'react-router-dom';
-import { useState } from 'react';
-import { Spin } from 'antd';
+import { Form, Input, Modal } from 'antd';
 import Table, { ColumnsType } from 'antd/es/table';
+import { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 
-import { useGetListUser } from 'hooks/useListUser';
 import { UserType } from '@types';
+import { useGetListUser } from 'hooks/useListUser';
+import { useUpdateUser } from '../../hooks/useUpdateUser';
 
 export const ListUser = () => {
 	const [currentPage, setCurrentPage] = useState(1);
 	const [pageSize, setPageSize] = useState(5);
-
+	const [isModalOpen, setIsModalOpen] = useState<UserType | undefined>();
+	const [form] = Form.useForm();
 	const { data: listUser, isLoading } = useGetListUser(currentPage, pageSize);
+
+	const { mutateAsync: updateUser, isLoading: loadUpdateUser } =
+		useUpdateUser();
 
 	const handlePaginationChange = (page: number, pageSize?: number) => {
 		setCurrentPage(page);
 		if (pageSize) {
 			setPageSize(pageSize);
 		}
+	};
+
+	const showModal = (record: UserType) => {
+		setIsModalOpen(record);
+	};
+
+	const handleOk = () => {
+		form.submit();
+		setIsModalOpen(undefined);
+	};
+
+	const handleCancel = () => {
+		setIsModalOpen(undefined);
 	};
 
 	const onRow = (record: UserType) => {
@@ -29,6 +47,13 @@ export const ListUser = () => {
 	};
 
 	const navigate = useNavigate();
+
+	const onFinish = async (value: UserType) => {
+		if (isModalOpen) {
+			value.id = isModalOpen.id;
+			await updateUser(value);
+		}
+	};
 
 	const columns: ColumnsType<UserType> = [
 		{
@@ -76,7 +101,7 @@ export const ListUser = () => {
 								onClick={(e) => {
 									e.preventDefault();
 									e.stopPropagation();
-									navigate('/update-user/' + record.id);
+									showModal(record);
 								}}
 							>
 								<path
@@ -107,16 +132,6 @@ export const ListUser = () => {
 		},
 	];
 
-	if (isLoading) {
-		return (
-			<div>
-				<Spin tip="Loading" size="large">
-					<div className="content" />
-				</Spin>
-			</div>
-		);
-	}
-
 	return (
 		<>
 			<Table<UserType>
@@ -134,6 +149,37 @@ export const ListUser = () => {
 				loading={isLoading}
 				onRow={onRow}
 			/>
+
+			<Modal
+				title="Update User"
+				open={isModalOpen ? true : false}
+				onOk={handleOk}
+				onCancel={handleCancel}
+				confirmLoading={loadUpdateUser}
+				destroyOnClose={true}
+			>
+				<Form
+					form={form}
+					initialValues={isModalOpen}
+					name="form_item_path"
+					layout="vertical"
+					onFinish={onFinish}
+					preserve={false}
+				>
+					<Form.Item name="name" label="Name">
+						<Input />
+					</Form.Item>
+					<Form.Item name="phone_number" label="Phone Number">
+						<Input />
+					</Form.Item>
+					<Form.Item name="password" label="Password">
+						<Input />
+					</Form.Item>
+					<Form.Item name="email" label="Email">
+						<Input disabled />
+					</Form.Item>
+				</Form>
+			</Modal>
 		</>
 	);
 };

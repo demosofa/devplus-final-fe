@@ -16,3 +16,5 @@ export const getDetailUser = (id: number) =>
 
 export const createHR = (data: UserCreate) =>
 	axios.post(API_URL.USER + 'hr', data);
+export const updateUser = (data: UserType) =>
+	axios.patch<UserType>(API_URL.USER + data.id, data);
