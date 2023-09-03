@@ -51,7 +51,6 @@ export const ListUser = () => {
 	const onFinish = async (value: UserType) => {
 		if (isModalOpen) {
 			value.id = isModalOpen.id;
-			console.log(value);
 			await updateUser(value);
 		}
 	};
