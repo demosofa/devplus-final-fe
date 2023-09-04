@@ -6,13 +6,24 @@ import { Link, useNavigate } from 'react-router-dom';
 import { UserType } from '@types';
 import { useGetListUser } from 'hooks/useListUser';
 import { useUpdateUser } from '../../hooks/useUpdateUser';
+import { useAuth } from '@hooks';
+import { ROLE } from '@enums';
 
 export const ListUser = () => {
 	const [currentPage, setCurrentPage] = useState(1);
 	const [pageSize, setPageSize] = useState(5);
 	const [isModalOpen, setIsModalOpen] = useState<UserType | undefined>();
 	const [form] = Form.useForm();
-	const { data: listUser, isLoading } = useGetListUser(currentPage, pageSize);
+
+	const { getAuth } = useAuth();
+
+	const auth = getAuth();
+
+	const { data: listUser, isLoading } = useGetListUser(
+		auth,
+		currentPage,
+		pageSize
+	);
 
 	const { mutateAsync: updateUser, isLoading: loadUpdateUser } =
 		useUpdateUser();
@@ -91,6 +102,10 @@ export const ListUser = () => {
 			title: 'Action',
 			key: 'action',
 			render: (record: UserType) => {
+				if (auth && auth.role == ROLE.SUPER_ADMIN) {
+					return 'No actions';
+				}
+
 				return (
 					<div className="action-icons">
 						<div className="campaign-action">
