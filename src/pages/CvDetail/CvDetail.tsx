@@ -8,6 +8,7 @@ import { CvType } from '@types';
 import { clone } from '@utils';
 import './CvDetail.css';
 import { useGetDetailCv } from 'hooks/useGetDetailCv';
+import { BASE_URL } from '@constants';
 
 export const CvDetail = () => {
 	const { id } = useParams();
@@ -99,37 +100,46 @@ export const CvDetail = () => {
 												{detailCv?.file}
 											</Link>
 										) : (
-											<Link
-												to={`http://localhost:3000/${detailCv?.file}`}
-												target="_blank"
-											>
+											<Link to={`${BASE_URL}${detailCv?.file}`} target="_blank">
 												{detailCv?.file}
 											</Link>
 										)
 									) : detailCv?.file.startsWith('https://drive.google.com/') ? (
-										<Link
-											to={detailCv?.file}
-											target="_blank"
-											rel="noopener noreferrer"
+										<object
+											data={`${BASE_URL}${detailCv?.file}`}
+											type="application/pdf"
+											width="100%"
+											height="500px"
 										>
-											<img
-												src={detailCv?.file}
-												alt="Image"
-												style={{ width: '300px', height: '300px' }}
-											/>
-										</Link>
+											<p>
+												Unable to display PDF file.{' '}
+												<Link
+													to={`${BASE_URL}${detailCv?.file}`}
+													target="_blank"
+												>
+													Download
+												</Link>
+												instead.
+											</p>
+										</object>
 									) : (
-										<Link
-											to={`http://localhost:3000/${detailCv?.file}`}
-											target="_blank"
-											rel="noopener noreferrer"
+										<object
+											data={`${BASE_URL}${detailCv?.file}`}
+											type="application/pdf"
+											width="100%"
+											height="500px"
 										>
-											<img
-												src={`http://localhost:3000/${detailCv?.file}`}
-												alt="Image"
-												style={{ width: '300px', height: '300px' }}
-											/>
-										</Link>
+											<p>
+												Unable to display PDF file.{' '}
+												<Link
+													to={`${BASE_URL}${detailCv?.file}`}
+													target="_blank"
+												>
+													Download
+												</Link>
+												instead.
+											</p>
+										</object>
 									)}
 								</Form.Item>
 							</Form.Item>

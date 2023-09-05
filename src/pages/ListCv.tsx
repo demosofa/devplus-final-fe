@@ -14,6 +14,7 @@ import { CV } from '@enums';
 import './ListCv.css';
 import { usePassCV } from '../hooks/usePassCV';
 import { useFailCV } from '../hooks/useFailCV';
+import { BASE_URL } from '@constants';
 
 export const ListCv = () => {
 	const [currentPage, setCurrentPage] = useState(1);
@@ -128,7 +129,7 @@ export const ListCv = () => {
 							</Link>
 						) : (
 							<Link
-								to={`http://localhost:3000/${text}`}
+								to={`${BASE_URL}${text}`}
 								target="_blank"
 								onClick={(e) => {
 									e.stopPropagation();
@@ -146,18 +147,18 @@ export const ListCv = () => {
 								e.stopPropagation();
 							}}
 						>
-							Follow me
+							DownLoad
 						</Link>
 					) : (
 						<Link
-							to={`http://localhost:3000/${text}`}
+							to={`${BASE_URL}${text}`}
 							target="_blank"
 							rel="noopener noreferrer"
 							onClick={(e) => {
 								e.stopPropagation();
 							}}
 						>
-							Follow me
+							DownLoad
 						</Link>
 					)}
 				</div>
