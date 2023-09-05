@@ -1,5 +1,5 @@
 import { useParams } from 'react-router-dom';
-import { Card, Form, Input } from 'antd';
+import { Card, Col, Form, Input, Row } from 'antd';
 import { LoadingOutlined } from '@ant-design/icons';
 
 import { useDetailUser } from 'hooks/useDetailUser';
@@ -26,21 +26,31 @@ export const DetailUser = () => {
 				<div className="container-detail">
 					<Form
 						initialValues={data}
-						labelCol={{ span: 3 }}
-						wrapperCol={{ span: 16 }}
+						labelCol={{ span: 4 }}
+						wrapperCol={{ span: 20 }}
 					>
-						<Form.Item label="Name" name="name">
-							<Input style={{ width: '800px' }} disabled />
-						</Form.Item>
-						<Form.Item label="Email" name="email">
-							<Input style={{ width: '800px' }} disabled />
-						</Form.Item>
-						<Form.Item label="Phone number" name="phone_number">
-							<Input style={{ width: '800px' }} disabled />
-						</Form.Item>
-						<Form.Item label="Status" name="status">
-							<Input style={{ width: '800px' }} disabled />
-						</Form.Item>
+						<Row>
+							<Col span={24} md={16}>
+								<Form.Item label="Name" name="name">
+									<Input disabled />
+								</Form.Item>
+							</Col>
+							<Col span={24} md={16}>
+								<Form.Item label="Email" name="email">
+									<Input disabled />
+								</Form.Item>
+							</Col>
+							<Col span={24} md={16}>
+								<Form.Item label="Phone number" name="phone_number">
+									<Input disabled />
+								</Form.Item>
+							</Col>
+							<Col span={24} md={16}>
+								<Form.Item label="Status" name="status">
+									<Input disabled />
+								</Form.Item>
+							</Col>
+						</Row>
 					</Form>
 				</div>
 			</Card>
