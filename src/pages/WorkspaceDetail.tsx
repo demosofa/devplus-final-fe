@@ -1,7 +1,8 @@
 import { Link, useParams } from 'react-router-dom';
 import { Button, Card } from 'antd';
-import { useGetWorkspaceDetail } from 'hooks/useGetWorkspaceDetail';
 import { PlusCircleOutlined } from '@ant-design/icons';
+
+import { useGetWorkspaceDetail } from 'hooks/useGetWorkspaceDetail';
 import '../components/WorkSpace/WorkSpaceDetail.css';
 
 export const WorkSpaceDetail = () => {

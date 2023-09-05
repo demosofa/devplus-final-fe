@@ -25,7 +25,7 @@ export function Login() {
 	useEffect(() => {
 		const auth = getAuth();
 
-		if (auth) navigate('/');
+		if (auth) navigate(`/detail-user/${auth.id}`);
 	}, [getAuth, navigate]);
 
 	return (
@@ -95,7 +95,6 @@ export function Login() {
 										block
 										style={{ justifyContent: 'space-between' }}
 									>
-										<Link to="/">Return to homepage</Link>
 										<Link to="/create-ws">Create workspace</Link>
 									</Space.Compact>
 								</Form>

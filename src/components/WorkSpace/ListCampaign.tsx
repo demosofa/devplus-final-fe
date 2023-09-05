@@ -2,9 +2,9 @@ import { ExclamationCircleFilled } from '@ant-design/icons';
 import { Modal, Table } from 'antd';
 import { useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
+import { ColumnsType } from 'antd/es/table';
 
 import './WorkSpace.css';
-import { ColumnsType } from 'antd/es/table';
 import { useAcceptWorkspace, useRejectWorkspace } from '@hooks';
 import { CampaignType } from '@types';
 
@@ -153,7 +153,7 @@ export const ListCampaign = () => {
 					total: campaign?.meta.itemCount,
 					onChange: handlePaginationChange,
 				}}
-				style={{ overflowX: 'auto' }}
+				scroll={{ x: 'max-content' }}
 				loading={isLoading}
 			/>
 		</>

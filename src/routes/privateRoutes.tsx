@@ -10,6 +10,7 @@ import { ROLE } from '@enums';
 import { ListUser } from 'components/User/ListUser';
 import { DetailUser } from 'components/User/DetailUser';
 import { UpdateCampaign } from '../components/Campaign/UpdateCampaign';
+import CreateCampaign from 'components/Campaign/CreateCampaign';
 
 const privateRoutes: Route[] = [
 	{
@@ -65,6 +66,11 @@ const privateRoutes: Route[] = [
 			{
 				path: '/update-campaign/:id',
 				element: <UpdateCampaign />,
+			},
+
+			{
+				path: '/create-campaign',
+				element: <CreateCampaign />,
 			},
 		],
 	},

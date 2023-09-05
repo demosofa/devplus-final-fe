@@ -1,5 +1,4 @@
 import { Button, Col, Form, Input, Row, Typography } from 'antd';
-import { Link, useNavigate } from 'react-router-dom';
 
 import { useCreateHR } from '@hooks';
 import { UserCreate } from '@types';
@@ -9,7 +8,6 @@ const { Title } = Typography;
 
 export function CreateHR() {
 	const [form] = Form.useForm();
-	const navigate = useNavigate();
 
 	const { mutateAsync: createHR, isLoading } = useCreateHR();
 
@@ -17,8 +15,6 @@ export function CreateHR() {
 		await createHR(values);
 
 		form.resetFields();
-
-		navigate('/');
 	};
 
 	return (
@@ -78,8 +74,6 @@ export function CreateHR() {
 							Create HR
 						</Button>
 					</Form.Item>
-
-					<Link to={'/'}>Return to homepage</Link>
 				</Form>
 			</Col>
 		</Row>

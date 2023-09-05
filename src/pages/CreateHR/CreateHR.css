@@ -3,5 +3,6 @@
 }
 
 .create-hr-btn > .ant-form-item-row {
-	justify-content: center;
+	width: 30%;
+	margin-top: 30px;
 }

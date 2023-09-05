@@ -19,7 +19,7 @@ export const DetailUser = () => {
 		<div>
 			<Card style={{ marginBottom: 15 }}>
 				<div className="register_workspace">
-					<span> Detail User</span>
+					<span> Detail</span>
 				</div>
 			</Card>
 			<Card>
