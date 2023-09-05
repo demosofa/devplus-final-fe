@@ -1,4 +1,4 @@
-import { Button, Card, Form, Input, Space, Upload } from 'antd';
+import { Button, Card, Form, Input, Upload } from 'antd';
 import { useParams } from 'react-router-dom';
 import 'react-quill/dist/quill.snow.css';
 import { PlusCircleOutlined } from '@ant-design/icons';
@@ -46,99 +46,83 @@ const CreateCv = () => {
 						className="full-form"
 					>
 						<div className="form-row">
-							<Form.Item label="Name">
-								<Space>
-									<Form.Item
-										name="name"
-										noStyle
-										rules={[
-											{
-												required: true,
-												message: 'Please enter your name',
-											},
-										]}
-									>
-										<Input
-											type="input"
-											style={{
-												width: '800px',
-											}}
-											placeholder="Input your name"
-										/>
-									</Form.Item>
-								</Space>
+							<Form.Item
+								name="name"
+								label="Name"
+								rules={[
+									{
+										required: true,
+										message: 'Please enter your name',
+									},
+								]}
+							>
+								<Input
+									type="input"
+									style={{
+										width: '800px',
+									}}
+									placeholder="Input your name"
+								/>
 							</Form.Item>
 						</div>
 						<div className="form-row">
-							<Form.Item label="Email">
-								<Space>
-									<Form.Item
-										name="email"
-										noStyle
-										rules={[
-											{
-												required: true,
-												message: 'Please enter your email',
-											},
-										]}
-									>
-										<Input
-											type="input"
-											style={{
-												width: '800px',
-											}}
-											placeholder="Input your email"
-										/>
-									</Form.Item>
-								</Space>
+							<Form.Item
+								name="email"
+								label="Email"
+								rules={[
+									{
+										required: true,
+										message: 'Please enter your email',
+									},
+								]}
+							>
+								<Input
+									type="input"
+									style={{
+										width: '800px',
+									}}
+									placeholder="Input your email"
+								/>
 							</Form.Item>
 						</div>
 						<div className="form-row">
-							<Form.Item label="Phone Number">
-								<Space>
-									<Form.Item
-										name="phone_number"
-										noStyle
-										rules={[
-											{
-												required: true,
-												message: 'Please enter your phone',
-											},
-										]}
-									>
-										<Input
-											type="input"
-											style={{
-												width: '800px',
-											}}
-											placeholder="Input your phone number"
-										/>
-									</Form.Item>
-								</Space>
+							<Form.Item
+								name="phone_number"
+								label="Phone Number"
+								rules={[
+									{
+										required: true,
+										message: 'Please enter your phone',
+									},
+								]}
+							>
+								<Input
+									type="input"
+									style={{
+										width: '800px',
+									}}
+									placeholder="Input your phone number"
+								/>
 							</Form.Item>
 						</div>
 						<div className="form-row">
-							<Form.Item label="Position ">
-								<Space>
-									<Form.Item
-										name="apply_position"
-										noStyle
-										rules={[
-											{
-												required: true,
-												message: 'Please enter your position',
-											},
-										]}
-									>
-										<Input
-											type="input"
-											style={{
-												width: '800px',
-											}}
-											placeholder="Input your phone position"
-										/>
-									</Form.Item>
-								</Space>
+							<Form.Item
+								name="apply_position"
+								label="Position"
+								rules={[
+									{
+										required: true,
+										message: 'Please enter your position',
+									},
+								]}
+							>
+								<Input
+									type="input"
+									style={{
+										width: '800px',
+									}}
+									placeholder="Input your phone position"
+								/>
 							</Form.Item>
 						</div>
 						<div className="form-row">

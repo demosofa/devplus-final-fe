@@ -162,7 +162,7 @@ export const ListCv = () => {
 		{
 			title: 'Campaign',
 			dataIndex: ['campaign', 'name'],
-			key: 'file',
+			key: 'campaign',
 		},
 		{
 			title: 'Create At',
