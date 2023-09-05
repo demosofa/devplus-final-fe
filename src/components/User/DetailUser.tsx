@@ -32,22 +32,22 @@ export const DetailUser = () => {
 						<Row>
 							<Col span={24} md={16}>
 								<Form.Item label="Name" name="name">
-									<Input disabled />
+									<Input readOnly={true} />
 								</Form.Item>
 							</Col>
 							<Col span={24} md={16}>
 								<Form.Item label="Email" name="email">
-									<Input disabled />
+									<Input readOnly={true} />
 								</Form.Item>
 							</Col>
 							<Col span={24} md={16}>
 								<Form.Item label="Phone number" name="phone_number">
-									<Input disabled />
+									<Input readOnly={true} />
 								</Form.Item>
 							</Col>
 							<Col span={24} md={16}>
 								<Form.Item label="Status" name="status">
-									<Input disabled />
+									<Input readOnly={true} />
 								</Form.Item>
 							</Col>
 						</Row>

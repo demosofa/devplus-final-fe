@@ -61,7 +61,7 @@ export const DetailCampaign = () => {
 								<Input
 									placeholder="Input name"
 									style={{ maxWidth: '800px' }}
-									disabled
+									readOnly={true}
 								/>
 							</Form.Item>
 						</div>
