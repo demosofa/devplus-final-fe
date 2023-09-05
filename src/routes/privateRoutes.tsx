@@ -81,7 +81,7 @@ const privateRoutes: Route[] = [
 			},
 
 			{
-				path: '/create-cv/:campaignId',
+				path: '/create-cv/:id',
 				element: <CreateCv />,
 			},
 		],

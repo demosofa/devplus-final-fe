@@ -1,3 +1,13 @@
 .apply-create {
 	text-align: center;
 }
+
+.row-btn-summit {
+	display: flex !important;
+	justify-content: center !important;
+}
+
+.title-cv {
+	font-size: 40px;
+	font-weight: 500;
+}
