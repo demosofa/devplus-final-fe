@@ -1,10 +1,19 @@
-import { Button, Card, Col, DatePicker, Form, Input, Row, Upload } from 'antd';
+import {
+	Button,
+	Card,
+	Col,
+	DatePicker,
+	Form,
+	Input,
+	Row,
+	Typography,
+	Upload,
+} from 'antd';
 import { useParams } from 'react-router-dom';
 import 'react-quill/dist/quill.snow.css';
 import { LoadingOutlined, PlusCircleOutlined } from '@ant-design/icons';
-import { useMemo, useState } from 'react';
+import { useMemo } from 'react';
 import dayjs, { Dayjs } from 'dayjs';
-import ReactQuill from 'react-quill';
 
 import { CampaignType, CreateCvType } from '@types';
 import { useCreateCv, useFindOneCampaign } from '@hooks';
@@ -12,12 +21,9 @@ import { clone } from '@utils';
 import './CreateCv.css';
 
 const CreateCv = () => {
-	const { id } = useParams();
+	const { Title, Paragraph } = Typography;
 
-	const [description, setDescription] = useState('');
-	const handleDescriptionChange = (value: string) => {
-		setDescription(value);
-	};
+	const { id } = useParams();
 
 	const [form] = Form.useForm();
 
@@ -65,58 +71,36 @@ const CreateCv = () => {
 
 	return (
 		<div>
-			<div className="container-detail">
-				<Form initialValues={detailCampaign}>
-					<div className="form-row">
-						<div className="title-cv">Title: {detailCampaign?.name}</div>
-					</div>
-				</Form>
-			</div>
+			<Row gutter={[12, 12]}>
+				<Col span={24} md={16} style={{ height: '100%' }}>
+					<div className="container-detail">
+						<Form
+							initialValues={detailCampaign}
+							labelCol={{ span: 24 }}
+							wrapperCol={{ span: 24 }}
+						>
+							<div className="form-row">
+								<Typography>
+									<Title>{detailCampaign?.name}</Title>
+									<Paragraph>{detailCampaign?.description}</Paragraph>
+								</Typography>
+							</div>
 
-			<Row>
-				<Col span={18}>
-					<Card>
-						<div className="container-detail">
-							<Form
-								initialValues={detailCampaign}
-								labelCol={{ span: 24 }}
-								wrapperCol={{ span: 24 }}
-							>
-								<div className="form-row">
-									<Form.Item label="Name" name="name">
-										<Input
-											placeholder="Input name"
-											style={{ width: '800px' }}
-											disabled
-										/>
-									</Form.Item>
-								</div>
-								<div className="form-row">
-									<Form.Item label="Description" name="description">
-										<ReactQuill
-											value={description}
-											onChange={handleDescriptionChange}
-											style={{ width: '800px', height: 150 }}
-											readOnly={true}
-										/>
-									</Form.Item>
-								</div>
-								<div className="form-row">
-									<Form.Item
-										style={{ marginTop: 70 }}
-										className="timestampInitial"
-										label="Expired time"
-										name="expired_time"
-									>
-										<DatePicker showTime disabled />
-									</Form.Item>
-								</div>
-							</Form>
-						</div>
-					</Card>
+							<div className="form-row">
+								<Form.Item
+									style={{ marginTop: 70 }}
+									className="timestampInitial"
+									label="Expired time"
+									name="expired_time"
+								>
+									<DatePicker showTime disabled />
+								</Form.Item>
+							</div>
+						</Form>
+					</div>
 				</Col>
 
-				<Col span={6}>
+				<Col span={24} md={7}>
 					<Card>
 						<div className="register_workspace">
 							<span> Apply CV</span>
@@ -213,7 +197,6 @@ const CreateCv = () => {
 								<div className="form-row">
 									<Form.Item
 										name="file"
-										label="File"
 										rules={[
 											{
 												required: true,
