@@ -2,7 +2,7 @@ import { QueryKey, useQueryClient } from '@tanstack/react-query';
 import { Statistic } from 'antd';
 
 import { CAMPAIGN } from '@enums';
-import { CampaignType, ImPartial, PartialBy } from '@types';
+import { CampaignType, ImPartial } from '@types';
 
 const { Countdown } = Statistic;
 
@@ -24,20 +24,17 @@ export function CampaignCountdown({
 			value={campaign.expired_time}
 			format="DD : HH : mm : ss"
 			onFinish={() => {
-				queryClient.setQueryData<PartialBy<CampaignType, 'workspaceId'>[]>(
-					queryKey,
-					(lstCampaign) => {
-						if (!lstCampaign || !lstCampaign.length) return [];
+				queryClient.setQueryData<CampaignType[]>(queryKey, (lstCampaign) => {
+					if (!lstCampaign || !lstCampaign.length) return [];
 
-						const cloned = lstCampaign.concat();
+					const cloned = lstCampaign.concat();
 
-						const idx = cloned.findIndex((item) => item.id === campaign.id);
+					const idx = cloned.findIndex((item) => item.id === campaign.id);
 
-						cloned[idx].status = CAMPAIGN.INACTIVE;
+					cloned[idx].status = CAMPAIGN.INACTIVE;
 
-						return cloned;
-					}
-				);
+					return cloned;
+				});
 
 				onFinish?.();
 			}}
