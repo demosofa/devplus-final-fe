@@ -14,6 +14,7 @@ import { CV } from '@enums';
 import './ListCv.css';
 import { usePassCV } from '../hooks/usePassCV';
 import { useFailCV } from '../hooks/useFailCV';
+import { BASE_URL } from '@constants';
 
 export const ListCv = () => {
 	const [currentPage, setCurrentPage] = useState(1);
@@ -113,9 +114,54 @@ export const ListCv = () => {
 			dataIndex: 'file',
 			key: 'file',
 			render: (text) => (
-				<Link to={text} target="_blank">
-					Follow me
-				</Link>
+				<div>
+					{text === 'link' ? (
+						text.startsWith('https://drive.google.com/') ? (
+							<Link
+								to={text}
+								target="_blank"
+								rel="noopener noreferrer"
+								onClick={(e) => {
+									e.stopPropagation();
+								}}
+							>
+								{text}
+							</Link>
+						) : (
+							<Link
+								to={`${BASE_URL}${text}`}
+								target="_blank"
+								onClick={(e) => {
+									e.stopPropagation();
+								}}
+							>
+								{text}
+							</Link>
+						)
+					) : text.startsWith('https://drive.google.com/') ? (
+						<Link
+							to={text}
+							target="_blank"
+							rel="noopener noreferrer"
+							onClick={(e) => {
+								e.stopPropagation();
+							}}
+						>
+							DownLoad
+						</Link>
+					) : (
+						<Link
+							to={`${BASE_URL}${text}`}
+							target="_blank"
+							rel="noopener noreferrer"
+							onClick={(e) => {
+								e.stopPropagation();
+							}}
+						>
+							DownLoad
+						</Link>
+					)}
+				</div>
 			),
 		},
 		{
@@ -127,6 +173,10 @@ export const ListCv = () => {
 			title: 'Create At',
 			dataIndex: 'create_at',
 			key: 'create_at',
+			render: (timestamp) => {
+				const date = new Date(timestamp);
+				return date.toLocaleDateString();
+			},
 		},
 		{
 			title: 'Status',

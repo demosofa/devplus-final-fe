@@ -17,3 +17,5 @@ export const passCV = (id: number) =>
 
 export const failCV = (id: number) =>
 	axios.patch<CvType>(API_URL.CV + `fail/${id}`);
+
+export const getCvDetail = (id: number) => axios.get(API_URL.CV + id);
