@@ -1,3 +1,6 @@
+import { UploadFile } from 'antd';
+import { CampaignType } from './campaign.type';
+
 export type CvType = {
 	id: number;
 	name: string;
@@ -6,5 +9,20 @@ export type CvType = {
 	file: string;
 	create_at: Date;
 	status: string;
-	campaign: [];
+	campaign: CampaignType;
+};
+
+export type AntdUpload = {
+	file: UploadFile;
+	fileList: UploadFile[];
+};
+
+export type CreateCvType = {
+	name: string;
+	phone_number: string;
+	apply_position: string;
+	file: AntdUpload;
+	create_at: Date;
+	status: string;
+	campaignId: string;
 };

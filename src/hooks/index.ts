@@ -9,3 +9,4 @@ export * from './useLogin';
 export * from './useCreateHR';
 export * from './useGetListCv';
 export * from './useCreateWorkspace';
+export * from './useCreateCv';

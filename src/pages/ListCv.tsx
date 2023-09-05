@@ -80,11 +80,6 @@ export const ListCv = () => {
 
 	const columns: ColumnsType<CvType> = [
 		{
-			title: 'STT',
-			key: 'index',
-			render: (_text, _record, index) => index + 1,
-		},
-		{
 			title: 'Id',
 			dataIndex: 'id',
 			key: 'id',
@@ -167,7 +162,7 @@ export const ListCv = () => {
 		{
 			title: 'Campaign',
 			dataIndex: ['campaign', 'name'],
-			key: 'file',
+			key: 'campaign',
 		},
 		{
 			title: 'Create At',
