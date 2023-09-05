@@ -60,8 +60,8 @@ export const DetailCampaign = () => {
 							<Form.Item label="Name" name="name">
 								<Input
 									placeholder="Input name"
-									style={{ width: '800px' }}
-									disabled
+									style={{ maxWidth: '800px' }}
+									readOnly={true}
 								/>
 							</Form.Item>
 						</div>
@@ -70,7 +70,7 @@ export const DetailCampaign = () => {
 								<ReactQuill
 									value={description}
 									onChange={handleDescriptionChange}
-									style={{ width: '800px', height: 150 }}
+									style={{ maxWidth: '800px', height: 150 }}
 									readOnly={true}
 								/>
 							</Form.Item>

@@ -160,7 +160,7 @@ export const ListUser = () => {
 					total: listUser?.meta.itemCount,
 					onChange: handlePaginationChange,
 				}}
-				style={{ overflowX: 'auto' }}
+				scroll={{ x: 'max-content' }}
 				loading={isLoading}
 				onRow={onRow}
 			/>

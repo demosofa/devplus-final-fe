@@ -153,7 +153,7 @@ export const ListUserFromWorkspace = () => {
 					total: campaign?.meta.itemCount,
 					onChange: handlePaginationChange,
 				}}
-				style={{ overflowX: 'auto' }}
+				scroll={{ x: 'max-content' }}
 				loading={isLoading}
 			/>
 		</>

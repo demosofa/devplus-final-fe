@@ -1,5 +1,5 @@
 import { useParams } from 'react-router-dom';
-import { Card, Form, Input } from 'antd';
+import { Card, Col, Form, Input, Row } from 'antd';
 import { LoadingOutlined } from '@ant-design/icons';
 
 import { useDetailUser } from 'hooks/useDetailUser';
@@ -19,28 +19,38 @@ export const DetailUser = () => {
 		<div>
 			<Card style={{ marginBottom: 15 }}>
 				<div className="register_workspace">
-					<span> Detail User</span>
+					<span> Detail</span>
 				</div>
 			</Card>
 			<Card>
 				<div className="container-detail">
 					<Form
 						initialValues={data}
-						labelCol={{ span: 3 }}
-						wrapperCol={{ span: 16 }}
+						labelCol={{ span: 4 }}
+						wrapperCol={{ span: 20 }}
 					>
-						<Form.Item label="Name" name="name">
-							<Input style={{ width: '800px' }} disabled />
-						</Form.Item>
-						<Form.Item label="Email" name="email">
-							<Input style={{ width: '800px' }} disabled />
-						</Form.Item>
-						<Form.Item label="Phone number" name="phone_number">
-							<Input style={{ width: '800px' }} disabled />
-						</Form.Item>
-						<Form.Item label="Status" name="status">
-							<Input style={{ width: '800px' }} disabled />
-						</Form.Item>
+						<Row>
+							<Col span={24} md={16}>
+								<Form.Item label="Name" name="name">
+									<Input readOnly={true} />
+								</Form.Item>
+							</Col>
+							<Col span={24} md={16}>
+								<Form.Item label="Email" name="email">
+									<Input readOnly={true} />
+								</Form.Item>
+							</Col>
+							<Col span={24} md={16}>
+								<Form.Item label="Phone number" name="phone_number">
+									<Input readOnly={true} />
+								</Form.Item>
+							</Col>
+							<Col span={24} md={16}>
+								<Form.Item label="Status" name="status">
+									<Input readOnly={true} />
+								</Form.Item>
+							</Col>
+						</Row>
 					</Form>
 				</div>
 			</Card>

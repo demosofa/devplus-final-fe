@@ -19,7 +19,7 @@ export function TopBar({
 	};
 
 	const authItems: MenuItem = [
-		{ key: 1, label: <Link to="/profile">My Profile</Link> },
+		{ key: 1, label: <Link to={`/detail-user/${auth?.id}`}>My Profile</Link> },
 		{
 			key: 2,
 			label: (

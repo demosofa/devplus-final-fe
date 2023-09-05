@@ -209,7 +209,7 @@ export const ListCv = () => {
 					total: cv?.meta.itemCount,
 					onChange: handlePaginationChange,
 				}}
-				style={{ overflowX: 'auto' }}
+				scroll={{ x: 'max-content' }}
 				loading={isLoading}
 				onRow={onRow}
 			/>

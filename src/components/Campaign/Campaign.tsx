@@ -144,7 +144,7 @@ export const Campaign = () => {
 					total: listCampaign?.meta.itemCount,
 					onChange: handlePaginationChange,
 				}}
-				style={{ overflowX: 'auto' }}
+				scroll={{ x: 'max-content' }}
 				loading={isLoading}
 				onRow={onRow}
 			/>

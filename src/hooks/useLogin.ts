@@ -1,10 +1,10 @@
 import { useMutation } from '@tanstack/react-query';
 import { notification } from 'antd';
+import { AxiosError } from 'axios';
 
 import { login } from '@services';
 import { NestError, UserLogin } from '@types';
 import { NOTIFICATION } from '@enums';
-import { AxiosError } from 'axios';
 
 export function useLogin() {
 	return useMutation({

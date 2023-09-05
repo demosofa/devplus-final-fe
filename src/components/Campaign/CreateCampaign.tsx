@@ -87,7 +87,7 @@ const CreateCampaign = () => {
 										<Input
 											type="input"
 											style={{
-												width: '800px',
+												maxWidth: '800px',
 											}}
 											placeholder="Input your name"
 										/>
@@ -120,7 +120,7 @@ const CreateCampaign = () => {
 									<ReactQuill
 										value={description}
 										onChange={handleDescriptionChange}
-										style={{ width: '800px', height: '120px' }}
+										style={{ maxWidth: '800px', height: '120px' }}
 									/>
 								</Form.Item>
 							</Form.Item>

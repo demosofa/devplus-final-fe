@@ -1,8 +1,8 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { notification } from 'antd';
 
 import { QUERY_KEY } from '@constants';
 import { rejectWorkspace } from '@services';
-import { notification } from 'antd';
 import { NOTIFICATION } from '@enums';
 
 export function useRejectWorkspace() {

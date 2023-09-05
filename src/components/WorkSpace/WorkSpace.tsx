@@ -5,17 +5,18 @@ import {
 	PlusCircleOutlined,
 } from '@ant-design/icons';
 import { Button, Modal, Table } from 'antd';
-import { WorkspaceType } from '@types';
 import { useState } from 'react';
-import './WorkSpace.css';
 import { ColumnsType } from 'antd/es/table';
+import { Link, useNavigate } from 'react-router-dom';
+import { WORKSPACE } from '@enums';
+
 import {
 	useAcceptWorkspace,
 	useGetListWorkSpace,
 	useRejectWorkspace,
 } from '@hooks';
-import { Link, useNavigate } from 'react-router-dom';
-import { WORKSPACE } from '@enums';
+import { WorkspaceType } from '@types';
+import './WorkSpace.css';
 
 export const WorkSpace = () => {
 	const [currentPage, setCurrentPage] = useState(1);
@@ -137,7 +138,7 @@ export const WorkSpace = () => {
 					total: listWorkSpace?.meta.itemCount,
 					onChange: handlePaginationChange,
 				}}
-				style={{ overflowX: 'auto' }}
+				scroll={{ x: 'max-content' }}
 				loading={isLoading}
 				onRow={onRow}
 			/>
