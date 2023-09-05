@@ -12,6 +12,13 @@ export const getListCv = (page: number, take: number, search: string) =>
 		},
 	});
 
+export const createCv = (data: FormData) =>
+	axios.post(API_URL.CV, data, {
+		headers: {
+			'Content-Type': 'multipart/form-data',
+		},
+	});
+
 export const passCV = (id: number) =>
 	axios.patch<CvType>(API_URL.CV + `pass/${id}`);
 

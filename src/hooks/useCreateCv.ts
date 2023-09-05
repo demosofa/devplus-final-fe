@@ -2,31 +2,28 @@ import { useMutation } from '@tanstack/react-query';
 import { notification } from 'antd';
 import { useNavigate } from 'react-router-dom';
 
-import { QUERY_KEY } from '@constants';
-import { CampaignType } from '@types';
 import { NOTIFICATION } from '@enums';
-import { createCampaign } from '@services';
+import { createCv } from '@services';
 
-export const useCreateCampaign = () => {
+export const useCreateCv = () => {
 	const navigate = useNavigate();
 
 	return useMutation({
-		mutationKey: [QUERY_KEY.CREATE_CAMPAIGN],
-		mutationFn: async (values: CampaignType) => {
-			const { data } = await createCampaign(values);
+		mutationFn: async (values: FormData) => {
+			const { data } = await createCv(values);
 			return data;
 		},
 		onSuccess: () => {
 			notification.success({
 				message: NOTIFICATION.SUCCESS,
-				description: 'Create campaign successfully.',
+				description: 'Create cv successfully.',
 			});
-			navigate('/create-cv/:id');
+			navigate('/cv');
 		},
 		onError: () => {
 			notification.error({
 				message: NOTIFICATION.ERROR,
-				description: 'Create campaign failed',
+				description: 'Create cv failed',
 			});
 		},
 	});

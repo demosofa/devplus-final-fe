@@ -12,6 +12,7 @@ import { DetailUser } from 'components/User/DetailUser';
 import { UpdateCampaign } from '../components/Campaign/UpdateCampaign';
 import CreateCampaign from 'components/Campaign/CreateCampaign';
 import { CvDetail } from 'pages/CvDetail/CvDetail';
+import CreateCv from 'pages/CreateCv/CreateCv';
 
 const privateRoutes: Route[] = [
 	{
@@ -77,6 +78,11 @@ const privateRoutes: Route[] = [
 			{
 				path: '/cv-detail/:id',
 				element: <CvDetail />,
+			},
+
+			{
+				path: '/create-cv/:campaignId',
+				element: <CreateCv />,
 			},
 		],
 	},
