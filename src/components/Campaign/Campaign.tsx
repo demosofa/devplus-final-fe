@@ -2,21 +2,17 @@ import { useState } from 'react';
 import { Button, Modal, Table } from 'antd';
 import { ColumnsType } from 'antd/es/table';
 import { ExclamationCircleFilled, PlusCircleOutlined } from '@ant-design/icons';
-import { Link, useNavigate, useParams } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 import { CAMPAIGN } from '@enums';
 import { CampaignType } from '@types';
-import { useFindOneCampaign, useGetListCampaign } from '../../hooks';
+import { useGetListCampaign } from '../../hooks';
 import './Campaign.css';
 import { useDeleteCampaign } from 'hooks/useDeleteCampaign';
 
 export const Campaign = () => {
 	const [currentPage, setCurrentPage] = useState(1);
 	const [pageSize, setPageSize] = useState(5);
-
-	const { id } = useParams();
-
-	const { data } = useFindOneCampaign(+id!);
 
 	const navigate = useNavigate();
 
@@ -138,10 +134,7 @@ export const Campaign = () => {
 	return (
 		<>
 			<Button className="btn-wrap-campaign">
-				<Link
-					style={{ color: 'white' }}
-					to={'/create-campaign/' + data?.workspaceId}
-				>
+				<Link style={{ color: 'white' }} to={'/create-campaign'}>
 					<PlusCircleOutlined /> Create Campaign
 				</Link>
 			</Button>

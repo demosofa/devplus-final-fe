@@ -84,6 +84,11 @@ const privateRoutes: Route[] = [
 				path: '/create-campaign/:id',
 				element: <CreateCampaign />,
 			},
+
+			{
+				path: '/create-campaign',
+				element: <CreateCampaign />,
+			},
 		],
 	},
 ];
