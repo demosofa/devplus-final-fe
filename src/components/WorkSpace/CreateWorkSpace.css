@@ -31,7 +31,7 @@
 }
 
 .submit-button {
-	width: 30%;
+	width: 40%;
 	display: block;
 
 	@media screen and (max-width: 937px) {
