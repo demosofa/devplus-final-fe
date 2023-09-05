@@ -6,5 +6,4 @@ export type CampaignType = {
 	description: string;
 	expired_time: string;
 	status: CAMPAIGN;
-	workspaceId: number;
 };

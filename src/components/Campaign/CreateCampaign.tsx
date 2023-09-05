@@ -1,7 +1,6 @@
 import { Button, Card, DatePicker, Form, Input, Space } from 'antd';
 import customParseFormat from 'dayjs/plugin/customParseFormat';
 import { useState } from 'react';
-import { useParams } from 'react-router-dom';
 import dayjs from 'dayjs';
 import 'react-quill/dist/quill.snow.css';
 import ReactQuill from 'react-quill';
@@ -15,8 +14,6 @@ import { CampaignType } from '@types';
 const CreateCampaign = () => {
 	dayjs.extend(customParseFormat);
 
-	const { workspaceId } = useParams();
-
 	const [form] = Form.useForm();
 
 	const { mutate: CreateCampaign, isLoading } = useCreateCampaign();
@@ -24,8 +21,6 @@ const CreateCampaign = () => {
 	const [description, setDescription] = useState('');
 
 	const onFinish = (values: CampaignType) => {
-		values.workspaceId = Number(workspaceId);
-
 		CreateCampaign(values);
 		form.resetFields();
 	};

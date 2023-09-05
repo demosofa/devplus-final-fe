@@ -71,7 +71,7 @@ const privateRoutes: Route[] = [
 			},
 
 			{
-				path: '/create-campaign/:id',
+				path: '/create-campaign',
 				element: <CreateCampaign />,
 			},
 

@@ -44,14 +44,6 @@ const CreateCv = () => {
 		return cloned;
 	}, [data, detailCampaignLoading]);
 
-	if (detailCampaignLoading) {
-		return (
-			<div className="isLoading">
-				<LoadingOutlined /> &nbsp; Loading...
-			</div>
-		);
-	}
-
 	const onFinish = (values: CreateCvType) => {
 		values.campaignId = id!;
 
@@ -69,6 +61,14 @@ const CreateCv = () => {
 		form.resetFields();
 	};
 
+	if (detailCampaignLoading || !detailCampaign) {
+		return (
+			<div className="isLoading">
+				<LoadingOutlined /> &nbsp; Loading...
+			</div>
+		);
+	}
+
 	return (
 		<div>
 			<Row gutter={[12, 12]}>
@@ -82,7 +82,13 @@ const CreateCv = () => {
 							<div className="form-row">
 								<Typography>
 									<Title>{detailCampaign?.name}</Title>
-									<Paragraph>{detailCampaign?.description}</Paragraph>
+									<Paragraph>
+										<div
+											dangerouslySetInnerHTML={{
+												__html: detailCampaign.description,
+											}}
+										></div>
+									</Paragraph>
 								</Typography>
 							</div>
 

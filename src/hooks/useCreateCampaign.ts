@@ -16,12 +16,12 @@ export const useCreateCampaign = () => {
 			const { data } = await createCampaign(values);
 			return data;
 		},
-		onSuccess: () => {
+		onSuccess: (data) => {
 			notification.success({
 				message: NOTIFICATION.SUCCESS,
 				description: 'Create campaign successfully.',
 			});
-			navigate('/create-cv/:id');
+			navigate(`/create-cv/${data.id}`);
 		},
 		onError: () => {
 			notification.error({
