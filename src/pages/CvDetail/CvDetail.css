@@ -1,12 +1,7 @@
-.card-wrap-container {
+.Cv-container {
 	max-height: 100%;
 	overflow: auto;
 }
-
-/* .scrollable-card__form-item {
-	max-height: 200px;
-	overflow: auto;
-} */
 
 .wrap-detail {
 	text-align: center;
@@ -16,4 +11,14 @@
 	width: 300px;
 	height: 30px;
 	border: 0.5px solid black;
+}
+
+.iframe-cv-detail {
+	width: 100%;
+	min-height: 570px;
+}
+
+.title-cv-detail {
+	margin-top: 0px !important;
+	text-align: center;
 }
