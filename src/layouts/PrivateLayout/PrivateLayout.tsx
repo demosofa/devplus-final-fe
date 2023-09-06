@@ -35,7 +35,7 @@ export function PrivateLayout() {
 			}
 
 			if (current.roles) {
-				if (current.roles.some((role) => role === auth.role)) {
+				if (current.roles.includes(auth.role)) {
 					result.push(current);
 				}
 			} else {

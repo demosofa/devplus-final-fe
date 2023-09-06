@@ -1,8 +1,8 @@
 import { RouteObject } from 'react-router-dom';
 
 import { PublicLayout } from '@layouts/PublicLayout/PublicLayout';
-import { Login } from '@pages';
-import { CreateWorkSpace } from 'components/WorkSpace/CreateWorkSpace';
+import { Login, CreateCv } from '@pages';
+import { CreateWorkSpace } from '@components';
 
 const publicRoutes: RouteObject[] = [
 	{
@@ -16,6 +16,11 @@ const publicRoutes: RouteObject[] = [
 			{
 				path: 'create-ws',
 				element: <CreateWorkSpace />,
+			},
+
+			{
+				path: '/create-cv/:id',
+				element: <CreateCv />,
 			},
 		],
 	},

@@ -1,7 +1,7 @@
 import { Form, Input, Modal } from 'antd';
 import Table, { ColumnsType } from 'antd/es/table';
 import { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 import { UserType } from '@types';
 import { useGetListUser } from 'hooks/useListUser';
@@ -52,7 +52,9 @@ export const ListUser = () => {
 		return {
 			onClick: (e: any) => {
 				e.stopPropagation();
-				navigate('/detail-user/' + record.id);
+
+				if (auth?.role != ROLE.SUPER_ADMIN)
+					navigate('/detail-user/' + record.id);
 			},
 		};
 	};
@@ -76,13 +78,7 @@ export const ListUser = () => {
 			title: 'Name',
 			dataIndex: 'name',
 			key: 'Name',
-			render: (text: string, record) => (
-				<>
-					<Link to={`/detail-user/${record.id}`}>{text}</Link>
-				</>
-			),
 		},
-
 		{
 			title: 'Email',
 			dataIndex: 'email',

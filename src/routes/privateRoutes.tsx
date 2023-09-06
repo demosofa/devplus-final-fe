@@ -1,18 +1,16 @@
 import { Route, routeBasedRole } from './routeBasedRole';
 import { PrivateLayout } from '@layouts/PrivateLayout/PrivateLayout';
-import { WorkSpace } from 'components/WorkSpace/WorkSpace';
-import { CampaignTest } from 'components/CampaignTest/CampaignTest';
-import { Campaign } from '../components';
-import { WorkSpaceDetail } from 'pages/WorkspaceDetail';
-import { DetailCampaign } from 'components/Campaign/DetailCampaign';
-import { CreateHR, ListCv } from '@pages';
+import {
+	WorkSpace,
+	Campaign,
+	UpdateCampaign,
+	DetailCampaign,
+	CreateCampaign,
+	ListUser,
+	DetailUser,
+} from '@components';
+import { CreateHR, ListCv, WorkSpaceDetail, CvDetail } from '@pages';
 import { ROLE } from '@enums';
-import { ListUser } from 'components/User/ListUser';
-import { DetailUser } from 'components/User/DetailUser';
-import { UpdateCampaign } from '../components/Campaign/UpdateCampaign';
-import CreateCampaign from 'components/Campaign/CreateCampaign';
-import { CvDetail } from 'pages/CvDetail/CvDetail';
-import CreateCv from 'pages/CreateCv/CreateCv';
 
 const privateRoutes: Route[] = [
 	{
@@ -30,28 +28,27 @@ const privateRoutes: Route[] = [
 			},
 
 			{
-				path: '/campaign-test',
-				element: <CampaignTest />,
-			},
-
-			{
 				path: '/workspace-detail/:id',
 				element: <WorkSpaceDetail />,
+				roles: [ROLE.SUPER_ADMIN],
 			},
 
 			{
 				path: '/detail-campaign/:id',
 				element: <DetailCampaign />,
+				roles: [ROLE.ADMIN, ROLE.HR],
 			},
 
 			{
 				path: '/cv',
 				element: <ListCv />,
+				roles: [ROLE.SUPER_ADMIN, ROLE.ADMIN],
 			},
 
 			{
 				path: '/user',
 				element: <ListUser />,
+				roles: [ROLE.SUPER_ADMIN, ROLE.ADMIN],
 			},
 
 			{
@@ -68,21 +65,19 @@ const privateRoutes: Route[] = [
 			{
 				path: '/update-campaign/:id',
 				element: <UpdateCampaign />,
+				roles: [ROLE.ADMIN, ROLE.HR],
 			},
 
 			{
 				path: '/create-campaign',
 				element: <CreateCampaign />,
+				roles: [ROLE.ADMIN, ROLE.HR],
 			},
 
 			{
 				path: '/cv-detail/:id',
 				element: <CvDetail />,
-			},
-
-			{
-				path: '/create-cv/:id',
-				element: <CreateCv />,
+				roles: [ROLE.SUPER_ADMIN, ROLE.ADMIN],
 			},
 		],
 	},
