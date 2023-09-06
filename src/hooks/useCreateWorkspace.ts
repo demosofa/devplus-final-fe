@@ -1,8 +1,9 @@
 import { useMutation } from '@tanstack/react-query';
 import { useNavigate } from 'react-router-dom';
 import { notification } from 'antd';
+import { AxiosError } from 'axios';
 
-import { CreateWorkspaceType } from '@types';
+import { CreateWorkspaceType, NestError } from '@types';
 import { QUERY_KEY } from '@constants';
 import { createWorkSpace } from '@services';
 import { NOTIFICATION } from '@enums';
@@ -23,10 +24,10 @@ export const useCreateWorkSpace = () => {
 			});
 			navigate('/workspace');
 		},
-		onError: () => {
+		onError: (data: AxiosError<NestError>) => {
 			notification.error({
 				message: NOTIFICATION.ERROR,
-				description: 'Create workspace failed',
+				description: data.response?.data.message,
 			});
 		},
 	});

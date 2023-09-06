@@ -62,9 +62,8 @@ export const UpdateCampaign = () => {
 				</div>
 			</Card>
 			<Card>
-				<div>
+				<div className="container-detail">
 					<Form
-						style={{ marginRight: 65 }}
 						initialValues={detailCampaign}
 						form={form}
 						onFinish={handleUpdateCampaign}
@@ -73,6 +72,7 @@ export const UpdateCampaign = () => {
 					>
 						<div className="form-row">
 							<Form.Item
+								className="fontWeight"
 								label="Name"
 								name={'name'}
 								rules={[
@@ -82,12 +82,13 @@ export const UpdateCampaign = () => {
 									},
 								]}
 							>
-								<Input placeholder="Input name" />
+								<Input style={{ maxWidth: '800px' }} placeholder="Input name" />
 							</Form.Item>
 						</div>
 
 						<div className="form-row">
 							<Form.Item
+								className="fontWeight"
 								label="Description"
 								name={'description'}
 								rules={[
@@ -97,7 +98,8 @@ export const UpdateCampaign = () => {
 								<ReactQuill
 									value={description}
 									onChange={handleDescriptionChange}
-									style={{ height: 150 }}
+									style={{ maxWidth: 800, height: 150 }}
+									className="quill-editor"
 								/>
 							</Form.Item>
 						</div>
@@ -105,14 +107,14 @@ export const UpdateCampaign = () => {
 						<div className="form-row">
 							<Form.Item
 								style={{ marginTop: 70 }}
-								className="timestampInitial"
+								className="timestampInitial fontWeight"
 								label="Expired time"
 								name={'expired_time'}
 							>
 								<DatePicker showTime />
 							</Form.Item>
 						</div>
-						<Form.Item label=" " colon={false}>
+						<Form.Item colon={false}>
 							<Button
 								loading={isLoading}
 								className="updateCampaign1"

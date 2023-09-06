@@ -95,7 +95,7 @@ export function Login() {
 										block
 										style={{ justifyContent: 'space-between' }}
 									>
-										<Link to="/create-ws">Create workspace</Link>
+										<Link to="/create-workspace">Create workspace</Link>
 									</Space.Compact>
 								</Form>
 							</Col>

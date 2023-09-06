@@ -55,30 +55,32 @@ export const DetailCampaign = () => {
 						initialValues={detailCampaign}
 						labelCol={{ span: 24 }}
 						wrapperCol={{ span: 24 }}
+						className="full-form"
 					>
 						<div className="form-row">
-							<Form.Item label="Name" name="name">
-								<Input
-									placeholder="Input name"
-									style={{ maxWidth: '800px' }}
-									readOnly={true}
-								/>
+							<Form.Item className="fontWeight" label="Name" name="name">
+								<Input style={{ maxWidth: '800px' }} readOnly={true} />
 							</Form.Item>
 						</div>
 						<div className="form-row">
-							<Form.Item label="Description" name="description">
+							<Form.Item
+								className="fontWeight"
+								label="Description"
+								name="description"
+							>
 								<ReactQuill
+									theme="bubble"
 									value={description}
 									onChange={handleDescriptionChange}
-									style={{ maxWidth: '800px', height: 150 }}
+									style={{ maxWidth: '800px', height: 160 }}
 									readOnly={true}
+									className="quill-editor"
 								/>
 							</Form.Item>
 						</div>
 						<div className="form-row">
 							<Form.Item
-								style={{ marginTop: 70 }}
-								className="timestampInitial"
+								className="timestampInitial fontWeight"
 								label="Expired time"
 								name="expired_time"
 							>

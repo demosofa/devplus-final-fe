@@ -1,9 +1,10 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { notification } from 'antd';
 import { useNavigate } from 'react-router-dom';
+import { AxiosError } from 'axios';
 
 import { updateCampaign } from '@services';
-import { CampaignType } from '@types';
+import { CampaignType, NestError } from '@types';
 import { NOTIFICATION } from '@enums';
 
 export const useUpdateCampaign = () => {
@@ -24,10 +25,10 @@ export const useUpdateCampaign = () => {
 
 			queryClient.refetchQueries();
 		},
-		onError: () => {
+		onError: (data: AxiosError<NestError>) => {
 			notification.error({
 				message: NOTIFICATION.ERROR,
-				description: 'Update campaign failed',
+				description: data.response?.data.message,
 			});
 		},
 	});

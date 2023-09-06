@@ -123,7 +123,7 @@ export const WorkSpace = () => {
 	return (
 		<>
 			<Button className="btn-wrap-campaign">
-				<Link style={{ color: 'white' }} to={'/create-ws'}>
+				<Link style={{ color: 'white' }} to={'/create-workspace'}>
 					<PlusCircleOutlined /> Create Workspace
 				</Link>
 			</Button>

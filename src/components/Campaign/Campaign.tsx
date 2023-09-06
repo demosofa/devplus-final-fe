@@ -1,18 +1,22 @@
 import { useState } from 'react';
-import { Modal, Table } from 'antd';
+import { Button, Modal, Table } from 'antd';
 import { ColumnsType } from 'antd/es/table';
-import { ExclamationCircleFilled } from '@ant-design/icons';
-import { useNavigate } from 'react-router-dom';
+import { ExclamationCircleFilled, PlusCircleOutlined } from '@ant-design/icons';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 
 import { CAMPAIGN } from '@enums';
 import { CampaignType } from '@types';
-import { useGetListCampaign } from '../../hooks';
+import { useFindOneCampaign, useGetListCampaign } from '../../hooks';
 import './Campaign.css';
 import { useDeleteCampaign } from 'hooks/useDeleteCampaign';
 
 export const Campaign = () => {
 	const [currentPage, setCurrentPage] = useState(1);
 	const [pageSize, setPageSize] = useState(5);
+
+	const { id } = useParams();
+
+	const { data } = useFindOneCampaign(+id!);
 
 	const navigate = useNavigate();
 
@@ -133,6 +137,14 @@ export const Campaign = () => {
 
 	return (
 		<>
+			<Button className="btn-wrap-campaign">
+				<Link
+					style={{ color: 'white' }}
+					to={'/create-campaign/' + data?.workspaceId}
+				>
+					<PlusCircleOutlined /> Create Campaign
+				</Link>
+			</Button>
 			<Table<CampaignType>
 				columns={columns}
 				dataSource={listCampaign?.data}
