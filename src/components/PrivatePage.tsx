@@ -10,8 +10,7 @@ export function PrivatePage({
 }: PropsWithChildren<{ roles: ROLE[] }>) {
 	const { getAuth } = useAuth();
 	const { role } = getAuth()!;
-	const checkRole = roles.some((item) => item === role);
 
-	if (checkRole) return children;
+	if (roles.includes(role)) return children;
 	return <Navigate to="/403" />;
 }

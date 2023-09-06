@@ -11,7 +11,7 @@ import './CreateCampaign.css';
 import { useCreateCampaign } from 'hooks/useCreateCampaign';
 import { CampaignType } from '@types';
 
-const CreateCampaign = () => {
+export const CreateCampaign = () => {
 	dayjs.extend(customParseFormat);
 
 	const [form] = Form.useForm();
@@ -161,5 +161,3 @@ const CreateCampaign = () => {
 		</div>
 	);
 };
-
-export default CreateCampaign;

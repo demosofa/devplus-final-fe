@@ -19,23 +19,23 @@ export const navigation: AuthMenuItem[] = [
 
 	{
 		key: '/campaign',
-		label: 'Campaign',
+		label: 'List Campaign',
 		icon: <PieChartOutlined />,
-		roles: [ROLE.ADMIN, ROLE.HR],
+		roles: [ROLE.SUPER_ADMIN, ROLE.ADMIN, ROLE.HR],
 	},
 
 	{
 		key: '/cv',
-		label: 'CV',
+		label: 'List CV',
 		icon: <UserOutlined />,
 		roles: [ROLE.ADMIN],
 	},
 
 	{
 		key: '/user',
-		label: 'List HR',
+		label: 'List User',
 		icon: <UsergroupAddOutlined />,
-		roles: [ROLE.SUPER_ADMIN],
+		roles: [ROLE.SUPER_ADMIN, ROLE.ADMIN],
 	},
 
 	{

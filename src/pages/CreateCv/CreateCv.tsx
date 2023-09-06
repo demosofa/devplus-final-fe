@@ -20,9 +20,9 @@ import { useCreateCv, useFindOneCampaign } from '@hooks';
 import { clone } from '@utils';
 import './CreateCv.css';
 
-const CreateCv = () => {
-	const { Title, Paragraph } = Typography;
+const { Title, Paragraph } = Typography;
 
+export const CreateCv = () => {
 	const { id } = useParams();
 
 	const [form] = Form.useForm();
@@ -235,5 +235,3 @@ const CreateCv = () => {
 		</div>
 	);
 };
-
-export default CreateCv;
