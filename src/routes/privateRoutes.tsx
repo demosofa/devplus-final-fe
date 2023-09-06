@@ -36,7 +36,7 @@ const privateRoutes: Route[] = [
 			{
 				path: '/detail-campaign/:id',
 				element: <DetailCampaign />,
-				roles: [ROLE.ADMIN, ROLE.HR],
+				roles: [ROLE.SUPER_ADMIN, ROLE.ADMIN, ROLE.HR],
 			},
 
 			{

@@ -4,9 +4,9 @@ import { ColumnsType } from 'antd/es/table';
 import { ExclamationCircleFilled } from '@ant-design/icons';
 import { useNavigate } from 'react-router-dom';
 
-import { CAMPAIGN } from '@enums';
+import { CAMPAIGN, ROLE } from '@enums';
 import { CampaignType } from '@types';
-import { useGetListCampaign } from '../../hooks';
+import { useAuth, useGetListCampaign } from '../../hooks';
 import './Campaign.css';
 import { useDeleteCampaign } from 'hooks/useDeleteCampaign';
 
@@ -15,6 +15,10 @@ export const Campaign = () => {
 	const [pageSize, setPageSize] = useState(5);
 
 	const navigate = useNavigate();
+
+	const { getAuth } = useAuth();
+
+	const auth = getAuth();
 
 	const { data: listCampaign, isLoading } = useGetListCampaign(
 		currentPage,
@@ -84,6 +88,10 @@ export const Campaign = () => {
 			title: 'Action',
 			key: 'action',
 			render: (record: CampaignType) => {
+				if (auth && auth.role == ROLE.SUPER_ADMIN) {
+					return 'No actions';
+				}
+
 				return (
 					<div className="action-icons">
 						{record.status === CAMPAIGN.ACTIVE ? (
