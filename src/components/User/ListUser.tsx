@@ -1,4 +1,4 @@
-import { Form, Input, Modal, Select, SelectProps } from 'antd';
+import { Button, Form, Input, Modal, Select, SelectProps } from 'antd';
 import Table, { ColumnsType } from 'antd/es/table';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
@@ -12,6 +12,9 @@ import { useUpdateUser } from '../../hooks/useUpdateUser';
 export const ListUser = () => {
 	const [currentPage, setCurrentPage] = useState(1);
 	const [pageSize, setPageSize] = useState(5);
+	const [searchTerm, setSearchTerm] = useState('');
+	const [searchValue, setSearchValue] = useState('');
+
 	const [isModalOpen, setIsModalOpen] = useState<UserType | undefined>();
 
 	const [form] = Form.useForm();
@@ -23,7 +26,8 @@ export const ListUser = () => {
 	const { data: listUser, isLoading } = useGetListUser(
 		auth,
 		currentPage,
-		pageSize
+		pageSize,
+		searchTerm
 	);
 
 	const { mutateAsync: updateUser, isLoading: loadUpdateUser } =
@@ -34,6 +38,11 @@ export const ListUser = () => {
 		if (pageSize) {
 			setPageSize(pageSize);
 		}
+	};
+
+	const handleSearchClick = () => {
+		setCurrentPage(1);
+		setSearchTerm(searchValue);
 	};
 
 	const showModal = (record: UserType) => {
@@ -141,6 +150,20 @@ export const ListUser = () => {
 
 	return (
 		<>
+			<Input
+				type="text"
+				placeholder="Search"
+				value={searchValue}
+				onChange={(e) => setSearchValue(e.target.value)}
+				style={{ width: '300px' }}
+				className="input-search-cv"
+				onKeyDown={(e) => {
+					e.key === 'Enter' && handleSearchClick();
+				}}
+			/>
+			<Button className="btn-search-cv" onClick={handleSearchClick}>
+				Search
+			</Button>
 			<Table<UserType>
 				columns={columns}
 				dataSource={listUser?.data}

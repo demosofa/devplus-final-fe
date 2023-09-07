@@ -3,11 +3,12 @@ import axios from 'axios';
 import { API_URL } from '@constants';
 import { UserCreate, UserType } from '@types';
 
-export const getListUser = (page: number, take: number) =>
+export const getListUser = (page: number, take: number, search: string) =>
 	axios.get<UserType[]>(API_URL.USER, {
 		params: {
 			page,
 			take,
+			search,
 		},
 	});
 

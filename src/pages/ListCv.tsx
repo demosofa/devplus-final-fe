@@ -238,6 +238,9 @@ export const ListCv = () => {
 				onChange={(e) => setSearchValue(e.target.value)}
 				style={{ width: '300px' }}
 				className="input-search-cv"
+				onKeyDown={(e) => {
+					e.key === 'Enter' && handleSearchClick();
+				}}
 			/>
 			<Button className="btn-search-cv" onClick={handleSearchClick}>
 				Search
