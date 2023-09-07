@@ -7,12 +7,13 @@ import { getListUser } from 'services/user.services';
 export const useGetListUser = (
 	auth: AuthPayload | void,
 	page: number,
-	pageSize: number
+	pageSize: number,
+	searchTerm: string
 ): UseQueryResult<PageMeta<UserType>> => {
 	return useQuery({
-		queryKey: [QUERY_KEY.LIST_USER, auth, page, pageSize],
+		queryKey: [QUERY_KEY.LIST_USER, auth, page, pageSize, searchTerm],
 		queryFn: async () => {
-			const { data } = await getListUser(page, pageSize);
+			const { data } = await getListUser(page, pageSize, searchTerm);
 			return data;
 		},
 	});
