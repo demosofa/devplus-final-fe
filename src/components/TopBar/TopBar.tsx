@@ -34,7 +34,7 @@ export function TopBar({
 		{ key: 1, label: <Link to="/login">Login</Link> },
 		{
 			key: 2,
-			label: <Link to="/create-ws">Create Workspace</Link>,
+			label: <Link to="/create-workspace">Create Workspace</Link>,
 		},
 	];
 

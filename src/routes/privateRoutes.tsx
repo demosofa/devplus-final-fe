@@ -79,6 +79,16 @@ const privateRoutes: Route[] = [
 				element: <CvDetail />,
 				roles: [ROLE.SUPER_ADMIN, ROLE.ADMIN],
 			},
+
+			{
+				path: '/create-campaign/:id',
+				element: <CreateCampaign />,
+			},
+
+			{
+				path: '/create-campaign',
+				element: <CreateCampaign />,
+			},
 		],
 	},
 ];

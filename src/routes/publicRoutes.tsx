@@ -14,7 +14,7 @@ const publicRoutes: RouteObject[] = [
 			},
 
 			{
-				path: 'create-ws',
+				path: 'create-workspace',
 				element: <CreateWorkSpace />,
 			},
 

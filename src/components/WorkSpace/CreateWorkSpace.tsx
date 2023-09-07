@@ -32,6 +32,7 @@ export const CreateWorkSpace = () => {
 					>
 						<div className="form-row">
 							<Form.Item
+								className="fontWeight"
 								label="Title"
 								name={'title_workspace'}
 								rules={[
@@ -49,6 +50,7 @@ export const CreateWorkSpace = () => {
 						</div>
 						<div className="form-row">
 							<Form.Item
+								className="fontWeight"
 								label="Name"
 								name={'name'}
 								rules={[{ required: true, message: 'Please input your name!' }]}
@@ -58,6 +60,7 @@ export const CreateWorkSpace = () => {
 						</div>
 						<div className="form-row">
 							<Form.Item
+								className="fontWeight"
 								label="Email"
 								name={'email'}
 								rules={[
@@ -70,6 +73,7 @@ export const CreateWorkSpace = () => {
 						</div>
 						<div className="form-row">
 							<Form.Item
+								className="fontWeight"
 								label="Password"
 								name={'password'}
 								rules={[
@@ -88,6 +92,7 @@ export const CreateWorkSpace = () => {
 						</div>
 						<div className="form-row">
 							<Form.Item
+								className="fontWeight"
 								label="Phone number:"
 								name={'phone_number'}
 								rules={[
@@ -109,12 +114,7 @@ export const CreateWorkSpace = () => {
 						</div>
 
 						<Form.Item colon={false} className="full-btn">
-							<Button
-								className="submit-button marg128"
-								type="primary"
-								htmlType="submit"
-								loading={isLoading}
-							>
+							<Button type="primary" htmlType="submit" loading={isLoading}>
 								<PlusCircleOutlined /> Create Workspace
 							</Button>
 						</Form.Item>

@@ -3,9 +3,10 @@ import { notification } from 'antd';
 import { useNavigate } from 'react-router-dom';
 
 import { QUERY_KEY } from '@constants';
-import { CampaignType } from '@types';
+import { CampaignType, NestError } from '@types';
 import { NOTIFICATION } from '@enums';
 import { createCampaign } from '@services';
+import { AxiosError } from 'axios';
 
 export const useCreateCampaign = () => {
 	const navigate = useNavigate();
@@ -23,10 +24,10 @@ export const useCreateCampaign = () => {
 			});
 			navigate(`/create-cv/${data.id}`);
 		},
-		onError: () => {
+		onError: (data: AxiosError<NestError>) => {
 			notification.error({
 				message: NOTIFICATION.ERROR,
-				description: 'Create campaign failed',
+				description: data.response?.data.message,
 			});
 		},
 	});

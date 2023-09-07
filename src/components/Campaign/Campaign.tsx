@@ -1,8 +1,8 @@
 import { useState } from 'react';
-import { Modal, Table } from 'antd';
+import { Button, Modal, Table } from 'antd';
 import { ColumnsType } from 'antd/es/table';
-import { ExclamationCircleFilled } from '@ant-design/icons';
-import { useNavigate } from 'react-router-dom';
+import { ExclamationCircleFilled, PlusCircleOutlined } from '@ant-design/icons';
+import { Link, useNavigate } from 'react-router-dom';
 
 import { CAMPAIGN, ROLE } from '@enums';
 import { CampaignType } from '@types';
@@ -141,6 +141,11 @@ export const Campaign = () => {
 
 	return (
 		<>
+			<Button className="btn-wrap-campaign">
+				<Link style={{ color: 'white' }} to={'/create-campaign'}>
+					<PlusCircleOutlined /> Create Campaign
+				</Link>
+			</Button>
 			<Table<CampaignType>
 				columns={columns}
 				dataSource={listCampaign?.data}

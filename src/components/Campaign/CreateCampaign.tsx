@@ -57,83 +57,67 @@ export const CreateCampaign = () => {
 				</div>
 			</Card>
 			<Card>
-				<div className="main-container">
+				<div className="container-detail">
 					<Form
 						form={form}
 						onFinish={onFinish}
-						name="complex-form"
 						labelCol={{ span: 24 }}
 						wrapperCol={{ span: 24 }}
-						className="full-form"
 					>
 						<div className="form-row">
-							<Form.Item label="Name">
-								<Space>
-									<Form.Item
-										name="name"
-										noStyle
-										rules={[
-											{
-												required: true,
-												message: 'Please enter your name',
-											},
-										]}
-									>
-										<Input
-											type="input"
-											style={{
-												maxWidth: '800px',
-											}}
-											placeholder="Input your name"
-										/>
-									</Form.Item>
-								</Space>
+							<Form.Item
+								className="fontWeight"
+								label="Name"
+								name={'name'}
+								rules={[
+									{
+										required: true,
+										message: 'Please input your new name!',
+									},
+								]}
+							>
+								<Input placeholder="Input name" />
 							</Form.Item>
 						</div>
 
 						<div className="form-row">
 							<Form.Item
+								className="fontWeight"
 								label="Description"
 								name="description"
+								rules={[
+									{
+										required: true,
+										message: 'Please input your description',
+									},
+								]}
 								style={{
-									marginBottom: 0,
+									display: 'inline-block',
 								}}
 							>
-								<Form.Item
-									className="checkValid"
-									name="description"
-									rules={[
-										{
-											required: true,
-											message: 'Please input your description',
-										},
-									]}
-									style={{
-										display: 'inline-block',
-									}}
-								>
-									<ReactQuill
-										value={description}
-										onChange={handleDescriptionChange}
-										style={{ maxWidth: '800px', height: '120px' }}
-									/>
-								</Form.Item>
+								<ReactQuill
+									className="quill-editor"
+									value={description}
+									onChange={handleDescriptionChange}
+									style={{ height: '120px' }}
+								/>
 							</Form.Item>
 						</div>
 
 						<div className="form-row">
-							<Form.Item style={{ marginTop: 45 }} label="Expired Time">
+							<Form.Item
+								style={{ marginTop: 30 }}
+								className="fontWeight"
+								label="Expired Time"
+								rules={[
+									{
+										required: true,
+										message: 'Please select a date',
+									},
+								]}
+							>
 								<Space.Compact>
-									<Form.Item
-										name="expired_time"
-										noStyle
-										rules={[
-											{
-												required: true,
-												message: 'Please select a date',
-											},
-										]}
-									>
+									<Form.Item name="expired_time">
 										<DatePicker
 											format="YYYY-MM-DD HH:mm:ss"
 											disabledDate={disabledDate}
@@ -146,12 +130,7 @@ export const CreateCampaign = () => {
 						</div>
 
 						<Form.Item colon={false} className="full-btn">
-							<Button
-								className="submit-button"
-								type="primary"
-								htmlType="submit"
-								loading={isLoading}
-							>
+							<Button type="primary" htmlType="submit" loading={isLoading}>
 								<PlusCircleOutlined /> Create Campaign
 							</Button>
 						</Form.Item>

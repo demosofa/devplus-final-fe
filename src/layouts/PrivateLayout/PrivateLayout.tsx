@@ -73,9 +73,10 @@ export function PrivateLayout() {
 					onClick={({ key }) => navigate(key)}
 				/>
 			</Sider>
-
 			<Layout>
-				<TopBar auth={auth} setAuth={setAuth} />
+				<div>
+					<TopBar auth={auth} setAuth={setAuth} />
+				</div>
 				<Content className={`layout-content ${breakpoint.sm ? '' : 'mobile'}`}>
 					<Outlet />
 				</Content>
