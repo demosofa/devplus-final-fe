@@ -1,7 +1,7 @@
 import { Button, Modal } from 'antd';
 import { useState } from 'react';
 
-import { DetailCampaign } from './DetailCampaign';
+import { DetailCampaign } from '@pages';
 
 export const ModalDetailCampaign = () => {
 	const [isModalOpen, setIsModalOpen] = useState(false);

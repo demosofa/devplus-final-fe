@@ -1,7 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 import { QUERY_KEY } from '@constants';
 
-import { getCvDetail } from 'services/cv.services';
+import { getCvDetail } from '@services';
 
 export const useGetDetailCv = (id: number) => {
 	return useQuery({

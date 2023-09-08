@@ -2,7 +2,7 @@ import { useParams } from 'react-router-dom';
 import { Card, Col, Form, Input, Row } from 'antd';
 import { LoadingOutlined } from '@ant-design/icons';
 
-import { useDetailUser } from 'hooks/useDetailUser';
+import { useDetailUser } from '@hooks';
 export const DetailUser = () => {
 	const { id } = useParams();
 

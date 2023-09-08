@@ -1,15 +1,20 @@
 import { Route, routeBasedRole } from './routeBasedRole';
+
 import { PrivateLayout } from '@layouts/PrivateLayout/PrivateLayout';
+
 import {
-	WorkSpace,
-	Campaign,
-	UpdateCampaign,
-	DetailCampaign,
-	CreateCampaign,
+	CreateHR,
+	ListCv,
+	ListWorkSpace,
+	CvDetail,
 	ListUser,
 	DetailUser,
-} from '@components';
-import { CreateHR, ListCv, WorkSpaceDetail, CvDetail } from '@pages';
+	UpdateCampaign,
+	CreateCampaign,
+	ListCampaign,
+	WorkSpaceDetail,
+	DetailCampaign,
+} from '@pages';
 import { ROLE } from '@enums';
 
 const privateRoutes: Route[] = [
@@ -18,13 +23,13 @@ const privateRoutes: Route[] = [
 		children: [
 			{
 				path: '/workspace',
-				element: <WorkSpace />,
+				element: <ListWorkSpace />,
 				roles: [ROLE.SUPER_ADMIN],
 			},
 
 			{
 				path: 'campaign',
-				element: <Campaign />,
+				element: <ListCampaign />,
 			},
 
 			{
@@ -78,16 +83,6 @@ const privateRoutes: Route[] = [
 				path: '/cv-detail/:id',
 				element: <CvDetail />,
 				roles: [ROLE.SUPER_ADMIN, ROLE.ADMIN],
-			},
-
-			{
-				path: '/create-campaign/:id',
-				element: <CreateCampaign />,
-			},
-
-			{
-				path: '/create-campaign',
-				element: <CreateCampaign />,
 			},
 		],
 	},

@@ -1,9 +1,9 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { notification } from 'antd';
 
-import { NOTIFICATION } from '../enums';
-import { updateUser } from '../services/user.services';
-import { UserType } from '../types';
+import { NOTIFICATION } from '@enums';
+import { updateUser } from '@services';
+import { UserType } from '@types';
 
 export const useUpdateUser = () => {
 	const queryClient = useQueryClient();

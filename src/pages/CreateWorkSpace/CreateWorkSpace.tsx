@@ -2,7 +2,7 @@ import { PlusCircleOutlined } from '@ant-design/icons';
 import { Button, Card, Form, Input } from 'antd';
 
 import { useCreateWorkSpace } from '@hooks';
-import { CreateWorkspaceType } from 'types';
+import { CreateWorkspaceType } from '@types';
 import './CreateWorkSpace.css';
 
 export const CreateWorkSpace = () => {

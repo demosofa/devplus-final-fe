@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 
-import { QUERY_KEY } from '../constants/query-key';
+import { QUERY_KEY } from '@constants';
 import { getFindOneCampaign } from '@services';
 
 export const useFindOneCampaign = (id: number) => {

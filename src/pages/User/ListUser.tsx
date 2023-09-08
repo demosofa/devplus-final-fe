@@ -3,11 +3,9 @@ import Table, { ColumnsType } from 'antd/es/table';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import { ROLE } from '@enums';
-import { useAuth } from '@hooks';
 import { UserType } from '@types';
-import { useGetListUser } from 'hooks/useListUser';
-import { useUpdateUser } from '../../hooks/useUpdateUser';
+import { useAuth, useUpdateUser, useGetListUser } from '@hooks';
+import { ROLE } from '@enums';
 
 export const ListUser = () => {
 	const [currentPage, setCurrentPage] = useState(1);

@@ -16,9 +16,9 @@ import {
 	useRejectWorkspace,
 } from '@hooks';
 import { WorkspaceType } from '@types';
-import './WorkSpace.css';
+import './ListWorkSpace.css';
 
-export const WorkSpace = () => {
+export const ListWorkSpace = () => {
 	const [currentPage, setCurrentPage] = useState(1);
 	const [pageSize, setPageSize] = useState(5);
 

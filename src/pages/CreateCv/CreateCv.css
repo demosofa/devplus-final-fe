@@ -11,3 +11,11 @@
 	font-size: 40px;
 	font-weight: 500;
 }
+
+.create-cv-title {
+	margin-top: 0px !important;
+}
+
+.cv-wrap-container > .ant-row {
+	margin-right: 0px !important;
+}

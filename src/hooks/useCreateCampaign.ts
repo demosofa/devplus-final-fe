@@ -22,7 +22,7 @@ export const useCreateCampaign = () => {
 				message: NOTIFICATION.SUCCESS,
 				description: 'Create campaign successfully.',
 			});
-			navigate(`/create-cv/${data.id}`);
+			navigate(`/apply-cv/${data.id}`);
 		},
 		onError: (data: AxiosError<NestError>) => {
 			notification.error({

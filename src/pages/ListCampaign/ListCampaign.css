@@ -44,3 +44,12 @@
 .search-input .ant-btn {
 	height: 6vh;
 }
+
+.cv-copy-icon {
+	font-size: 24px;
+}
+
+.cv-copy-icon-before {
+	font-size: 24px;
+	color: blue;
+}

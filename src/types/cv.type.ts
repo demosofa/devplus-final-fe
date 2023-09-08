@@ -21,7 +21,8 @@ export type CreateCvType = {
 	name: string;
 	phone_number: string;
 	apply_position: string;
-	file: AntdUpload;
+	file?: AntdUpload;
+	fileString?: string;
 	create_at: Date;
 	status: string;
 	campaignId: string;

@@ -6,29 +6,39 @@ import {
 	Form,
 	Input,
 	Row,
+	Select,
 	Typography,
 	Upload,
 } from 'antd';
 import { useParams } from 'react-router-dom';
 import 'react-quill/dist/quill.snow.css';
 import { LoadingOutlined, PlusCircleOutlined } from '@ant-design/icons';
-import { useMemo } from 'react';
+import { useMemo, useState } from 'react';
 import dayjs, { Dayjs } from 'dayjs';
 
 import { CampaignType, CreateCvType } from '@types';
-import { useCreateCv, useFindOneCampaign } from '@hooks';
+import { useCreateCv, useGetFindCvWithCampaign } from '@hooks';
 import { clone } from '@utils';
 import './CreateCv.css';
 
+const { Option } = Select;
 const { Title, Paragraph } = Typography;
 
 export const CreateCv = () => {
+	const [uploadOption, setUploadOption] = useState('');
+
+	const handleUploadOptionChange = (value: any) => {
+		setUploadOption(value);
+	};
+
 	const { id } = useParams();
 
 	const [form] = Form.useForm();
 
 	const { mutate: CreateCv, isLoading } = useCreateCv();
-	const { data, isLoading: detailCampaignLoading } = useFindOneCampaign(+id!);
+	const { data, isLoading: detailCampaignLoading } = useGetFindCvWithCampaign(
+		+id!
+	);
 
 	const detailCampaign = useMemo(() => {
 		if (detailCampaignLoading || !data) {
@@ -47,11 +57,17 @@ export const CreateCv = () => {
 	const onFinish = (values: CreateCvType) => {
 		values.campaignId = id!;
 
-		const { file, ...formValues }: { [key: string]: any } = values;
-		const uploadFile = file.file as File;
-
 		const formData = new FormData();
-		formData.append('file', uploadFile);
+
+		const { file, fileString, ...formValues }: { [key: string]: any } = values;
+
+		if (file) {
+			const uploadFile = file.file as File;
+			formData.append('file', uploadFile);
+		} else if (fileString) {
+			formData.append('file', fileString);
+		}
+
 		for (const name in formValues) {
 			const value: string = formValues[name].toString();
 			formData.append(name, value);
@@ -70,7 +86,7 @@ export const CreateCv = () => {
 	}
 
 	return (
-		<div>
+		<div className="cv-wrap-container">
 			<Row gutter={[12, 12]}>
 				<Col span={24} md={16} style={{ height: '100%' }}>
 					<div className="container-detail">
@@ -81,7 +97,9 @@ export const CreateCv = () => {
 						>
 							<div className="form-row">
 								<Typography>
-									<Title>{detailCampaign?.name}</Title>
+									<Title className="create-cv-title">
+										{detailCampaign?.name}
+									</Title>
 									<Paragraph>
 										<div
 											dangerouslySetInnerHTML={{
@@ -120,93 +138,108 @@ export const CreateCv = () => {
 								wrapperCol={{ span: 24 }}
 								className="full-form"
 							>
-								<div className="form-row">
-									<Form.Item
-										name="name"
-										label="Name"
-										rules={[
-											{
-												required: true,
-												message: 'Please enter your name',
-											},
-										]}
+								<Form.Item
+									name="name"
+									label="Name"
+									rules={[
+										{
+											required: true,
+											message: 'Please enter your name',
+										},
+									]}
+								>
+									<Input
+										type="input"
+										style={{
+											maxWidth: '800px',
+										}}
+										placeholder="Input your name"
+									/>
+								</Form.Item>
+
+								<Form.Item
+									name="email"
+									label="Email"
+									rules={[
+										{
+											required: true,
+											message: 'Please enter your email',
+										},
+									]}
+								>
+									<Input
+										type="input"
+										style={{
+											maxWidth: '800px',
+										}}
+										placeholder="Input your email"
+									/>
+								</Form.Item>
+
+								<Form.Item
+									name="phone_number"
+									label="Phone Number"
+									rules={[
+										{
+											required: true,
+											message: 'Please enter your phone',
+										},
+									]}
+								>
+									<Input
+										type="input"
+										style={{
+											maxWidth: '800px',
+										}}
+										placeholder="Input your phone number"
+									/>
+								</Form.Item>
+
+								<Form.Item
+									name="apply_position"
+									label="Position"
+									rules={[
+										{
+											required: true,
+											message: 'Please enter your position',
+										},
+									]}
+								>
+									<Input
+										type="input"
+										style={{
+											maxWidth: '800px',
+										}}
+										placeholder="Input your apply position"
+									/>
+								</Form.Item>
+
+								<Form.Item
+									label="File"
+									name="uploadOption"
+									rules={[
+										{
+											required: true,
+											message: 'Please select upload option',
+										},
+									]}
+								>
+									<Select
+										onChange={handleUploadOptionChange}
+										placeholder="Select upload option"
 									>
-										<Input
-											type="input"
-											style={{
-												maxWidth: '800px',
-											}}
-											placeholder="Input your name"
-										/>
-									</Form.Item>
-								</div>
-								<div className="form-row">
-									<Form.Item
-										name="email"
-										label="Email"
-										rules={[
-											{
-												required: true,
-												message: 'Please enter your email',
-											},
-										]}
-									>
-										<Input
-											type="input"
-											style={{
-												maxWidth: '800px',
-											}}
-											placeholder="Input your email"
-										/>
-									</Form.Item>
-								</div>
-								<div className="form-row">
-									<Form.Item
-										name="phone_number"
-										label="Phone Number"
-										rules={[
-											{
-												required: true,
-												message: 'Please enter your phone',
-											},
-										]}
-									>
-										<Input
-											type="input"
-											style={{
-												maxWidth: '800px',
-											}}
-											placeholder="Input your phone number"
-										/>
-									</Form.Item>
-								</div>
-								<div className="form-row">
-									<Form.Item
-										name="apply_position"
-										label="Position"
-										rules={[
-											{
-												required: true,
-												message: 'Please enter your position',
-											},
-										]}
-									>
-										<Input
-											type="input"
-											style={{
-												maxWidth: '800px',
-											}}
-											placeholder="Input your apply position"
-										/>
-									</Form.Item>
-								</div>
-								<div className="form-row">
+										<Option value="upload">Upload</Option>
+										<Option value="input">Input</Option>
+									</Select>
+								</Form.Item>
+
+								{uploadOption === 'upload' ? (
 									<Form.Item
 										name="file"
 										rules={[
 											{
 												required: true,
-												message: 'Please enter your file',
+												message: 'Please upload your file',
 											},
 										]}
 									>
@@ -220,7 +253,27 @@ export const CreateCv = () => {
 											</Button>
 										</Upload>
 									</Form.Item>
-								</div>
+								) : null}
+
+								{uploadOption === 'input' ? (
+									<Form.Item
+										name="fileString"
+										rules={[
+											{
+												required: true,
+												message: 'Please enter your file content',
+											},
+										]}
+									>
+										<Input
+											type="input"
+											style={{
+												maxWidth: '800px',
+											}}
+											placeholder="Input your apply position"
+										/>
+									</Form.Item>
+								) : null}
 								<Row className="row-btn-summit">
 									<Button type="primary" htmlType="submit" loading={isLoading}>
 										<PlusCircleOutlined /> Apply Cv

@@ -1,16 +1,22 @@
 import { useState } from 'react';
 import { Button, Modal, Table } from 'antd';
 import { ColumnsType } from 'antd/es/table';
-import { ExclamationCircleFilled, PlusCircleOutlined } from '@ant-design/icons';
+import {
+	CopyFilled,
+	CopyOutlined,
+	ExclamationCircleFilled,
+	PlusCircleOutlined,
+} from '@ant-design/icons';
 import { Link, useNavigate } from 'react-router-dom';
+import dayjs from 'dayjs';
 
 import { CAMPAIGN, ROLE } from '@enums';
 import { CampaignType } from '@types';
-import { useAuth, useGetListCampaign } from '../../hooks';
-import './Campaign.css';
-import { useDeleteCampaign } from 'hooks/useDeleteCampaign';
+import { useGetListCampaign, useDeleteCampaign, useAuth } from '@hooks';
 
-export const Campaign = () => {
+import './ListCampaign.css';
+
+export const ListCampaign = () => {
 	const [currentPage, setCurrentPage] = useState(1);
 	const [pageSize, setPageSize] = useState(5);
 
@@ -19,6 +25,8 @@ export const Campaign = () => {
 	const { getAuth } = useAuth();
 
 	const auth = getAuth();
+
+	const [copied, setCopied] = useState<number>();
 
 	const { data: listCampaign, isLoading } = useGetListCampaign(
 		currentPage,
@@ -75,8 +83,34 @@ export const Campaign = () => {
 			dataIndex: 'expired_time',
 			key: 'expired_time',
 			render: (timestamp) => {
-				const date = new Date(timestamp);
-				return date.toLocaleDateString();
+				return dayjs(timestamp).format('YYYY-MM-DD, HH:mm:ss');
+			},
+		},
+		{
+			title: 'Link',
+			dataIndex: 'id',
+			key: 'expired_time',
+			render: (id) => {
+				return (
+					<>
+						<label
+							onClick={async (e) => {
+								e.stopPropagation();
+								e.preventDefault();
+								await navigator.clipboard.writeText(
+									`${window.location.host}/apply-cv/${id}`
+								);
+								setCopied(id);
+							}}
+						>
+							{copied && copied == id ? (
+								<CopyFilled className="cv-copy-icon" />
+							) : (
+								<CopyOutlined className="cv-copy-icon-before" />
+							)}
+						</label>
+					</>
+				);
 			},
 		},
 		{
