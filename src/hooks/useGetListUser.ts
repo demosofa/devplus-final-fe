@@ -2,7 +2,7 @@ import { UseQueryResult, useQuery } from '@tanstack/react-query';
 
 import { QUERY_KEY } from '@constants';
 import { AuthPayload, PageMeta, UserType } from '@types';
-import { getListUser } from 'services/user.services';
+import { getListUser } from '@services';
 
 export const useGetListUser = (
 	auth: AuthPayload | void,

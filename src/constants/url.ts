@@ -4,4 +4,5 @@ export enum API_URL {
 	USER = '/user/',
 	AUTH = '/auth/',
 	CV = '/cv/',
+	APPLY_CV = 'apply-cv/',
 }

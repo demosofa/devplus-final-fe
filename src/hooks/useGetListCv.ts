@@ -2,7 +2,7 @@ import { UseQueryResult, useQuery } from '@tanstack/react-query';
 
 import { QUERY_KEY } from '@constants';
 import { PageMeta, CvType } from '@types';
-import { getListCv } from 'services/cv.services';
+import { getListCv } from '@services';
 
 export const useGetListCv = (
 	page: number,

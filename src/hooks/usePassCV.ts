@@ -2,7 +2,7 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { notification } from 'antd';
 
 import { NOTIFICATION } from '@enums';
-import { passCV } from '../services';
+import { passCV } from '@services';
 
 export function usePassCV() {
 	const queryClient = useQueryClient();

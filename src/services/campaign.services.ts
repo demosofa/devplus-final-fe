@@ -19,3 +19,6 @@ export const updateCampaign = (data: CampaignType) =>
 
 export const getFindOneCampaign = (id: number) =>
 	axios.get<CampaignType>(API_URL.CAMPAIGN + id);
+
+export const getFindCvWithCampaign = (id: number) =>
+	axios.get<CampaignType>(API_URL.CAMPAIGN + API_URL.APPLY_CV + id);

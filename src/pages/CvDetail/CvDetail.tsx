@@ -1,13 +1,13 @@
 import { useParams } from 'react-router-dom';
 import { Card, Col, Form, Input, Row, Typography } from 'antd';
 import dayjs, { Dayjs } from 'dayjs';
-import { useMemo } from 'react';
+import { useEffect, useMemo } from 'react';
 import 'react-quill/dist/quill.snow.css';
 
 import { CvType } from '@types';
 import { clone } from '@utils';
 import './CvDetail.css';
-import { useGetDetailCv } from 'hooks/useGetDetailCv';
+import { useGetDetailCv } from '@hooks';
 import { BASE_URL } from '@constants';
 
 const { Title } = Typography;
@@ -15,17 +15,25 @@ const { Title } = Typography;
 export const CvDetail = () => {
 	const { id } = useParams();
 
+	const [forms] = Form.useForm();
+
 	const { data, isLoading: detailCvLoading } = useGetDetailCv(+id!);
+
+	useEffect(() => {
+		if (data && !detailCvLoading) {
+			forms.resetFields();
+		}
+	}, [data, detailCvLoading, forms]);
 
 	const detailCv = useMemo(() => {
 		if (detailCvLoading || !data) {
 			return undefined;
 		}
 
-		const cloned = clone(data) as Omit<CvType, 'expired_time'> & {
-			expired_time: Dayjs;
+		const cloned = clone(data) as Omit<CvType, 'create_at'> & {
+			create_at: Dayjs;
 		};
-		cloned.expired_time = dayjs(data.expired_time);
+		cloned.create_at = dayjs(data.create_at);
 
 		if (cloned.file.includes('https://drive.google.com/')) {
 			cloned.file = cloned.file.replace('view', 'preview');
@@ -44,6 +52,7 @@ export const CvDetail = () => {
 						<Title className="title-cv-detail">Cv Information</Title>
 					</Typography>
 					<Form
+						form={forms}
 						initialValues={detailCv}
 						name="complex-form"
 						labelCol={{
@@ -85,7 +94,11 @@ export const CvDetail = () => {
 					<Typography>
 						<Title className="title-cv-detail">Cv File</Title>
 					</Typography>
-					<iframe src={detailCv?.file} className="iframe-cv-detail"></iframe>
+					<iframe
+						key={detailCv?.file}
+						src={detailCv?.file}
+						className="iframe-cv-detail"
+					></iframe>
 				</Card>
 			</Col>
 		</Row>

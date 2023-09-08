@@ -7,13 +7,13 @@ import { Button, Input, Modal, Table } from 'antd';
 import { useState } from 'react';
 import { ColumnsType } from 'antd/es/table';
 import { Link, useNavigate } from 'react-router-dom';
+import dayjs from 'dayjs';
 
 import { CvType, WorkspaceType } from '@types';
-import { useGetListCv } from '@hooks';
+import { useFailCV, useGetListCv, usePassCV } from '@hooks';
 import { CV } from '@enums';
 import './ListCv.css';
-import { usePassCV } from '../hooks/usePassCV';
-import { useFailCV } from '../hooks/useFailCV';
+
 import { BASE_URL } from '@constants';
 
 export const ListCv = () => {
@@ -49,7 +49,7 @@ export const ListCv = () => {
 		return {
 			onClick: (e: any) => {
 				e.stopPropagation();
-				if (record.status === CV.PASS) {
+				if (record.status === CV.PASS || record.status === CV.FAIL) {
 					navigate('/cv-detail/' + record.id);
 				}
 			},
@@ -142,7 +142,7 @@ export const ListCv = () => {
 								e.stopPropagation();
 							}}
 						>
-							DownLoad
+							Follow me
 						</Link>
 					) : (
 						<Link
@@ -153,7 +153,7 @@ export const ListCv = () => {
 								e.stopPropagation();
 							}}
 						>
-							DownLoad
+							Follow me
 						</Link>
 					)}
 				</div>
@@ -169,8 +169,7 @@ export const ListCv = () => {
 			dataIndex: 'create_at',
 			key: 'create_at',
 			render: (timestamp) => {
-				const date = new Date(timestamp);
-				return date.toLocaleDateString();
+				return dayjs(timestamp).format('YYYY-MM-DD, HH:mm:ss');
 			},
 		},
 		{
