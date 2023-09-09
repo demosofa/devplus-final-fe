@@ -7,10 +7,6 @@
 	align-items: center;
 }
 
-.fontWeight {
-	font-weight: bold;
-}
-
 .quill-editor {
 	font-weight: normal;
 }
