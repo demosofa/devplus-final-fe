@@ -1,4 +1,4 @@
-import { RouteObject } from 'react-router-dom';
+import { Navigate, RouteObject } from 'react-router-dom';
 
 import { PublicLayout } from '@layouts/PublicLayout/PublicLayout';
 import { Login, CreateWorkSpace, CreateCv } from '@pages';
@@ -7,6 +7,11 @@ const publicRoutes: RouteObject[] = [
 	{
 		element: <PublicLayout />,
 		children: [
+			{
+				path: '/',
+				element: <Navigate to={'/login'} />,
+			},
+
 			{
 				path: '/login',
 				element: <Login />,
