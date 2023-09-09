@@ -80,13 +80,8 @@ export function Login() {
 										<Input.Password placeholder="Password" />
 									</Form.Item>
 
-									<Form.Item style={{ paddingTop: 14, marginBottom: 14 }}>
-										<Button
-											loading={isLoading}
-											block
-											className="register-btn"
-											htmlType="submit"
-										>
+									<Form.Item className="login-btn">
+										<Button loading={isLoading} block htmlType="submit">
 											Login
 										</Button>
 									</Form.Item>
