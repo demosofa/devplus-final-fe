@@ -11,7 +11,7 @@ export interface UserCreate extends UserLogin {
 }
 
 export type AuthPayload = {
-	id: string;
+	id: number;
 	name: string;
 	email: string;
 	role: ROLE;

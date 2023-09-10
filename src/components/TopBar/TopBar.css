@@ -1,4 +1,10 @@
 .top-bar {
-	text-align: end;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
 	background-color: white;
+}
+
+.top-bar > h4 {
+	margin-top: 10px;
 }

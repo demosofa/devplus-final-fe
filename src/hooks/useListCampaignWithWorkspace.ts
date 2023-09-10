@@ -10,7 +10,7 @@ export const useListCampaignWithWorkspace = (
 	pageSize: number
 ): UseQueryResult<PageMeta<CampaignType>> => {
 	return useQuery({
-		queryKey: [QUERY_KEY.LIST_CAMPAIGN_FROM_WORKSPACE, page, pageSize],
+		queryKey: [QUERY_KEY.LIST_CAMPAIGN_FROM_WORKSPACE, page, pageSize, id],
 		queryFn: async () => {
 			const { data } = await listCampaignFromWorkspace(page, pageSize, id);
 			return data;

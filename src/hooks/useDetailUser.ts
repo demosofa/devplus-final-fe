@@ -5,7 +5,7 @@ import { getDetailUser } from '@services';
 
 export const useDetailUser = (id: number) => {
 	return useQuery({
-		queryKey: [QUERY_KEY.DETAIL_USER],
+		queryKey: [QUERY_KEY.DETAIL_USER, id],
 		queryFn: async () => {
 			const { data } = await getDetailUser(id);
 			return data;

@@ -6,7 +6,8 @@ import { useAuth } from '@hooks';
 import { AUTH_STATUS } from '@enums';
 import { AuthMenuItem } from '@types';
 import { navigation } from '../../navigation';
-import { TopBar } from 'components/TopBar/TopBar';
+import { TopBar } from '@components';
+import { capitalize } from '@utils';
 import './PrivateLayout.css';
 
 type MenuItem = Required<MenuProps>['items'];
@@ -22,6 +23,13 @@ export function PrivateLayout() {
 	const navigate = useNavigate();
 
 	const breakpoint = Grid.useBreakpoint();
+
+	const title = location.pathname
+		.replaceAll('/', ' ')
+		.split('-')
+		.reduce((prev, curr) => {
+			return prev + ' ' + capitalize(curr);
+		}, '');
 
 	const acceptedNav = navigation.reduce(
 		(result: MenuItem, current: AuthMenuItem) => {
@@ -73,8 +81,9 @@ export function PrivateLayout() {
 					onClick={({ key }) => navigate(key)}
 				/>
 			</Sider>
+
 			<Layout>
-				<TopBar auth={auth} setAuth={setAuth} />
+				<TopBar title={title} auth={auth} setAuth={setAuth} />
 
 				<Content className={`private-content ${breakpoint.sm ? '' : 'mobile'}`}>
 					<Outlet />

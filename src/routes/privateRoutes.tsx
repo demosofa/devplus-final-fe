@@ -22,13 +22,13 @@ const privateRoutes: Route[] = [
 		element: <PrivateLayout />,
 		children: [
 			{
-				path: '/workspace',
+				path: '/list-workspace',
 				element: <ListWorkSpace />,
 				roles: [ROLE.SUPER_ADMIN],
 			},
 
 			{
-				path: 'campaign',
+				path: '/list-campaign',
 				element: <ListCampaign />,
 			},
 
@@ -45,13 +45,13 @@ const privateRoutes: Route[] = [
 			},
 
 			{
-				path: '/cv',
+				path: '/list-cv',
 				element: <ListCv />,
 				roles: [ROLE.SUPER_ADMIN, ROLE.ADMIN],
 			},
 
 			{
-				path: '/user',
+				path: '/list-user',
 				element: <ListUser />,
 				roles: [ROLE.SUPER_ADMIN, ROLE.ADMIN],
 			},
