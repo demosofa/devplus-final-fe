@@ -1,16 +1,20 @@
-import { Button, Dropdown, Layout, MenuProps } from 'antd';
+import { Button, Dropdown, Layout, MenuProps, Typography } from 'antd';
 import { Link } from 'react-router-dom';
 
 import { AuthPayload, SetAuth } from '@types';
 import './TopBar.css';
 
 const { Header } = Layout;
+const { Title } = Typography;
+
 type MenuItem = MenuProps['items'];
 
 export function TopBar({
+	title,
 	auth,
 	setAuth,
 }: {
+	title: string;
 	auth: AuthPayload | void;
 	setAuth: SetAuth;
 }) {
@@ -42,6 +46,8 @@ export function TopBar({
 
 	return (
 		<Header className="top-bar">
+			<Title level={4}>{title}</Title>
+
 			<Dropdown menu={{ items }}>
 				<Button>{auth ? auth.name : 'Guest'}</Button>
 			</Dropdown>

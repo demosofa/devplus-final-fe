@@ -11,28 +11,28 @@ import { AuthMenuItem } from '@types';
 
 export const navigation: AuthMenuItem[] = [
 	{
-		key: '/workspace',
+		key: '/list-workspace',
 		label: 'Workspace',
 		icon: <GithubOutlined />,
 		roles: [ROLE.SUPER_ADMIN],
 	},
 
 	{
-		key: '/campaign',
+		key: '/list-campaign',
 		label: 'List Campaign',
 		icon: <PieChartOutlined />,
 		roles: [ROLE.SUPER_ADMIN, ROLE.ADMIN, ROLE.HR],
 	},
 
 	{
-		key: '/cv',
+		key: '/list-cv',
 		label: 'List CV',
 		icon: <UserOutlined />,
 		roles: [ROLE.ADMIN],
 	},
 
 	{
-		key: '/user',
+		key: '/list-user',
 		label: 'List User',
 		icon: <UsergroupAddOutlined />,
 		roles: [ROLE.SUPER_ADMIN, ROLE.ADMIN],
