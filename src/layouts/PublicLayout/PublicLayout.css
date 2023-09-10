@@ -3,3 +3,8 @@
 	width: 100%;
 	overflow: hidden;
 }
+
+.public-content {
+	position: relative;
+	overflow: auto;
+}

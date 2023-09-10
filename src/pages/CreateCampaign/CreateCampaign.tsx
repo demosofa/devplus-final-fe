@@ -1,4 +1,4 @@
-import { Button, Card, DatePicker, Form, Input, Space } from 'antd';
+import { Button, Col, DatePicker, Form, Input, Row } from 'antd';
 import customParseFormat from 'dayjs/plugin/customParseFormat';
 import { useState } from 'react';
 import dayjs from 'dayjs';
@@ -8,12 +8,12 @@ import { RangePickerProps } from 'antd/es/date-picker';
 import { PlusCircleOutlined } from '@ant-design/icons';
 
 import './CreateCampaign.css';
-import { useCreateCampaign } from 'hooks/useCreateCampaign';
+import { useCreateCampaign } from '@hooks';
 import { CampaignType } from '@types';
 
-export const CreateCampaign = () => {
-	dayjs.extend(customParseFormat);
+dayjs.extend(customParseFormat);
 
+export const CreateCampaign = () => {
 	const [form] = Form.useForm();
 
 	const { mutate: CreateCampaign, isLoading } = useCreateCampaign();
@@ -50,93 +50,74 @@ export const CreateCampaign = () => {
 	};
 
 	return (
-		<div>
-			<Card style={{ marginBottom: 15 }}>
-				<div className="register_workspace">
-					<span> Create Campaign</span>
-				</div>
-			</Card>
-			<Card>
-				<div className="container-detail">
-					<Form
-						form={form}
-						onFinish={onFinish}
-						labelCol={{ span: 24 }}
-						wrapperCol={{ span: 24 }}
+		<Row>
+			<Col span={24} sm={23} md={16}>
+				<Form
+					form={form}
+					onFinish={onFinish}
+					labelCol={{ span: 24 }}
+					wrapperCol={{ span: 24 }}
+				>
+					<Form.Item
+						className="fontWeight"
+						label="Name"
+						name={'name'}
+						rules={[
+							{
+								required: true,
+								message: 'Please input your new name!',
+							},
+						]}
 					>
-						<div className="form-row">
-							<Form.Item
-								className="fontWeight"
-								label="Name"
-								name={'name'}
-								rules={[
-									{
-										required: true,
-										message: 'Please input your new name!',
-									},
-								]}
-							>
-								<Input placeholder="Input name" />
-							</Form.Item>
-						</div>
+						<Input placeholder="Input name" />
+					</Form.Item>
 
-						<div className="form-row">
-							<Form.Item
-								className="fontWeight"
-								label="Description"
-								name="description"
-								rules={[
-									{
-										required: true,
-										message: 'Please input your description',
-									},
-								]}
-								style={{
-									display: 'inline-block',
-								}}
-							>
-								<ReactQuill
-									className="quill-editor"
-									value={description}
-									onChange={handleDescriptionChange}
-									style={{ height: '120px' }}
-								/>
-							</Form.Item>
-						</div>
+					<Form.Item
+						className="fontWeight"
+						label="Description"
+						name="description"
+						rules={[
+							{
+								required: true,
+								message: 'Please input your description',
+							},
+						]}
+					>
+						<ReactQuill
+							className="quill-editor override"
+							value={description}
+							onChange={handleDescriptionChange}
+						/>
+					</Form.Item>
 
-						<div className="form-row">
-							<Form.Item
-								style={{ marginTop: 30 }}
-								className="fontWeight"
-								label="Expired Time"
-								rules={[
-									{
-										required: true,
-										message: 'Please select a date',
-									},
-								]}
-							>
-								<Space.Compact>
-									<Form.Item name="expired_time">
-										<DatePicker
-											format="YYYY-MM-DD HH:mm:ss"
-											disabledDate={disabledDate}
-											disabledTime={disabledDateTime}
-											showTime={{ defaultValue: dayjs('00:00:00', 'HH:mm:ss') }}
-										/>
-									</Form.Item>
-								</Space.Compact>
-							</Form.Item>
-						</div>
+					<Form.Item
+						style={{ marginTop: 30 }}
+						className="fontWeight"
+						label="Expired Time"
+						name="expired_time"
+						rules={[
+							{
+								required: true,
+								message: 'Please select a date',
+							},
+						]}
+					>
+						<DatePicker
+							format="YYYY-MM-DD HH:mm:ss"
+							disabledDate={disabledDate}
+							disabledTime={disabledDateTime}
+							showTime={{ defaultValue: dayjs('00:00:00', 'HH:mm:ss') }}
+							style={{ display: 'block' }}
+						/>
+					</Form.Item>
 
-						<Form.Item colon={false} className="full-btn">
-							<Button type="primary" htmlType="submit" loading={isLoading}>
-								<PlusCircleOutlined /> Create Campaign
-							</Button>
-						</Form.Item>
-					</Form>
-				</div>
-			</Card>
-		</div>
+					<Form.Item colon={false} className="full-btn">
+						<Button type="primary" htmlType="submit" loading={isLoading}>
+							<PlusCircleOutlined /> Create Campaign
+						</Button>
+					</Form.Item>
+				</Form>
+			</Col>
+		</Row>
 	);
 };

@@ -3,7 +3,7 @@ export * from './User/CreateHR';
 export * from './User/DetailUser';
 export * from './User/ListUser';
 export * from './ListCv/ListCv';
-export * from './CreateCv/CreateCv';
+export * from './ApplyCv/ApplyCv';
 export * from './CvDetail/CvDetail';
 export * from './UpdateCampaign/UpdateCampaign';
 export * from './CreateCampaign/CreateCampaign';

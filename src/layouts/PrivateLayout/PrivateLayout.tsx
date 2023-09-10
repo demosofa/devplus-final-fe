@@ -74,10 +74,9 @@ export function PrivateLayout() {
 				/>
 			</Sider>
 			<Layout>
-				<div>
-					<TopBar auth={auth} setAuth={setAuth} />
-				</div>
-				<Content className={`layout-content ${breakpoint.sm ? '' : 'mobile'}`}>
+				<TopBar auth={auth} setAuth={setAuth} />
+
+				<Content className={`private-content ${breakpoint.sm ? '' : 'mobile'}`}>
 					<Outlet />
 				</Content>
 			</Layout>

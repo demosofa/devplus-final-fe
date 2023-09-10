@@ -27,3 +27,14 @@ body {
 .fontWeight {
 	font-weight: bold;
 }
+
+/* .ant-row:not(.gutterfix) {
+	margin-right: 0 !important;
+	margin-left: 0 !important;
+}
+.ant-col:not(.gutterfix):first-child {
+	padding-left: 0 !important;
+}
+.ant-col:not(.gutterfix):last-child {
+	padding-right: 0 !important;
+} */

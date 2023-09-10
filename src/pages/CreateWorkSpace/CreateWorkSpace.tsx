@@ -121,21 +121,19 @@ export const CreateWorkSpace = () => {
 									</Form.Item>
 
 									<Form.Item className="login-btn" wrapperCol={{ span: 24 }}>
-										<Space.Compact block style={{ gap: 5 }}>
-											<Button>
-												<Link to={'..'}>Go back</Link>
-											</Button>
-
-											<Button
-												block
-												type="primary"
-												htmlType="submit"
-												loading={isLoading}
-											>
-												<PlusCircleOutlined /> Create Workspace
-											</Button>
-										</Space.Compact>
+										<Button
+											block
+											type="primary"
+											htmlType="submit"
+											loading={isLoading}
+										>
+											<PlusCircleOutlined /> Create Workspace
+										</Button>
 									</Form.Item>
+
+									<Space.Compact block>
+										<Link to={'..'}>Go back</Link>
+									</Space.Compact>
 								</Form>
 							</Col>
 						</Row>

@@ -1,0 +1,42 @@
+.apply-cv-background {
+	background-color: #f37529;
+	height: inherit;
+	display: flex;
+	align-items: center;
+	padding-bottom: 30px;
+}
+
+.apply-cv-background > .container-all {
+	height: 100%;
+}
+
+.apply-cv-expire-time {
+	color: white !important;
+	padding-left: 6px;
+	padding-right: 6px;
+}
+
+.apply-create {
+	text-align: center;
+}
+
+.row-btn-summit {
+	display: flex !important;
+	justify-content: center !important;
+}
+
+.create-cv-title {
+	margin-top: 0px !important;
+}
+
+.cv-wrap-container {
+	width: 100%;
+	margin-left: 0px !important;
+	margin-right: 0px !important;
+}
+
+.apply-cv-form {
+	position: sticky;
+	z-index: 99;
+	top: 30px;
+}

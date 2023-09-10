@@ -4,11 +4,12 @@
 	overflow: hidden;
 }
 
-.layout-content {
+.private-content {
+	position: relative;
 	margin: 20px 16px 0;
 	overflow: auto;
 }
 
-.layout-content.mobile {
+.private-content.mobile {
 	margin: 14px 10px 0;
 }
