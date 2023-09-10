@@ -14,12 +14,12 @@ import { ROLE } from '@enums';
 
 export const Auth = createContext<AuthType>({
 	getAuth: () => ({
-		id: '',
+		id: NaN,
 		name: '',
 		email: '',
 		role: ROLE.HR,
 		status: '',
-		iat: 0,
+		iat: NaN,
 	}),
 	setAuth: () => null,
 });
