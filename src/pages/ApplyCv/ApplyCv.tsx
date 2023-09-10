@@ -2,7 +2,6 @@ import {
 	Button,
 	Card,
 	Col,
-	DatePicker,
 	Form,
 	Input,
 	Row,
@@ -15,16 +14,24 @@ import 'react-quill/dist/quill.snow.css';
 import { LoadingOutlined, PlusCircleOutlined } from '@ant-design/icons';
 import { useMemo, useState } from 'react';
 import dayjs, { Dayjs } from 'dayjs';
+import customParseFormat from 'dayjs/plugin/customParseFormat';
 
 import { CampaignType, CreateCvType } from '@types';
 import { useCreateCv, useGetFindCvWithCampaign } from '@hooks';
 import { clone } from '@utils';
-import './CreateCv.css';
+import './ApplyCv.css';
+import { CampaignCountdown, Container } from '@components';
+import { QUERY_KEY } from '@constants';
+import { CAMPAIGN } from '@enums';
 
 const { Option } = Select;
-const { Title, Paragraph } = Typography;
+const { Title } = Typography;
 
-export const CreateCv = () => {
+const { useForm } = Form;
+
+dayjs.extend(customParseFormat);
+
+export const ApplyCv = () => {
 	const [uploadOption, setUploadOption] = useState('');
 
 	const handleUploadOptionChange = (value: any) => {
@@ -33,9 +40,9 @@ export const CreateCv = () => {
 
 	const { id } = useParams();
 
-	const [form] = Form.useForm();
+	const [form] = useForm();
 
-	const { mutate: CreateCv, isLoading } = useCreateCv();
+	const { mutate: createCv, isLoading } = useCreateCv();
 	const { data, isLoading: detailCampaignLoading } = useGetFindCvWithCampaign(
 		+id!
 	);
@@ -73,7 +80,7 @@ export const CreateCv = () => {
 			formData.append(name, value);
 		}
 
-		CreateCv(formData);
+		createCv(formData);
 		form.resetFields();
 	};
 
@@ -86,57 +93,51 @@ export const CreateCv = () => {
 	}
 
 	return (
-		<div className="cv-wrap-container">
-			<Row gutter={[12, 12]}>
-				<Col span={24} md={16} style={{ height: '100%' }}>
-					<div className="container-detail">
-						<Form
-							initialValues={detailCampaign}
-							labelCol={{ span: 24 }}
-							wrapperCol={{ span: 24 }}
-						>
-							<div className="form-row">
-								<Typography>
-									<Title className="create-cv-title">
-										{detailCampaign?.name}
-									</Title>
-									<Paragraph>
-										<div
-											dangerouslySetInnerHTML={{
-												__html: detailCampaign.description,
-											}}
-										></div>
-									</Paragraph>
-								</Typography>
-							</div>
+		<div className="apply-cv-background">
+			<Container>
+				<Row justify={'center'}>
+					<CampaignCountdown
+						queryKey={[QUERY_KEY.FIND_CV_WITH_CAMPAIGN, Number(id)]}
+						campaign={{
+							status: detailCampaign.status,
+							expired_time: data!.expired_time,
+						}}
+						className="apply-cv-expire-time"
+					/>
+				</Row>
 
-							<div className="form-row">
-								<Form.Item
-									style={{ marginTop: 70 }}
-									className="timestampInitial"
-									label="Expired time"
-									name="expired_time"
-								>
-									<DatePicker showTime disabled />
-								</Form.Item>
-							</div>
-						</Form>
-					</div>
-				</Col>
+				<Row gutter={[12, 12]} className="cv-wrap-container">
+					<Col span={24} md={15}>
+						<Card style={{ height: '100%' }}>
+							<Title level={3} className="create-cv-title">
+								{detailCampaign.name}
+							</Title>
 
-				<Col span={24} md={7}>
-					<Card>
-						<div className="register_workspace">
-							<span> Apply CV</span>
-						</div>
-						<div className="main-container">
+							<div
+								dangerouslySetInnerHTML={{
+									__html: detailCampaign.description,
+								}}
+							/>
+						</Card>
+					</Col>
+
+					<Col
+						span={24}
+						md={9}
+						className="apply-cv-form"
+						style={{ height: 'fit-content' }}
+					>
+						<Card>
+							<Title level={3} className="create-cv-title">
+								Apply CV
+							</Title>
+
 							<Form
 								form={form}
 								onFinish={onFinish}
-								name="complex-form"
 								labelCol={{ span: 24 }}
 								wrapperCol={{ span: 24 }}
-								className="full-form"
+								disabled={detailCampaign.status === CAMPAIGN.INACTIVE}
 							>
 								<Form.Item
 									name="name"
@@ -274,17 +275,17 @@ export const CreateCv = () => {
 										/>
 									</Form.Item>
 								) : null}
-								<Row className="row-btn-summit">
+
+								<Form.Item colon={false} className="row-btn-summit">
 									<Button type="primary" htmlType="submit" loading={isLoading}>
 										<PlusCircleOutlined /> Apply Cv
 									</Button>
-								</Row>
-								<Form.Item colon={false} className="full-btn"></Form.Item>
+								</Form.Item>
 							</Form>
-						</div>
-					</Card>
-				</Col>
-			</Row>
+						</Card>
+					</Col>
+				</Row>
+			</Container>
 		</div>
 	);
 };

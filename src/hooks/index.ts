@@ -22,3 +22,4 @@ export * from './useDeleteCampaign';
 export * from './useGetListUser';
 export * from './useGetFindCvWithCampaign';
 export * from './useAuth';
+export * from './useCreateCampaign';

@@ -32,3 +32,10 @@
 		margin-top: 0px;
 	}
 }
+
+.quill-editor.override > .ql-container {
+	height: 100%;
+	min-height: 120px;
+	max-height: 300px;
+	overflow-y: auto;
+}

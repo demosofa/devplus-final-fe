@@ -1,5 +1,5 @@
 import { LoadingOutlined } from '@ant-design/icons';
-import { Card, DatePicker, Form, Input } from 'antd';
+import { Col, DatePicker, Form, Input, Row } from 'antd';
 import dayjs, { Dayjs } from 'dayjs';
 import { useMemo, useState } from 'react';
 import ReactQuill from 'react-quill';
@@ -43,53 +43,42 @@ export const DetailCampaign = () => {
 	}
 
 	return (
-		<div>
-			<Card style={{ marginBottom: 15 }}>
-				<div className="register_workspace">
-					<span> Detail Campaign</span>
-				</div>
-			</Card>
-			<Card>
-				<div className="container-detail">
-					<Form
-						initialValues={detailCampaign}
-						labelCol={{ span: 24 }}
-						wrapperCol={{ span: 24 }}
-						className="full-form"
+		<Row>
+			<Col span={24} sm={23} md={16}>
+				<Form
+					initialValues={detailCampaign}
+					labelCol={{ span: 24 }}
+					wrapperCol={{ span: 24 }}
+					className="full-form"
+					disabled
+				>
+					<Form.Item className="fontWeight" label="Name" name="name">
+						<Input readOnly={true} />
+					</Form.Item>
+
+					<Form.Item
+						className="timestampInitial fontWeight"
+						label="Expired time"
+						name="expired_time"
 					>
-						<div className="form-row">
-							<Form.Item className="fontWeight" label="Name" name="name">
-								<Input style={{ maxWidth: '800px' }} readOnly={true} />
-							</Form.Item>
-						</div>
-						<div className="form-row">
-							<Form.Item
-								className="fontWeight"
-								label="Description"
-								name="description"
-							>
-								<ReactQuill
-									theme="bubble"
-									value={description}
-									onChange={handleDescriptionChange}
-									style={{ maxWidth: '800px', height: 160 }}
-									readOnly={true}
-									className="quill-editor"
-								/>
-							</Form.Item>
-						</div>
-						<div className="form-row">
-							<Form.Item
-								className="timestampInitial fontWeight"
-								label="Expired time"
-								name="expired_time"
-							>
-								<DatePicker showTime disabled />
-							</Form.Item>
-						</div>
-					</Form>
-				</div>
-			</Card>
-		</div>
+						<DatePicker showTime style={{ display: 'block' }} />
+					</Form.Item>
+
+					<Form.Item
+						className="fontWeight"
+						label="Description"
+						name="description"
+					>
+						<ReactQuill
+							theme="bubble"
+							value={description}
+							onChange={handleDescriptionChange}
+							readOnly={true}
+							className="quill-editor"
+						/>
+					</Form.Item>
+				</Form>
+			</Col>
+		</Row>
 	);
 };

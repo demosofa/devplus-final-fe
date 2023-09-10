@@ -1,5 +1,5 @@
 import { useParams } from 'react-router-dom';
-import { Card, Col, Form, Input, Row } from 'antd';
+import { Col, Form, Input, Row } from 'antd';
 import { LoadingOutlined } from '@ant-design/icons';
 
 import { useDetailUser } from '@hooks';
@@ -16,48 +16,32 @@ export const DetailUser = () => {
 		);
 	}
 	return (
-		<div>
-			<Card style={{ marginBottom: 15 }}>
-				<div className="register_workspace">
-					<span> Detail</span>
-				</div>
-			</Card>
-			<Card>
-				<div className="container-detail">
-					<Form
-						initialValues={data}
-						labelCol={{ span: 4 }}
-						wrapperCol={{ span: 20 }}
+		<Row>
+			<Col span={24} sm={23} md={16}>
+				<Form
+					initialValues={data}
+					labelCol={{ span: 8, xl: 6 }}
+					labelAlign="left"
+					wrapperCol={{ span: 16, xl: 18 }}
+				>
+					<Form.Item className="fontWeight" label="Name" name="name">
+						<Input readOnly={true} />
+					</Form.Item>
+					<Form.Item className="fontWeight" label="Email" name="email">
+						<Input readOnly={true} />
+					</Form.Item>
+					<Form.Item
+						className="fontWeight"
+						label="Phone number"
+						name="phone_number"
 					>
-						<Row>
-							<Col span={24} md={16}>
-								<Form.Item className="fontWeight" label="Name" name="name">
-									<Input readOnly={true} />
-								</Form.Item>
-							</Col>
-							<Col span={24} md={16}>
-								<Form.Item className="fontWeight" label="Email" name="email">
-									<Input readOnly={true} />
-								</Form.Item>
-							</Col>
-							<Col span={24} md={16}>
-								<Form.Item
-									className="fontWeight"
-									label="Phone number"
-									name="phone_number"
-								>
-									<Input readOnly={true} />
-								</Form.Item>
-							</Col>
-							<Col span={24} md={16}>
-								<Form.Item className="fontWeight" label="Status" name="status">
-									<Input readOnly={true} />
-								</Form.Item>
-							</Col>
-						</Row>
-					</Form>
-				</div>
-			</Card>
-		</div>
+						<Input readOnly={true} />
+					</Form.Item>
+					<Form.Item className="fontWeight" label="Status" name="status">
+						<Input readOnly={true} />
+					</Form.Item>
+				</Form>
+			</Col>
+		</Row>
 	);
 };

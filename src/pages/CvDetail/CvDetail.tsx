@@ -45,12 +45,15 @@ export const CvDetail = () => {
 	}, [data, detailCvLoading]);
 
 	return (
-		<Row className="Cv-container">
-			<Col span={24} md={12}>
+		<Row gutter={[12, 12]} className="cv-container cv-wrap-container">
+			<Col span={24} xl={12}>
 				<Card loading={detailCvLoading} style={{ height: '100%' }}>
 					<Typography>
-						<Title className="title-cv-detail">Cv Information</Title>
+						<Title level={3} className="title-cv-detail">
+							Cv Information
+						</Title>
 					</Typography>
+
 					<Form
 						form={forms}
 						initialValues={detailCv}
@@ -58,42 +61,59 @@ export const CvDetail = () => {
 						labelCol={{
 							span: 6,
 						}}
+						labelAlign="left"
 						wrapperCol={{
 							span: 18,
 						}}
 						className="full-form"
 					>
-						<Form.Item label="Name" name="name">
+						<Form.Item className="fontWeight" label="Name" name="name">
 							<Input readOnly />
 						</Form.Item>
 
-						<Form.Item label="Email " name="email">
+						<Form.Item className="fontWeight" label="Email " name="email">
 							<Input readOnly />
 						</Form.Item>
 
-						<Form.Item label="Phone Number" name="phone_number">
+						<Form.Item
+							className="fontWeight"
+							label="Phone Number"
+							name="phone_number"
+						>
 							<Input readOnly />
 						</Form.Item>
 
-						<Form.Item label="Apply Position" name="apply_position">
+						<Form.Item
+							className="fontWeight"
+							label="Apply Position"
+							name="apply_position"
+						>
 							<Input readOnly />
 						</Form.Item>
 
-						<Form.Item label="Create At" name="create_at">
+						<Form.Item
+							className="fontWeight"
+							label="Create At"
+							name="create_at"
+						>
 							<Input readOnly />
 						</Form.Item>
 
-						<Form.Item label="Status " name="status">
+						<Form.Item className="fontWeight" label="Status " name="status">
 							<Input readOnly />
 						</Form.Item>
 					</Form>
 				</Card>
 			</Col>
-			<Col span={24} md={12}>
+
+			<Col span={24} xl={12}>
 				<Card loading={detailCvLoading}>
 					<Typography>
-						<Title className="title-cv-detail">Cv File</Title>
+						<Title level={3} className="title-cv-detail">
+							Cv File
+						</Title>
 					</Typography>
+
 					<iframe
 						key={detailCv?.file}
 						src={detailCv?.file}

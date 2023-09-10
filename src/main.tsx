@@ -8,6 +8,7 @@ import publicRoutes from '@routes/publicRoutes';
 import axios from 'axios';
 import { AuthProvider } from '@contexts';
 import { BASE_URL } from '@constants';
+import 'dayjs/locale/vi';
 
 const queryClient = new QueryClient();
 const router = createBrowserRouter([...privateRoutes, ...publicRoutes]);

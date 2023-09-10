@@ -7,7 +7,7 @@ const { Content } = Layout;
 export function PublicLayout() {
 	return (
 		<Layout className="layout-container">
-			<Content style={{ overflow: 'auto' }}>
+			<Content className="public-content">
 				<Outlet />
 			</Content>
 		</Layout>
