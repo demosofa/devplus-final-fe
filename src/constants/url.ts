@@ -5,4 +5,5 @@ export enum API_URL {
 	AUTH = '/auth/',
 	CV = '/cv/',
 	APPLY_CV = 'apply-cv/',
+	CHART_CAMPAIGN = '/campaign/chart-campaign/',
 }
