@@ -16,6 +16,8 @@ import {
 	DetailCampaign,
 } from '@pages';
 import { ROLE } from '@enums';
+import { DashboardCV } from '../pages/Dashboard/DashboardCV';
+import { ListCampaignWithWorkspace } from '../pages/ListCampaignWithWorkspace/ListCampaignWithWorkspace';
 
 const privateRoutes: Route[] = [
 	{
@@ -30,6 +32,11 @@ const privateRoutes: Route[] = [
 			{
 				path: 'campaign',
 				element: <ListCampaign />,
+			},
+
+			{
+				path: '/campaign-workspace/:id',
+				element: <ListCampaignWithWorkspace />,
 			},
 
 			{
@@ -83,6 +90,21 @@ const privateRoutes: Route[] = [
 				path: '/cv-detail/:id',
 				element: <CvDetail />,
 				roles: [ROLE.SUPER_ADMIN, ROLE.ADMIN],
+			},
+
+			{
+				path: '/create-campaign/:id',
+				element: <CreateCampaign />,
+			},
+
+			{
+				path: '/create-campaign',
+				element: <CreateCampaign />,
+			},
+
+			{
+				path: '/dashboard-cv/:id',
+				element: <DashboardCV />,
 			},
 		],
 	},
