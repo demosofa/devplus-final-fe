@@ -22,5 +22,3 @@ export const getFindOneCampaign = (id: number) =>
 
 export const getFindCvWithCampaign = (id: number) =>
 	axios.get<CampaignType>(API_URL.CAMPAIGN + API_URL.APPLY_CV + id);
-export const getChartCV = (id: number) =>
-	axios.get(API_URL.CHART_CAMPAIGN + id);

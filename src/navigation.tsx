@@ -11,12 +11,6 @@ import { AuthMenuItem } from '@types';
 
 export const navigation: AuthMenuItem[] = [
 	{
-		key: '/dashboard',
-		label: 'Dashboard',
-		icon: <GithubOutlined />,
-		roles: [ROLE.ADMIN],
-	},
-	{
 		key: '/workspace',
 		label: 'Workspace',
 		icon: <GithubOutlined />,
@@ -29,12 +23,6 @@ export const navigation: AuthMenuItem[] = [
 		icon: <PieChartOutlined />,
 		roles: [ROLE.SUPER_ADMIN, ROLE.ADMIN, ROLE.HR],
 	},
-	// {
-	// 	key: '/campaign-workspace/:id',
-	// 	label: 'List Campaign',
-	// 	icon: <PieChartOutlined />,
-	// 	roles: [ROLE.ADMIN, ROLE.HR],
-	// },
 
 	{
 		key: '/cv',
