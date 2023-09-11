@@ -23,4 +23,4 @@ export * from './useGetListUser';
 export * from './useGetFindCvWithCampaign';
 export * from './useAuth';
 export * from './useCreateCampaign';
-export * from './useChartCampaign';
+export * from './useChartCV';

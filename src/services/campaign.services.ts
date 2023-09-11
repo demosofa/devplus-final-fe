@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 import { API_URL } from '@constants';
-import { CampaignType } from '@types';
+import { CampaignType, ChartCv } from '@types';
 
 export const getListCampaign = (page: number, take: number) =>
 	axios.get<CampaignType[]>(API_URL.CAMPAIGN, {
@@ -23,5 +23,5 @@ export const getFindOneCampaign = (id: number) =>
 export const getFindCvWithCampaign = (id: number) =>
 	axios.get<CampaignType>(API_URL.CAMPAIGN + API_URL.APPLY_CV + id);
 
-export const getChartCV = (id: number) =>
-	axios.get(API_URL.CHART_CAMPAIGN + id);
+export const getChartCV = (filterTime: string) =>
+	axios.get<ChartCv[]>(API_URL.CHART_CV, { params: { filterTime } });
