@@ -12,4 +12,4 @@ export * from './ListCampaign/ListCampaign';
 export * from './WorkSpaceDetail/WorkspaceDetail';
 export * from './ListWorkSpace/ListWorkSpace';
 export * from './CreateWorkSpace/CreateWorkSpace';
-export * from './Dashboard/DashboardCV';
+export * from './Dashboard/DashboardAdmin';

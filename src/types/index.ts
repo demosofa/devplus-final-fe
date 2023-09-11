@@ -7,3 +7,4 @@ export * from './auth.type';
 export * from './user.type';
 export * from './cv.type';
 export * from './error.type';
+export * from './dashboard.type';

@@ -1,7 +1,7 @@
 import { Navigate, RouteObject } from 'react-router-dom';
 
 import { PublicLayout } from '@layouts/PublicLayout/PublicLayout';
-import { Login, CreateWorkSpace, ApplyCv, DashboardCV } from '@pages';
+import { Login, CreateWorkSpace, ApplyCv, DashboardAdmin } from '@pages';
 
 const publicRoutes: RouteObject[] = [
 	{
@@ -28,8 +28,8 @@ const publicRoutes: RouteObject[] = [
 			},
 
 			{
-				path: '/dashboard-cv/:id',
-				element: <DashboardCV />,
+				path: '/campaign-dashboard/',
+				element: <DashboardAdmin />,
 			},
 		],
 	},
