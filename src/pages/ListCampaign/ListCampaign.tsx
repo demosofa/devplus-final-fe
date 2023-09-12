@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Button, Modal, Table } from 'antd';
+import { Button, Modal, Table, Tag } from 'antd';
 import { ColumnsType } from 'antd/es/table';
 import {
 	CopyFilled,
@@ -37,7 +37,7 @@ export const ListCampaign = () => {
 
 	const handleDeleteCampaign = (id: number) => {
 		Modal.confirm({
-			title: `Accept Workspace ${id}`,
+			title: `Delete Campaign ${id}`,
 			icon: <ExclamationCircleFilled />,
 			content: 'Do you Want to delete this campaign?',
 			onOk() {
@@ -117,12 +117,34 @@ export const ListCampaign = () => {
 			title: 'Status',
 			dataIndex: 'status',
 			key: 'status',
+			render: (status) => {
+				let color;
+				let text;
+				switch (status) {
+					case CAMPAIGN.INACTIVE:
+						color = 'red';
+						text = 'Inactive';
+						break;
+					case CAMPAIGN.ACTIVE:
+						color = 'green';
+						text = 'Active';
+						break;
+				}
+				return (
+					<Tag
+						color={color}
+						style={{ fontWeight: 'bold', textTransform: 'uppercase' }}
+					>
+						{text}
+					</Tag>
+				);
+			},
 		},
 		{
 			title: 'Action',
 			key: 'action',
 			render: (record: CampaignType) => {
-				if (auth && auth.role == ROLE.SUPER_ADMIN) {
+				if (auth && (auth.role == ROLE.SUPER_ADMIN || auth.role == ROLE.HR)) {
 					return 'No actions';
 				}
 

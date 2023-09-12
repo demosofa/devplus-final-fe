@@ -27,25 +27,9 @@ export const CreateCampaign = () => {
 		form.resetFields();
 	};
 
-	const range = (start: number, end: number) => {
-		const result = [];
-
-		for (let i = start; i < end; i++) {
-			result.push(i);
-		}
-
-		return result;
-	};
-
 	const disabledDate: RangePickerProps['disabledDate'] = (current) => {
 		return current && current < dayjs().endOf('day');
 	};
-
-	const disabledDateTime = () => ({
-		disabledHours: () => range(0, 24).splice(4, 20),
-		disabledMinutes: () => range(30, 60),
-		disabledSeconds: () => [55, 56],
-	});
 
 	const handleDescriptionChange = (value: string) => {
 		setDescription(value);
@@ -108,7 +92,6 @@ export const CreateCampaign = () => {
 							<DatePicker
 								format="YYYY-MM-DD HH:mm:ss"
 								disabledDate={disabledDate}
-								disabledTime={disabledDateTime}
 								showTime={{ defaultValue: dayjs('00:00:00', 'HH:mm:ss') }}
 								style={{ display: 'block' }}
 							/>

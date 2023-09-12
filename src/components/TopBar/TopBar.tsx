@@ -1,4 +1,4 @@
-import { Button, Dropdown, Layout, MenuProps, Typography } from 'antd';
+import { Dropdown, Layout, MenuProps, Typography } from 'antd';
 import { Link } from 'react-router-dom';
 
 import { AuthPayload, SetAuth } from '@types';
@@ -47,7 +47,20 @@ export function TopBar({ auth, setAuth, ...props }: Props) {
 			<Title {...props}>{props.title}</Title>
 
 			<Dropdown menu={{ items }}>
-				<Button>{auth ? auth.name : 'Guest'}</Button>
+				<div
+					style={{
+						display: 'flex',
+						cursor: 'pointer',
+						paddingRight: '20px',
+					}}
+				>
+					<img
+						className="img-drop"
+						src="https://th.bing.com/th/id/OIP.nczpMSa69aDJWYGi0tKqggHaHa?w=205&h=205&c=7&r=0&o=5&dpr=1.3&pid=1.7"
+					/>
+
+					{auth ? auth.name : 'Guest'}
+				</div>
 			</Dropdown>
 		</Header>
 	);

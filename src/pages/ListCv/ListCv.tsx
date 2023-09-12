@@ -3,15 +3,15 @@ import {
 	CloseCircleOutlined,
 	ExclamationCircleFilled,
 } from '@ant-design/icons';
-import { Button, Input, Modal, Table } from 'antd';
+import { Button, Input, Modal, Table, Tag } from 'antd';
 import { useState } from 'react';
 import { ColumnsType } from 'antd/es/table';
 import { Link, useNavigate } from 'react-router-dom';
 import dayjs from 'dayjs';
 
 import { CvType, WorkspaceType } from '@types';
-import { useFailCV, useGetListCv, usePassCV } from '@hooks';
-import { CV } from '@enums';
+import { useAuth, useFailCV, useGetListCv, usePassCV } from '@hooks';
+import { CV, ROLE } from '@enums';
 import './ListCv.css';
 
 import { BASE_URL } from '@constants';
@@ -44,6 +44,10 @@ export const ListCv = () => {
 			setPageSize(pageSize);
 		}
 	};
+
+	const { getAuth } = useAuth();
+
+	const auth = getAuth();
 
 	const onRow = (record: CvType) => {
 		return {
@@ -177,21 +181,28 @@ export const ListCv = () => {
 			dataIndex: 'status',
 			key: 'status',
 			render: (status) => {
+				let color;
+				let text;
+				switch (status) {
+					case CV.FAIL:
+						color = 'red';
+						text = 'Fail';
+						break;
+					case CV.PASS:
+						color = 'green';
+						text = 'Pass';
+						break;
+					default:
+						color = 'blue';
+						text = 'New';
+				}
 				return (
-					<span
-						style={{
-							color:
-								status == CV.FAIL
-									? 'red'
-									: status == CV.PASS
-									? 'green'
-									: 'blue',
-							fontWeight: 'bold',
-							textTransform: 'uppercase',
-						}}
+					<Tag
+						color={color}
+						style={{ fontWeight: 'bold', textTransform: 'uppercase' }}
 					>
-						{status}
-					</span>
+						{text}
+					</Tag>
 				);
 			},
 		},
@@ -199,32 +210,37 @@ export const ListCv = () => {
 		{
 			title: 'Action',
 			key: 'action',
-			render: (record: WorkspaceType) => (
-				<div className="action-icons-workspace">
-					{record.status === CV.NEW ? (
-						<>
-							<CheckCircleOutlined
-								className="icons-check-Cv"
-								onClick={(e) => {
-									e.preventDefault();
-									e.stopPropagation();
-									handlePassCV(record.id);
-								}}
-							/>
-							<CloseCircleOutlined
-								className="icons-close-Cv"
-								onClick={(e) => {
-									e.preventDefault();
-									e.stopPropagation();
-									handleFailCV(record.id);
-								}}
-							/>
-						</>
-					) : (
-						'No actions'
-					)}
-				</div>
-			),
+			render: (record: WorkspaceType) => {
+				if (auth && auth.role == ROLE.SUPER_ADMIN) {
+					return 'No actions';
+				}
+				return (
+					<div className="action-icons-workspace">
+						{record.status === CV.NEW ? (
+							<>
+								<CheckCircleOutlined
+									className="icons-check-Cv"
+									onClick={(e) => {
+										e.preventDefault();
+										e.stopPropagation();
+										handlePassCV(record.id);
+									}}
+								/>
+								<CloseCircleOutlined
+									className="icons-close-Cv"
+									onClick={(e) => {
+										e.preventDefault();
+										e.stopPropagation();
+										handleFailCV(record.id);
+									}}
+								/>
+							</>
+						) : (
+							'No actions'
+						)}
+					</div>
+				);
+			},
 		},
 	];
 
