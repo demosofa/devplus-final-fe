@@ -24,7 +24,7 @@ export const ListCampaign = () => {
 
 	const { getAuth } = useAuth();
 
-	const auth = getAuth();
+	const auth = getAuth()!;
 
 	const [copied, setCopied] = useState<number>();
 
@@ -175,7 +175,12 @@ export const ListCampaign = () => {
 
 	return (
 		<>
-			<Button className="btn-wrap-campaign">
+			<Button
+				className="btn-wrap-campaign"
+				style={{
+					display: auth.role === ROLE.SUPER_ADMIN ? 'none' : 'inline-block',
+				}}
+			>
 				<Link style={{ color: 'white' }} to={'/create-campaign'}>
 					<PlusCircleOutlined /> Create Campaign
 				</Link>

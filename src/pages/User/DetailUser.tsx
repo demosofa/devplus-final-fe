@@ -2,11 +2,16 @@ import { useParams } from 'react-router-dom';
 import { Card, Col, Form, Input, Row } from 'antd';
 import { LoadingOutlined } from '@ant-design/icons';
 
-import { useDetailUser } from '@hooks';
+import { useAuth, useDetailUser } from '@hooks';
 export const DetailUser = () => {
 	const { id } = useParams();
 
-	const { data, isLoading: detailUserLoading } = useDetailUser(+id!);
+	const { getAuth } = useAuth();
+	const auth = getAuth()!;
+
+	const { data, isLoading: detailUserLoading } = useDetailUser(
+		Number(id) || auth.id
+	);
 
 	if (detailUserLoading) {
 		return (

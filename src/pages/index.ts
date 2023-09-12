@@ -13,3 +13,6 @@ export * from './WorkSpaceDetail/WorkspaceDetail';
 export * from './ListWorkSpace/ListWorkSpace';
 export * from './CreateWorkSpace/CreateWorkSpace';
 export * from './Dashboard/DashboardAdmin';
+export * from './NotFound/NotFound';
+export * from './Forbidden/Forbidden';
+export * from './ServerError/ServerError';

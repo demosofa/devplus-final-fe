@@ -30,6 +30,7 @@ const privateRoutes: Route[] = [
 			{
 				path: '/list-campaign',
 				element: <ListCampaign />,
+				roles: [ROLE.SUPER_ADMIN, ROLE.ADMIN, ROLE.HR],
 			},
 
 			{
@@ -58,6 +59,12 @@ const privateRoutes: Route[] = [
 
 			{
 				path: '/detail-user/:id',
+				element: <DetailUser />,
+				roles: [ROLE.ADMIN],
+			},
+
+			{
+				path: '/profile',
 				element: <DetailUser />,
 			},
 
