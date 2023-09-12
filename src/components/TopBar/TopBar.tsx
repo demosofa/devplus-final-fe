@@ -3,21 +3,19 @@ import { Link } from 'react-router-dom';
 
 import { AuthPayload, SetAuth } from '@types';
 import './TopBar.css';
+import { TitleProps } from 'antd/es/typography/Title';
 
 const { Header } = Layout;
 const { Title } = Typography;
 
 type MenuItem = MenuProps['items'];
 
-export function TopBar({
-	title,
-	auth,
-	setAuth,
-}: {
-	title: string;
+interface Props extends TitleProps {
 	auth: AuthPayload | void;
 	setAuth: SetAuth;
-}) {
+}
+
+export function TopBar({ auth, setAuth, ...props }: Props) {
 	const handleLogout = () => {
 		setAuth();
 	};
@@ -46,7 +44,7 @@ export function TopBar({
 
 	return (
 		<Header className="top-bar">
-			<Title level={4}>{title}</Title>
+			<Title {...props}>{props.title}</Title>
 
 			<Dropdown menu={{ items }}>
 				<Button>{auth ? auth.name : 'Guest'}</Button>

@@ -1,5 +1,5 @@
 import { PlusCircleOutlined } from '@ant-design/icons';
-import { Button, Card, DatePicker, Form, Input, Spin } from 'antd';
+import { Button, Card, Col, DatePicker, Form, Input, Row, Spin } from 'antd';
 import { useMemo, useState } from 'react';
 import dayjs, { Dayjs } from 'dayjs';
 import 'react-quill/dist/quill.snow.css';
@@ -11,8 +11,10 @@ import { useFindOneCampaign, useUpdateCampaign } from '@hooks';
 import { CampaignType } from '@types';
 import { clone } from '@utils';
 
+const { useForm } = Form;
+
 export const UpdateCampaign = () => {
-	const [form] = Form.useForm();
+	const [form] = useForm();
 
 	const { id } = useParams();
 
@@ -55,14 +57,9 @@ export const UpdateCampaign = () => {
 		);
 	}
 	return (
-		<div>
-			<Card style={{ marginBottom: 15 }}>
-				<div className="register_workspace">
-					<span> Update Campaign</span>
-				</div>
-			</Card>
-			<Card>
-				<div className="container-detail">
+		<Card>
+			<Row>
+				<Col span={24} sm={23} md={16} lg={12}>
 					<Form
 						initialValues={detailCampaign}
 						form={form}
@@ -70,50 +67,43 @@ export const UpdateCampaign = () => {
 						labelCol={{ span: 24 }}
 						wrapperCol={{ span: 24 }}
 					>
-						<div className="form-row">
-							<Form.Item
-								className="fontWeight"
-								label="Name"
-								name={'name'}
-								rules={[
-									{
-										required: true,
-										message: 'Please input your new name!',
-									},
-								]}
-							>
-								<Input style={{ maxWidth: '800px' }} placeholder="Input name" />
-							</Form.Item>
-						</div>
+						<Form.Item
+							className="fontWeight"
+							label="Name"
+							name={'name'}
+							rules={[
+								{
+									required: true,
+									message: 'Please input your new name!',
+								},
+							]}
+						>
+							<Input placeholder="Input name" />
+						</Form.Item>
 
-						<div className="form-row">
-							<Form.Item
-								className="fontWeight"
-								label="Description"
-								name={'description'}
-								rules={[
-									{ required: true, message: 'Please input new description!' },
-								]}
-							>
-								<ReactQuill
-									value={description}
-									onChange={handleDescriptionChange}
-									style={{ maxWidth: 800, height: 150 }}
-									className="quill-editor"
-								/>
-							</Form.Item>
-						</div>
+						<Form.Item
+							className="fontWeight"
+							label="Description"
+							name={'description'}
+							rules={[
+								{ required: true, message: 'Please input new description!' },
+							]}
+						>
+							<ReactQuill
+								className="quill-editor override"
+								value={description}
+								onChange={handleDescriptionChange}
+							/>
+						</Form.Item>
 
-						<div className="form-row">
-							<Form.Item
-								style={{ marginTop: 70 }}
-								className="timestampInitial fontWeight"
-								label="Expired time"
-								name={'expired_time'}
-							>
-								<DatePicker showTime />
-							</Form.Item>
-						</div>
+						<Form.Item
+							className="timestampInitial fontWeight"
+							label="Expired time"
+							name={'expired_time'}
+						>
+							<DatePicker showTime />
+						</Form.Item>
+
 						<Form.Item colon={false}>
 							<Button
 								loading={isLoading}
@@ -125,8 +115,8 @@ export const UpdateCampaign = () => {
 							</Button>
 						</Form.Item>
 					</Form>
-				</div>
-			</Card>
-		</div>
+				</Col>
+			</Row>
+		</Card>
 	);
 };

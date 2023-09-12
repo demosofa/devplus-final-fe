@@ -12,10 +12,12 @@ import { BASE_URL } from '@constants';
 
 const { Title } = Typography;
 
+const { useForm } = Form;
+
 export const CvDetail = () => {
 	const { id } = useParams();
 
-	const [forms] = Form.useForm();
+	const [forms] = useForm();
 
 	const { data, isLoading: detailCvLoading } = useGetDetailCv(+id!);
 
