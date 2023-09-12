@@ -6,5 +6,6 @@
 
 .public-content {
 	position: relative;
+	height: inherit;
 	overflow: auto;
 }

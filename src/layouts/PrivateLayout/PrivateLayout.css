@@ -6,6 +6,7 @@
 
 .private-content {
 	position: relative;
+	height: inherit;
 	margin: 20px 16px 0;
 	overflow: auto;
 }

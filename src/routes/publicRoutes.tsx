@@ -5,7 +5,6 @@ import {
 	Login,
 	CreateWorkSpace,
 	ApplyCv,
-	DashboardAdmin,
 	NotFound,
 	Forbidden,
 	ServerError,
@@ -39,11 +38,6 @@ const publicRoutes: RouteObject[] = [
 			{
 				path: '/apply-cv/:id',
 				element: <ApplyCv />,
-			},
-
-			{
-				path: '/campaign-dashboard/',
-				element: <DashboardAdmin />,
 			},
 		],
 	},
