@@ -49,9 +49,10 @@ export function CampaignCountdown({
 
 							return cloned;
 						} else {
-							campaigns.status = CAMPAIGN.INACTIVE;
+							const cloned = Object.assign({}, campaigns);
+							cloned.status = CAMPAIGN.INACTIVE;
 
-							return campaigns;
+							return cloned;
 						}
 					}
 				);
