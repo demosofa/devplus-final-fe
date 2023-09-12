@@ -47,82 +47,84 @@ export const CvDetail = () => {
 	}, [data, detailCvLoading]);
 
 	return (
-		<Row gutter={[12, 12]} className="cv-container cv-wrap-container">
-			<Col span={24} xl={12}>
-				<Card loading={detailCvLoading} style={{ height: '100%' }}>
-					<Typography>
-						<Title level={3} className="title-cv-detail">
-							Cv Information
-						</Title>
-					</Typography>
+		<section style={{ overflowX: 'hidden' }}>
+			<Row gutter={[12, 12]} className="cv-container">
+				<Col span={24} xl={12}>
+					<Card loading={detailCvLoading} style={{ height: '100%' }}>
+						<Typography>
+							<Title level={3} className="title-cv-detail">
+								Cv Information
+							</Title>
+						</Typography>
 
-					<Form
-						form={forms}
-						initialValues={detailCv}
-						name="complex-form"
-						labelCol={{
-							span: 6,
-						}}
-						labelAlign="left"
-						wrapperCol={{
-							span: 18,
-						}}
-						className="full-form"
-					>
-						<Form.Item className="fontWeight" label="Name" name="name">
-							<Input readOnly />
-						</Form.Item>
-
-						<Form.Item className="fontWeight" label="Email " name="email">
-							<Input readOnly />
-						</Form.Item>
-
-						<Form.Item
-							className="fontWeight"
-							label="Phone Number"
-							name="phone_number"
+						<Form
+							form={forms}
+							initialValues={detailCv}
+							name="complex-form"
+							labelCol={{
+								span: 6,
+							}}
+							labelAlign="left"
+							wrapperCol={{
+								span: 18,
+							}}
+							className="full-form"
 						>
-							<Input readOnly />
-						</Form.Item>
+							<Form.Item className="fontWeight" label="Name" name="name">
+								<Input readOnly />
+							</Form.Item>
 
-						<Form.Item
-							className="fontWeight"
-							label="Apply Position"
-							name="apply_position"
-						>
-							<Input readOnly />
-						</Form.Item>
+							<Form.Item className="fontWeight" label="Email " name="email">
+								<Input readOnly />
+							</Form.Item>
 
-						<Form.Item
-							className="fontWeight"
-							label="Create At"
-							name="create_at"
-						>
-							<Input readOnly />
-						</Form.Item>
+							<Form.Item
+								className="fontWeight"
+								label="Phone Number"
+								name="phone_number"
+							>
+								<Input readOnly />
+							</Form.Item>
 
-						<Form.Item className="fontWeight" label="Status " name="status">
-							<Input readOnly />
-						</Form.Item>
-					</Form>
-				</Card>
-			</Col>
+							<Form.Item
+								className="fontWeight"
+								label="Apply Position"
+								name="apply_position"
+							>
+								<Input readOnly />
+							</Form.Item>
 
-			<Col span={24} xl={12}>
-				<Card loading={detailCvLoading}>
-					<Typography>
-						<Title level={3} className="title-cv-detail">
-							Cv File
-						</Title>
-					</Typography>
+							<Form.Item
+								className="fontWeight"
+								label="Create At"
+								name="create_at"
+							>
+								<Input readOnly />
+							</Form.Item>
 
-					<iframe
-						key={detailCv?.file}
-						src={detailCv?.file}
-						className="iframe-cv-detail"
-					></iframe>
-				</Card>
-			</Col>
-		</Row>
+							<Form.Item className="fontWeight" label="Status " name="status">
+								<Input readOnly />
+							</Form.Item>
+						</Form>
+					</Card>
+				</Col>
+
+				<Col span={24} xl={12}>
+					<Card loading={detailCvLoading}>
+						<Typography>
+							<Title level={3} className="title-cv-detail">
+								Cv File
+							</Title>
+						</Typography>
+
+						<iframe
+							key={detailCv?.file}
+							src={detailCv?.file}
+							className="iframe-cv-detail"
+						></iframe>
+					</Card>
+				</Col>
+			</Row>
+		</section>
 	);
 };

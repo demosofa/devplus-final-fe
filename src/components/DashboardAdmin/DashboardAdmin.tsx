@@ -12,6 +12,7 @@ import {
 import { Line, Pie } from 'react-chartjs-2';
 import { useChartCV } from '@hooks';
 import { useMemo, useState } from 'react';
+import { FILTER_TIME } from '@enums';
 
 ChartJS.register(
 	CategoryScale,
@@ -24,13 +25,12 @@ ChartJS.register(
 );
 
 export const DashboardAdmin = () => {
-	const [select, setSelect] = useState('year');
+	const [select, setSelect] = useState<FILTER_TIME>(FILTER_TIME.YEAR);
 
-	const { data: CVData } = useChartCV(select);
+	const { data: CVData, isLoading: loadChartCv } = useChartCV(select);
 
 	const lineOptions = {
-		responsive: true,
-		maintainAspectRatio: true,
+		maintainAspectRatio: false,
 		plugins: {
 			legend: {
 				position: 'top' as const,
@@ -46,6 +46,19 @@ export const DashboardAdmin = () => {
 				ticks: {
 					stepSize: 1,
 				},
+			},
+		},
+	};
+
+	const pieOptions = {
+		maintainAspectRatio: false,
+		plugins: {
+			legend: {
+				position: 'top' as const,
+			},
+			title: {
+				display: true,
+				text: 'CV Chart',
 			},
 		},
 	};
@@ -96,6 +109,11 @@ export const DashboardAdmin = () => {
 		});
 	});
 
+	const lineData = {
+		labels: uniqueDates,
+		datasets: lineDatasets,
+	};
+
 	const campaignNames = Array.from(
 		new Set(CVData?.map((item) => item.campaign_name))
 	);
@@ -124,12 +142,7 @@ export const DashboardAdmin = () => {
 		],
 	};
 
-	const lineData = {
-		labels: uniqueDates,
-		datasets: lineDatasets,
-	};
-
-	const handleChange = (value: string) => {
+	const handleChange = (value: FILTER_TIME) => {
 		setSelect(value);
 	};
 
@@ -137,28 +150,31 @@ export const DashboardAdmin = () => {
 		<>
 			<Row>
 				<Select
-					defaultValue="year"
-					style={{ width: 120 }}
+					defaultValue={FILTER_TIME.YEAR}
+					style={{ width: 120, marginBottom: 15 }}
 					onChange={handleChange}
 					options={[
-						{ value: 'year', label: 'Year' },
-						{ value: 'month', label: 'Month' },
-						{ value: 'week', label: 'Week' },
+						{ value: FILTER_TIME.YEAR, label: 'Year' },
+						{ value: FILTER_TIME.MONTH, label: 'Month' },
+						{ value: FILTER_TIME.WEEK, label: 'Week' },
 					]}
 				/>
 			</Row>
-			<Row>
-				<Col span={12}>
-					<Card>
-						<Pie data={pieData} />
-					</Card>
-				</Col>
-				<Col span={12}>
-					<Card>
-						<Line options={lineOptions} data={lineData} />
-					</Card>
-				</Col>
-			</Row>
+
+			<section style={{ overflowX: 'hidden' }}>
+				<Row gutter={[12, 12]}>
+					<Col span={24} md={10}>
+						<Card loading={loadChartCv}>
+							<Pie options={pieOptions} data={pieData} />
+						</Card>
+					</Col>
+					<Col span={24} md={14}>
+						<Card loading={loadChartCv}>
+							<Line options={lineOptions} data={lineData} />
+						</Card>
+					</Col>
+				</Row>
+			</section>
 		</>
 	);
 };

@@ -1,4 +1,5 @@
 import {
+	DashboardOutlined,
 	GithubOutlined,
 	PieChartOutlined,
 	SnippetsOutlined,
@@ -10,6 +11,13 @@ import { ROLE } from '@enums';
 import { AuthMenuItem } from '@types';
 
 export const navigation: AuthMenuItem[] = [
+	{
+		key: '/dashboard',
+		label: 'Dashboard',
+		icon: <DashboardOutlined />,
+		roles: [ROLE.SUPER_ADMIN, ROLE.ADMIN],
+	},
+
 	{
 		key: '/list-workspace',
 		label: 'Workspace',

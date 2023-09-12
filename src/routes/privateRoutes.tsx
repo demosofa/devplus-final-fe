@@ -14,6 +14,7 @@ import {
 	ListCampaign,
 	WorkSpaceDetail,
 	DetailCampaign,
+	Dashboard,
 } from '@pages';
 import { ROLE } from '@enums';
 
@@ -89,6 +90,12 @@ const privateRoutes: Route[] = [
 			{
 				path: '/cv-detail/:id',
 				element: <CvDetail />,
+				roles: [ROLE.SUPER_ADMIN, ROLE.ADMIN],
+			},
+
+			{
+				path: '/dashboard',
+				element: <Dashboard />,
 				roles: [ROLE.SUPER_ADMIN, ROLE.ADMIN],
 			},
 		],

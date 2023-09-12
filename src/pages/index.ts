@@ -12,7 +12,7 @@ export * from './ListCampaign/ListCampaign';
 export * from './WorkSpaceDetail/WorkspaceDetail';
 export * from './ListWorkSpace/ListWorkSpace';
 export * from './CreateWorkSpace/CreateWorkSpace';
-export * from './Dashboard/DashboardAdmin';
+export * from './Dashboard/Dashboard';
 export * from './NotFound/NotFound';
 export * from './Forbidden/Forbidden';
 export * from './ServerError/ServerError';

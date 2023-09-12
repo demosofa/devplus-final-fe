@@ -106,139 +106,86 @@ export const ApplyCv = () => {
 					/>
 				</Row>
 
-				<Row gutter={[12, 12]} className="cv-wrap-container">
-					<Col span={24} md={15}>
-						<Card style={{ height: '100%' }}>
-							<Title level={3} className="create-cv-title">
-								{detailCampaign.name}
-							</Title>
+				<section style={{ overflowX: 'hidden' }}>
+					<Row gutter={[12, 12]}>
+						<Col span={24} md={15}>
+							<Card style={{ height: '100%' }}>
+								<Title level={3} className="create-cv-title">
+									{detailCampaign.name}
+								</Title>
 
-							<div
-								dangerouslySetInnerHTML={{
-									__html: detailCampaign.description,
-								}}
-							/>
-						</Card>
-					</Col>
+								<div
+									dangerouslySetInnerHTML={{
+										__html: detailCampaign.description,
+									}}
+								/>
+							</Card>
+						</Col>
 
-					<Col
-						span={24}
-						md={9}
-						className="apply-cv-form"
-						style={{ height: 'fit-content' }}
-					>
-						<Card>
-							<Title level={3} className="create-cv-title">
-								Apply CV
-							</Title>
+						<Col
+							span={24}
+							md={9}
+							className="apply-cv-form"
+							style={{ height: 'fit-content' }}
+						>
+							<Card>
+								<Title level={3} className="create-cv-title">
+									Apply CV
+								</Title>
 
-							<Form
-								form={form}
-								onFinish={onFinish}
-								labelCol={{ span: 24 }}
-								wrapperCol={{ span: 24 }}
-								disabled={detailCampaign.status === CAMPAIGN.INACTIVE}
-							>
-								<Form.Item
-									name="name"
-									label="Name"
-									rules={[
-										{
-											required: true,
-											message: 'Please enter your name',
-										},
-									]}
+								<Form
+									form={form}
+									onFinish={onFinish}
+									labelCol={{ span: 24 }}
+									wrapperCol={{ span: 24 }}
+									disabled={detailCampaign.status === CAMPAIGN.INACTIVE}
 								>
-									<Input type="input" placeholder="Input your name" />
-								</Form.Item>
-
-								<Form.Item
-									name="email"
-									label="Email"
-									rules={[
-										{
-											required: true,
-											message: 'Please enter your email',
-										},
-									]}
-								>
-									<Input type="input" placeholder="Input your email" />
-								</Form.Item>
-
-								<Form.Item
-									name="phone_number"
-									label="Phone Number"
-									rules={[
-										{
-											required: true,
-											message: 'Please enter your phone',
-										},
-									]}
-								>
-									<Input type="input" placeholder="Input your phone number" />
-								</Form.Item>
-
-								<Form.Item
-									name="apply_position"
-									label="Position"
-									rules={[
-										{
-											required: true,
-											message: 'Please enter your position',
-										},
-									]}
-								>
-									<Input type="input" placeholder="Input your apply position" />
-								</Form.Item>
-
-								<Form.Item
-									label="File"
-									name="uploadOption"
-									rules={[
-										{
-											required: true,
-											message: 'Please select upload option',
-										},
-									]}
-								>
-									<Select
-										onChange={handleUploadOptionChange}
-										placeholder="Select upload option"
-									>
-										<Option value="upload">Upload</Option>
-										<Option value="input">Input</Option>
-									</Select>
-								</Form.Item>
-
-								{uploadOption === 'upload' ? (
 									<Form.Item
-										name="file"
+										name="name"
+										label="Name"
 										rules={[
 											{
 												required: true,
-												message: 'Please upload your file',
+												message: 'Please enter your name',
 											},
 										]}
 									>
-										<Upload
-											accept="application/pdf"
-											maxCount={1}
-											beforeUpload={() => false}
-										>
-											<Button icon={<PlusCircleOutlined />} type="default">
-												Upload File
-											</Button>
-										</Upload>
+										<Input type="input" placeholder="Input your name" />
 									</Form.Item>
-								) : null}
 
-								{uploadOption === 'input' ? (
 									<Form.Item
-										name="fileString"
+										name="email"
+										label="Email"
 										rules={[
 											{
 												required: true,
-												message: 'Please enter your file content',
+												message: 'Please enter your email',
+											},
+										]}
+									>
+										<Input type="input" placeholder="Input your email" />
+									</Form.Item>
+
+									<Form.Item
+										name="phone_number"
+										label="Phone Number"
+										rules={[
+											{
+												required: true,
+												message: 'Please enter your phone',
+											},
+										]}
+									>
+										<Input type="input" placeholder="Input your phone number" />
+									</Form.Item>
+
+									<Form.Item
+										name="apply_position"
+										label="Position"
+										rules={[
+											{
+												required: true,
+												message: 'Please enter your position',
 											},
 										]}
 									>
@@ -247,17 +194,79 @@ export const ApplyCv = () => {
 											placeholder="Input your apply position"
 										/>
 									</Form.Item>
-								) : null}
 
-								<Form.Item colon={false} className="row-btn-summit">
-									<Button type="primary" htmlType="submit" loading={isLoading}>
-										<PlusCircleOutlined /> Apply Cv
-									</Button>
-								</Form.Item>
-							</Form>
-						</Card>
-					</Col>
-				</Row>
+									<Form.Item
+										label="File"
+										name="uploadOption"
+										rules={[
+											{
+												required: true,
+												message: 'Please select upload option',
+											},
+										]}
+									>
+										<Select
+											onChange={handleUploadOptionChange}
+											placeholder="Select upload option"
+										>
+											<Option value="upload">Upload</Option>
+											<Option value="input">Input</Option>
+										</Select>
+									</Form.Item>
+
+									{uploadOption === 'upload' ? (
+										<Form.Item
+											name="file"
+											rules={[
+												{
+													required: true,
+													message: 'Please upload your file',
+												},
+											]}
+										>
+											<Upload
+												accept="application/pdf"
+												maxCount={1}
+												beforeUpload={() => false}
+											>
+												<Button icon={<PlusCircleOutlined />} type="default">
+													Upload File
+												</Button>
+											</Upload>
+										</Form.Item>
+									) : null}
+
+									{uploadOption === 'input' ? (
+										<Form.Item
+											name="fileString"
+											rules={[
+												{
+													required: true,
+													message: 'Please enter your file content',
+												},
+											]}
+										>
+											<Input
+												type="input"
+												placeholder="Input your apply position"
+											/>
+										</Form.Item>
+									) : null}
+
+									<Form.Item colon={false} className="row-btn-summit">
+										<Button
+											type="primary"
+											htmlType="submit"
+											loading={isLoading}
+										>
+											<PlusCircleOutlined /> Apply Cv
+										</Button>
+									</Form.Item>
+								</Form>
+							</Card>
+						</Col>
+					</Row>
+				</section>
 			</Container>
 		</div>
 	);
