@@ -21,7 +21,7 @@ export const useUpdateCampaign = () => {
 				message: NOTIFICATION.SUCCESS,
 				description: 'Update campaign successfully.',
 			});
-			navigate('/campaign');
+			navigate('/list-campaign');
 
 			queryClient.refetchQueries();
 		},

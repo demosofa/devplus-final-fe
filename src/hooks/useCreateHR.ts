@@ -20,7 +20,7 @@ export function useCreateHR() {
 				message: NOTIFICATION.SUCCESS,
 				description: 'Success Create HR',
 			});
-			navigate('/user');
+			navigate('/list-user');
 		},
 		onError: (data: AxiosError<NestError>) => {
 			notification.error({

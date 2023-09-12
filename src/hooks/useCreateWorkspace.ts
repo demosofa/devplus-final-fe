@@ -22,7 +22,7 @@ export const useCreateWorkSpace = () => {
 				message: NOTIFICATION.SUCCESS,
 				description: 'Create workspace successfully.',
 			});
-			navigate('/workspace');
+			navigate('/login');
 		},
 		onError: (data: AxiosError<NestError>) => {
 			notification.error({
