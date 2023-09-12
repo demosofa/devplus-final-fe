@@ -7,6 +7,8 @@ import { UserType } from '@types';
 import { useAuth, useUpdateUser, useGetListUser } from '@hooks';
 import { ROLE } from '@enums';
 
+const { useForm } = Form;
+
 export const ListUser = () => {
 	const [currentPage, setCurrentPage] = useState(1);
 	const [pageSize, setPageSize] = useState(5);
@@ -15,7 +17,7 @@ export const ListUser = () => {
 
 	const [isModalOpen, setIsModalOpen] = useState<UserType | undefined>();
 
-	const [form] = Form.useForm();
+	const [form] = useForm();
 
 	const { getAuth } = useAuth();
 

@@ -1,6 +1,5 @@
-import { Link, useParams } from 'react-router-dom';
-import { Button, Card } from 'antd';
-import { PlusCircleOutlined } from '@ant-design/icons';
+import { useParams } from 'react-router-dom';
+import { Card } from 'antd';
 
 import { useGetWorkspaceDetail } from '@hooks';
 import './WorkSpaceDetail.css';
@@ -12,21 +11,16 @@ export const WorkSpaceDetail = () => {
 
 	return (
 		<>
-			<Button className="btn-wrap-campaign">
-				<Link style={{ color: 'white' }} to={'/create-campaign/' + id}>
-					<PlusCircleOutlined /> Create Campaign
+			{/* <Button className="btn-wrap-campaign">
+				<Link style={{ color: 'white' }} to={generatePath('list-campaign', {})}>
+					<PlusCircleOutlined /> View Campaign
 				</Link>
-			</Button>
-			<div>
-				{isLoading ? (
-					<p>Loading...</p>
-				) : (
-					<Card>
-						<h1>Name: {workspace?.title_workspace}</h1>
-						<p>Status: {workspace?.status}</p>
-					</Card>
-				)}
-			</div>
+			</Button> */}
+
+			<Card loading={isLoading}>
+				<h1>Name: {workspace?.title_workspace}</h1>
+				<p>Status: {workspace?.status}</p>
+			</Card>
 		</>
 	);
 };

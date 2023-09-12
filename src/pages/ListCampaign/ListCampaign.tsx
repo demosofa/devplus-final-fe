@@ -180,6 +180,7 @@ export const ListCampaign = () => {
 					<PlusCircleOutlined /> Create Campaign
 				</Link>
 			</Button>
+
 			<Table<CampaignType>
 				columns={columns}
 				dataSource={listCampaign?.data}

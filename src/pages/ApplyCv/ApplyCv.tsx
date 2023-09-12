@@ -149,13 +149,7 @@ export const ApplyCv = () => {
 										},
 									]}
 								>
-									<Input
-										type="input"
-										style={{
-											maxWidth: '800px',
-										}}
-										placeholder="Input your name"
-									/>
+									<Input type="input" placeholder="Input your name" />
 								</Form.Item>
 
 								<Form.Item
@@ -168,13 +162,7 @@ export const ApplyCv = () => {
 										},
 									]}
 								>
-									<Input
-										type="input"
-										style={{
-											maxWidth: '800px',
-										}}
-										placeholder="Input your email"
-									/>
+									<Input type="input" placeholder="Input your email" />
 								</Form.Item>
 
 								<Form.Item
@@ -187,13 +175,7 @@ export const ApplyCv = () => {
 										},
 									]}
 								>
-									<Input
-										type="input"
-										style={{
-											maxWidth: '800px',
-										}}
-										placeholder="Input your phone number"
-									/>
+									<Input type="input" placeholder="Input your phone number" />
 								</Form.Item>
 
 								<Form.Item
@@ -206,13 +188,7 @@ export const ApplyCv = () => {
 										},
 									]}
 								>
-									<Input
-										type="input"
-										style={{
-											maxWidth: '800px',
-										}}
-										placeholder="Input your apply position"
-									/>
+									<Input type="input" placeholder="Input your apply position" />
 								</Form.Item>
 
 								<Form.Item
@@ -268,9 +244,6 @@ export const ApplyCv = () => {
 									>
 										<Input
 											type="input"
-											style={{
-												maxWidth: '800px',
-											}}
 											placeholder="Input your apply position"
 										/>
 									</Form.Item>

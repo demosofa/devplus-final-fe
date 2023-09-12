@@ -1,38 +1,3 @@
-.submit-button {
-	background-color: rgb(211, 164, 255);
-}
-
-.main-container .full-form .text-select {
-	margin-right: 30px;
-}
-
-.main-container .full-form {
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	flex-direction: column;
-	margin-top: 30px;
-	display: inline-block;
-}
-
-#description_help .ant-form-item-explain-error {
-	margin-top: 45px;
-}
-
-.checkValid .ant-form-item-explain-error {
-	margin-top: 55px;
-}
-
-@media (max-width: 907px) {
-	.main-container .full-form .text-select {
-		margin-right: 0px;
-	}
-	.main-container .full-btn .btn-submit {
-		margin-left: 0px;
-		margin-top: 0px;
-	}
-}
-
 .quill-editor.override > .ql-container {
 	height: 100%;
 	min-height: 120px;

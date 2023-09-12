@@ -14,6 +14,8 @@ type MenuItem = Required<MenuProps>['items'];
 
 const { Sider, Content } = Layout;
 
+const { useBreakpoint } = Grid;
+
 export function PrivateLayout() {
 	const { getAuth, setAuth } = useAuth();
 	const auth = getAuth();
@@ -22,7 +24,7 @@ export function PrivateLayout() {
 	const location = useLocation();
 	const navigate = useNavigate();
 
-	const breakpoint = Grid.useBreakpoint();
+	const breakpoint = useBreakpoint();
 
 	const title = location.pathname
 		.replaceAll('/', ' ')
@@ -67,7 +69,7 @@ export function PrivateLayout() {
 				breakpoint="sm"
 				onBreakpoint={(broken) => !broken && setCollapsed(true)}
 				collapsible={breakpoint.sm}
-				collapsedWidth={60}
+				collapsedWidth={breakpoint.sm ? 70 : 50}
 				collapsed={collapsed}
 				onCollapse={(value) => setCollapsed(value)}
 			>
@@ -83,7 +85,12 @@ export function PrivateLayout() {
 			</Sider>
 
 			<Layout>
-				<TopBar title={title} auth={auth} setAuth={setAuth} />
+				<TopBar
+					title={title}
+					level={breakpoint.sm ? 3 : 5}
+					auth={auth}
+					setAuth={setAuth}
+				/>
 
 				<Content className={`private-content ${breakpoint.sm ? '' : 'mobile'}`}>
 					<Outlet />

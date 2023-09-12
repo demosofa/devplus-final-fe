@@ -1,5 +1,5 @@
 import { LoadingOutlined } from '@ant-design/icons';
-import { Col, DatePicker, Form, Input, Row } from 'antd';
+import { Card, Col, DatePicker, Form, Input, Row } from 'antd';
 import dayjs, { Dayjs } from 'dayjs';
 import { useMemo, useState } from 'react';
 import ReactQuill from 'react-quill';
@@ -43,42 +43,44 @@ export const DetailCampaign = () => {
 	}
 
 	return (
-		<Row>
-			<Col span={24} sm={23} md={16}>
-				<Form
-					initialValues={detailCampaign}
-					labelCol={{ span: 24 }}
-					wrapperCol={{ span: 24 }}
-					className="full-form"
-					disabled
-				>
-					<Form.Item className="fontWeight" label="Name" name="name">
-						<Input readOnly={true} />
-					</Form.Item>
-
-					<Form.Item
-						className="timestampInitial fontWeight"
-						label="Expired time"
-						name="expired_time"
+		<Card>
+			<Row>
+				<Col span={24} sm={23} md={16} lg={12}>
+					<Form
+						initialValues={detailCampaign}
+						labelCol={{ span: 24 }}
+						wrapperCol={{ span: 24 }}
+						className="full-form"
+						disabled
 					>
-						<DatePicker showTime style={{ display: 'block' }} />
-					</Form.Item>
+						<Form.Item className="fontWeight" label="Name" name="name">
+							<Input readOnly={true} />
+						</Form.Item>
 
-					<Form.Item
-						className="fontWeight"
-						label="Description"
-						name="description"
-					>
-						<ReactQuill
-							theme="bubble"
-							value={description}
-							onChange={handleDescriptionChange}
-							readOnly={true}
-							className="quill-editor"
-						/>
-					</Form.Item>
-				</Form>
-			</Col>
-		</Row>
+						<Form.Item
+							className="timestampInitial fontWeight"
+							label="Expired time"
+							name="expired_time"
+						>
+							<DatePicker showTime style={{ display: 'block' }} />
+						</Form.Item>
+
+						<Form.Item
+							className="fontWeight"
+							label="Description"
+							name="description"
+						>
+							<ReactQuill
+								theme="bubble"
+								value={description}
+								onChange={handleDescriptionChange}
+								readOnly={true}
+								className="quill-editor override"
+							/>
+						</Form.Item>
+					</Form>
+				</Col>
+			</Row>
+		</Card>
 	);
 };
