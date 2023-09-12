@@ -25,7 +25,7 @@ export function Login() {
 	useEffect(() => {
 		const auth = getAuth();
 
-		if (auth) navigate(`/detail-user/${auth.id}`);
+		if (auth) navigate(`/profile`);
 	}, [getAuth, navigate]);
 
 	return (
