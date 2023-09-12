@@ -10,7 +10,8 @@ import jwtDecode from 'jwt-decode';
 
 import { getStorage, removeStorage, setStorage } from '@utils';
 import { AuthType, GetAuth, SetAuth } from '@types';
-import { ROLE } from '@enums';
+import { NOTIFICATION, ROLE } from '@enums';
+import { notification } from 'antd';
 
 export const Auth = createContext<AuthType>({
 	getAuth: () => ({
@@ -62,7 +63,23 @@ export function AuthProvider({ children }: PropsWithChildren) {
 			(response) => response,
 			(error) => {
 				switch (error?.response?.status) {
+					case 401:
+						if (
+							window.location.pathname != '/login' &&
+							error.response?.data.message.includes('Your account is disabled')
+						) {
+							authValue.setAuth();
+							notification.error({
+								message: NOTIFICATION.ERROR,
+								description: error.response?.data.message,
+							});
+						}
+						break;
 					case 403:
+						notification.error({
+							message: NOTIFICATION.ERROR,
+							description: error.response?.data.message,
+						});
 						window.location.href = '/403';
 						break;
 					default:
@@ -72,7 +89,7 @@ export function AuthProvider({ children }: PropsWithChildren) {
 		);
 
 		return () => axios.interceptors.response.eject(interceptor);
-	}, []);
+	}, [authValue]);
 
 	return <Auth.Provider value={authValue}>{children}</Auth.Provider>;
 }
