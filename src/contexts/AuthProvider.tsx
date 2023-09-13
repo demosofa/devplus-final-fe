@@ -75,13 +75,13 @@ export function AuthProvider({ children }: PropsWithChildren) {
 							});
 						}
 						break;
-					case 403:
-						notification.error({
-							message: NOTIFICATION.ERROR,
-							description: error.response?.data.message,
-						});
-						window.location.href = '/403';
-						break;
+					// case 403:
+					// 	notification.error({
+					// 		message: NOTIFICATION.ERROR,
+					// 		description: error.response?.data.message,
+					// 	});
+					// 	window.location.href = '/403';
+					// 	break;
 					default:
 				}
 				return Promise.reject(error);
