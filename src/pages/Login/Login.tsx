@@ -32,6 +32,8 @@ export function Login() {
 		<Row className="login-container">
 			<Col span={0} md={14} lg={16}>
 				<img
+					width={'100%'}
+					height={'100%'}
 					src="https://devskiller.com/wp-content/uploads/2022/05/Candidate-selection.png"
 					alt=""
 				/>
