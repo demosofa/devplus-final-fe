@@ -4,6 +4,7 @@ import { notification } from 'antd';
 import { NOTIFICATION } from '@enums';
 import { updateUser } from '@services';
 import { UserType } from '@types';
+import { QUERY_KEY } from '@constants';
 
 export const useUpdateUser = () => {
 	const queryClient = useQueryClient();
@@ -18,7 +19,7 @@ export const useUpdateUser = () => {
 				message: NOTIFICATION.SUCCESS,
 				description: 'Update user successfully.',
 			});
-			queryClient.refetchQueries();
+			queryClient.refetchQueries([QUERY_KEY.LIST_USER]);
 		},
 		onError: () => {
 			notification.error({
