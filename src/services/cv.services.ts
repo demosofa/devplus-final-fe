@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-import { CvType } from '@types';
+import { CvCountType, CvType } from '@types';
 import { API_URL } from '@constants';
 
 export const getListCv = (page: number, take: number, search: string) =>
@@ -26,3 +26,6 @@ export const failCV = (id: number) =>
 	axios.patch<CvType>(API_URL.CV + `fail/${id}`);
 
 export const getCvDetail = (id: number) => axios.get(API_URL.CV + id);
+
+export const getCvStatistic = () =>
+	axios.get<CvCountType>(API_URL.CV + API_URL.CV_STATISTIC);

@@ -89,7 +89,7 @@ export const ListCampaign = () => {
 		{
 			title: 'Link',
 			dataIndex: 'id',
-			key: 'expired_time',
+			key: 'link',
 			render: (id) => {
 				return (
 					<>

@@ -27,7 +27,9 @@ export function CampaignCountdown({
 	if (campaign.status == CAMPAIGN.INACTIVE)
 		return (
 			<Title level={3} {...props}>
-				{`Expired at ${dayjs(campaign.expired_time)}`}
+				{`Expired at ${dayjs(campaign.expired_time).format(
+					'YYYY-MM-DD, HH:mm:ss'
+				)}`}
 			</Title>
 		);
 

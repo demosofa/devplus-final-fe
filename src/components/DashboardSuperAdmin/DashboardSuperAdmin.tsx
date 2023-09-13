@@ -13,6 +13,7 @@ import { Line, Pie } from 'react-chartjs-2';
 import { useChartCampaign, useChartUser } from '@hooks';
 import { useMemo, useState } from 'react';
 import { FILTER_TIME } from '@enums';
+import { TotalStatistics } from 'pages/CampaignStatistics/TotalStatistics';
 
 ChartJS.register(
 	CategoryScale,
@@ -152,10 +153,11 @@ export const DashboardSuperAdmin = () => {
 
 	return (
 		<>
-			<Row>
+			<TotalStatistics />
+			<Row justify={'end'}>
 				<Select
 					defaultValue={FILTER_TIME.YEAR}
-					style={{ width: 120, marginBottom: 15 }}
+					style={{ width: 120, marginBottom: 12, marginTop: 12 }}
 					onChange={handleChange}
 					options={[
 						{ value: FILTER_TIME.YEAR, label: 'Year' },

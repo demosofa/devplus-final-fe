@@ -53,9 +53,7 @@ export const ListCv = () => {
 		return {
 			onClick: (e: any) => {
 				e.stopPropagation();
-				if (record.status === CV.PASS || record.status === CV.FAIL) {
-					navigate('/cv-detail/' + record.id);
-				}
+				navigate('/cv-detail/' + record.id);
 			},
 		};
 	};

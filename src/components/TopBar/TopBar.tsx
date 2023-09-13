@@ -44,7 +44,9 @@ export function TopBar({ auth, setAuth, ...props }: Props) {
 
 	return (
 		<Header className="top-bar">
-			<Title {...props}>{props.title}</Title>
+			<Title className="title-top-bar" {...props}>
+				{props.title}
+			</Title>
 
 			<Dropdown menu={{ items }}>
 				<div
@@ -59,7 +61,7 @@ export function TopBar({ auth, setAuth, ...props }: Props) {
 						src="https://th.bing.com/th/id/OIP.nczpMSa69aDJWYGi0tKqggHaHa?w=205&h=205&c=7&r=0&o=5&dpr=1.3&pid=1.7"
 					/>
 
-					{auth ? auth.name : 'Guest'}
+					<div className="name-user-wrap">{auth ? auth.name : 'Guest'}</div>
 				</div>
 			</Dropdown>
 		</Header>
