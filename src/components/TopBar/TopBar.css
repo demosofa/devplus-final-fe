@@ -8,3 +8,32 @@
 .top-bar > h4 {
 	margin-top: 10px;
 }
+
+.img-drop {
+	width: 40px;
+	height: 40px;
+	margin-top: 10px;
+	margin-right: 10px;
+}
+
+@media (max-width: 692px) {
+	.name-user-wrap {
+		display: none;
+	}
+
+	.title-top-bar {
+		font-size: 24px !important;
+	}
+}
+
+@media (max-width: 630px) {
+	.title-top-bar {
+		font-size: 20px !important;
+	}
+}
+
+@media (max-width: 450px) {
+	.title-top-bar {
+		font-size: 16px !important;
+	}
+}

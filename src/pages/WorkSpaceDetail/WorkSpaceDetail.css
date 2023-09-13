@@ -10,3 +10,7 @@
 .workspace-wrap-text {
 	text-align: center;
 }
+
+.workspace-card {
+	height: 100% !important;
+}

@@ -1,11 +1,11 @@
-import { Button, Form, Input, Modal, Select, SelectProps } from 'antd';
+import { Button, Form, Input, Modal, Select, SelectProps, Tag } from 'antd';
 import Table, { ColumnsType } from 'antd/es/table';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { UserType } from '@types';
 import { useAuth, useUpdateUser, useGetListUser } from '@hooks';
-import { ROLE } from '@enums';
+import { AUTH_STATUS, ROLE } from '@enums';
 
 const { useForm } = Form;
 
@@ -114,6 +114,28 @@ export const ListUser = () => {
 			title: 'Status',
 			dataIndex: 'status',
 			key: 'status',
+			render: (status) => {
+				let color;
+				let text;
+				switch (status) {
+					case AUTH_STATUS.DISABLE:
+						color = 'red';
+						text = 'Disable';
+						break;
+					case AUTH_STATUS.ENABLE:
+						color = 'green';
+						text = 'Enable';
+						break;
+				}
+				return (
+					<Tag
+						color={color}
+						style={{ fontWeight: 'bold', textTransform: 'uppercase' }}
+					>
+						{text}
+					</Tag>
+				);
+			},
 		},
 		{
 			title: 'Action',
