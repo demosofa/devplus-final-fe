@@ -6,6 +6,7 @@ import { AxiosError } from 'axios';
 import { updateCampaign } from '@services';
 import { CampaignType, NestError } from '@types';
 import { NOTIFICATION } from '@enums';
+import { QUERY_KEY } from '@constants';
 
 export const useUpdateCampaign = () => {
 	const queryClient = useQueryClient();
@@ -21,9 +22,9 @@ export const useUpdateCampaign = () => {
 				message: NOTIFICATION.SUCCESS,
 				description: 'Update campaign successfully.',
 			});
-			navigate('/list-campaign');
+			queryClient.refetchQueries([QUERY_KEY.LIST_CAMPAIGN]);
 
-			queryClient.refetchQueries();
+			navigate('/list-campaign');
 		},
 		onError: (data: AxiosError<NestError>) => {
 			notification.error({
