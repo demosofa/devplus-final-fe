@@ -8,6 +8,7 @@ import { CvType } from '@types';
 import { clone } from '@utils';
 import './CvDetail.css';
 import { useGetDetailCv } from '@hooks';
+import { BASE_URL } from '@constants';
 
 const { Title } = Typography;
 
@@ -26,6 +27,15 @@ export const CvDetail = () => {
 		}
 	}, [data, detailCvLoading, forms]);
 
+	const isValidUrl = (urlString: string) => {
+		try {
+			const url = new URL(urlString);
+			return url.protocol === 'http:' || url.protocol === 'https:';
+		} catch (e) {
+			return false;
+		}
+	};
+
 	const detailCv = useMemo(() => {
 		if (detailCvLoading || !data) {
 			return undefined;
@@ -38,10 +48,9 @@ export const CvDetail = () => {
 
 		if (cloned.file.includes('https://drive.google.com/')) {
 			cloned.file = cloned.file.replace('view', 'preview');
+		} else if (!isValidUrl(cloned.file)) {
+			cloned.file = BASE_URL + cloned.file;
 		}
-		// else {
-		// 	cloned.file = BASE_URL + cloned.file;
-		// }
 
 		return cloned;
 	}, [data, detailCvLoading]);
