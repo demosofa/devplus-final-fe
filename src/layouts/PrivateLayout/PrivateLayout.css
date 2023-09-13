@@ -15,10 +15,12 @@
 	margin: 14px 10px 0;
 }
 
-.logo_image {
+.logo-wrap {
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	margin-top: 20px;
-	width: 100%;
+}
+.logo_image {
+	width: 80%;
+	padding-top: 10px;
 }

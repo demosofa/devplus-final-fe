@@ -171,13 +171,21 @@ export const DashboardAdmin = () => {
 			<section style={{ overflowX: 'hidden' }}>
 				<Row gutter={[12, 12]}>
 					<Col span={24} md={10}>
-						<Card loading={loadChartCv}>
-							<Pie options={pieOptions} data={pieData} />
+						<Card loading={loadChartCv} style={{ height: '600px' }}>
+							<Pie
+								options={pieOptions}
+								data={pieData}
+								style={{ height: '500px' }}
+							/>
 						</Card>
 					</Col>
 					<Col span={24} md={14}>
-						<Card loading={loadChartCv}>
-							<Line options={lineOptions} data={lineData} />
+						<Card loading={loadChartCv} style={{ height: '600px' }}>
+							<Line
+								options={lineOptions}
+								data={lineData}
+								style={{ height: '500px' }}
+							/>
 						</Card>
 					</Col>
 				</Row>

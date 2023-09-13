@@ -4,6 +4,7 @@ import { notification } from 'antd';
 import { acceptWorkspace } from '@services';
 import { WorkspaceType } from '@types';
 import { NOTIFICATION } from '@enums';
+import { QUERY_KEY } from '@constants';
 
 export function useAcceptWorkspace() {
 	const queryClient = useQueryClient();
@@ -17,7 +18,7 @@ export function useAcceptWorkspace() {
 				message: NOTIFICATION.SUCCESS,
 				description: 'Accept workspace successfully.',
 			});
-			queryClient.refetchQueries();
+			queryClient.refetchQueries([QUERY_KEY.LIST_WORKSPACE]);
 		},
 		onError: () => {
 			notification.error({
