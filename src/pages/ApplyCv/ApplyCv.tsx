@@ -95,18 +95,17 @@ export const ApplyCv = () => {
 	return (
 		<div className="apply-cv-background">
 			<Container>
-				<Row justify={'center'}>
-					<CampaignCountdown
-						queryKey={[QUERY_KEY.FIND_CV_WITH_CAMPAIGN, Number(id)]}
-						campaign={{
-							status: detailCampaign.status,
-							expired_time: data!.expired_time,
-						}}
-						className="apply-cv-expire-time"
-					/>
-				</Row>
-
 				<section style={{ overflowX: 'hidden' }}>
+					<Row justify={'center'}>
+						<CampaignCountdown
+							queryKey={[QUERY_KEY.FIND_CV_WITH_CAMPAIGN, Number(id)]}
+							campaign={{
+								status: detailCampaign.status,
+								expired_time: data!.expired_time,
+							}}
+							className="apply-cv-expire-time"
+						/>
+					</Row>
 					<Row gutter={[12, 12]}>
 						<Col span={24} md={15}>
 							<Card style={{ height: '100%' }}>

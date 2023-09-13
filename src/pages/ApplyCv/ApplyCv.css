@@ -1,6 +1,5 @@
 .apply-cv-background {
 	background-color: rgb(211, 164, 255);
-	height: inherit;
 	display: flex;
 	align-items: center;
 	padding-bottom: 30px;
