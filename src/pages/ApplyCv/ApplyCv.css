@@ -1,7 +1,7 @@
 .apply-cv-background {
-	background-color: rgb(211, 164, 255);
-	display: flex;
-	align-items: center;
+	background-image: url(https://devskiller.com/wp-content/uploads/2022/05/Candidate-selection.png);
+	background-size: cover;
+	background-repeat: no-repeat;
 	padding-bottom: 30px;
 }
 
@@ -31,5 +31,5 @@
 .apply-cv-form {
 	position: sticky;
 	z-index: 99;
-	top: 30px;
+	top: 12px;
 }
