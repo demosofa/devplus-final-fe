@@ -14,3 +14,21 @@
 .private-content.mobile {
 	margin: 14px 10px 0;
 }
+
+.logo_image {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin-top: 20px;
+	width: 200px;
+}
+
+@media only screen and (max-width: 576px) {
+	.logo_image {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		margin-top: 20px;
+		width: 100%px;
+	}
+}

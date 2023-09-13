@@ -73,7 +73,17 @@ export function PrivateLayout() {
 				collapsed={collapsed}
 				onCollapse={(value) => setCollapsed(value)}
 			>
-				<div className="logo" />
+				<div>
+					<img
+						className="logo_image"
+						src={
+							collapsed
+								? '/src/assets/logo_loading.png'
+								: 'https://devplus.edu.vn/assets/images/devplus/Artboard_2.png'
+						}
+						alt="img"
+					/>
+				</div>
 				<br />
 				<Menu
 					theme="dark"
