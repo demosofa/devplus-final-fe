@@ -1,8 +1,10 @@
 import { useMutation } from '@tanstack/react-query';
 import { notification } from 'antd';
+import { AxiosError } from 'axios';
 
 import { NOTIFICATION } from '@enums';
 import { createCv } from '@services';
+import { NestError } from '@types';
 
 export const useCreateCv = () => {
 	return useMutation({
@@ -16,10 +18,10 @@ export const useCreateCv = () => {
 				description: 'Create cv successfully.',
 			});
 		},
-		onError: () => {
+		onError: (data: AxiosError<NestError>) => {
 			notification.error({
 				message: NOTIFICATION.ERROR,
-				description: 'Create cv failed',
+				description: data.response?.data.message,
 			});
 		},
 	});

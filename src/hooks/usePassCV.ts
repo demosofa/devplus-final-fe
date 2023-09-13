@@ -1,9 +1,11 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { notification } from 'antd';
+import { AxiosError } from 'axios';
 
 import { NOTIFICATION } from '@enums';
 import { passCV } from '@services';
 import { QUERY_KEY } from '@constants';
+import { NestError } from '@types';
 
 export function usePassCV() {
 	const queryClient = useQueryClient();
@@ -19,11 +21,10 @@ export function usePassCV() {
 			});
 			queryClient.refetchQueries([QUERY_KEY.LIST_CV]);
 		},
-
-		onError: () => {
+		onError: (data: AxiosError<NestError>) => {
 			notification.error({
 				message: NOTIFICATION.ERROR,
-				description: 'pass CV failed',
+				description: data.response?.data.message,
 			});
 		},
 	});

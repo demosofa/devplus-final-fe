@@ -1,6 +1,6 @@
 import { useParams } from 'react-router-dom';
 import { Card, Col, Form, Input, Row, Typography } from 'antd';
-import dayjs, { Dayjs } from 'dayjs';
+import dayjs from 'dayjs';
 import { useEffect, useMemo } from 'react';
 import 'react-quill/dist/quill.snow.css';
 
@@ -8,7 +8,6 @@ import { CvType } from '@types';
 import { clone } from '@utils';
 import './CvDetail.css';
 import { useGetDetailCv } from '@hooks';
-import { BASE_URL } from '@constants';
 
 const { Title } = Typography;
 
@@ -32,16 +31,17 @@ export const CvDetail = () => {
 			return undefined;
 		}
 
-		const cloned = clone(data) as Omit<CvType, 'create_at'> & {
-			create_at: Dayjs;
+		const cloned = clone(data) as Omit<CvType, 'created_at'> & {
+			created_at: string;
 		};
-		cloned.create_at = dayjs(data.create_at);
+		cloned.created_at = dayjs(data.created_at).format('YYYY-MM-DD, HH:mm:ss');
 
 		if (cloned.file.includes('https://drive.google.com/')) {
 			cloned.file = cloned.file.replace('view', 'preview');
-		} else {
-			cloned.file = BASE_URL + cloned.file;
 		}
+		// else {
+		// 	cloned.file = BASE_URL + cloned.file;
+		// }
 
 		return cloned;
 	}, [data, detailCvLoading]);
@@ -97,7 +97,7 @@ export const CvDetail = () => {
 							<Form.Item
 								className="fontWeight"
 								label="Create At"
-								name="create_at"
+								name="created_at"
 							>
 								<Input readOnly />
 							</Form.Item>

@@ -13,7 +13,7 @@ import { Line, Pie } from 'react-chartjs-2';
 import { useChartCampaign, useChartUser } from '@hooks';
 import { useMemo, useState } from 'react';
 import { FILTER_TIME } from '@enums';
-import { TotalStatistics } from 'pages/CampaignStatistics/TotalStatistics';
+import { TotalStatistics } from '@components';
 
 ChartJS.register(
 	CategoryScale,

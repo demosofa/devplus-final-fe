@@ -1,8 +1,10 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { notification } from 'antd';
+import { AxiosError } from 'axios';
 
 import { deleteCampaign } from '@services';
 import { NOTIFICATION } from '@enums';
+import { NestError } from '@types';
 
 export function useDeleteCampaign() {
 	const queryClient = useQueryClient();
@@ -19,10 +21,10 @@ export function useDeleteCampaign() {
 			});
 			queryClient.refetchQueries();
 		},
-		onError: () => {
+		onError: (data: AxiosError<NestError>) => {
 			notification.error({
 				message: NOTIFICATION.ERROR,
-				description: 'Delete campaign failed',
+				description: data.response?.data.message,
 			});
 		},
 	});

@@ -168,7 +168,7 @@ export const ListCv = () => {
 		},
 		{
 			title: 'Create At',
-			dataIndex: 'create_at',
+			dataIndex: 'created_at',
 			key: 'create_at',
 			render: (timestamp) => {
 				return dayjs(timestamp).format('YYYY-MM-DD, HH:mm:ss');

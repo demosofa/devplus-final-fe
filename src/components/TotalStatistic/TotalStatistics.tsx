@@ -26,7 +26,7 @@ export const TotalStatistics = () => {
 			? ((campaignCurrentYearCount - campaignOldYearCount) /
 					campaignOldYearCount) *
 			  100
-			: 0;
+			: 100;
 
 	const isIncreased = percentageIncrease >= 0;
 

@@ -1,9 +1,11 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { notification } from 'antd';
+import { AxiosError } from 'axios';
 
 import { rejectWorkspace } from '@services';
 import { NOTIFICATION } from '@enums';
 import { QUERY_KEY } from '@constants';
+import { NestError } from '@types';
 
 export function useRejectWorkspace() {
 	const queryClient = useQueryClient();
@@ -19,10 +21,10 @@ export function useRejectWorkspace() {
 			});
 			queryClient.refetchQueries([QUERY_KEY.LIST_WORKSPACE]);
 		},
-		onError: () => {
+		onError: (data: AxiosError<NestError>) => {
 			notification.error({
 				message: NOTIFICATION.ERROR,
-				description: 'Reject workspace failed',
+				description: data.response?.data.message,
 			});
 		},
 	});
