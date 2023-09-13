@@ -7,7 +7,7 @@ export type CvType = {
 	phone_number: string;
 	apply_position: string;
 	file: string;
-	create_at: Date;
+	created_at: Date;
 	status: string;
 	campaign: CampaignType;
 };
@@ -23,7 +23,7 @@ export type CreateCvType = {
 	apply_position: string;
 	file?: AntdUpload;
 	fileString?: string;
-	create_at: Date;
+	created_at: Date;
 	status: string;
 	campaignId: string;
 };
