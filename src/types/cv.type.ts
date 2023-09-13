@@ -27,3 +27,9 @@ export type CreateCvType = {
 	status: string;
 	campaignId: string;
 };
+
+export type CvCountType = {
+	currentYearCount?: any;
+	oldYearCount?: any;
+	totalCvCount?: any;
+};

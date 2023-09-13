@@ -6,22 +6,24 @@ import {
 	LineElement,
 	LinearScale,
 	PointElement,
-	Title,
 	Tooltip,
+	Title,
 } from 'chart.js/auto';
-import { Line, Pie } from 'react-chartjs-2';
-import { useChartCV } from '@hooks';
 import { useMemo, useState } from 'react';
 import { FILTER_TIME } from '@enums';
+import { Line, Pie } from 'react-chartjs-2';
+
+import { useChartCV } from '@hooks';
+import { TotalStatistics } from 'pages/CampaignStatistics/TotalStatistics';
 
 ChartJS.register(
 	CategoryScale,
 	LinearScale,
 	PointElement,
 	LineElement,
-	Title,
 	Tooltip,
-	Legend
+	Legend,
+	Title
 );
 
 export const DashboardAdmin = () => {
@@ -46,6 +48,9 @@ export const DashboardAdmin = () => {
 				ticks: {
 					stepSize: 1,
 				},
+			},
+			x: {
+				beginAtZero: true,
 			},
 		},
 	};
@@ -148,10 +153,12 @@ export const DashboardAdmin = () => {
 
 	return (
 		<>
-			<Row>
+			<TotalStatistics />
+
+			<Row justify={'end'}>
 				<Select
 					defaultValue={FILTER_TIME.YEAR}
-					style={{ width: 120, marginBottom: 15 }}
+					style={{ width: 120, marginBottom: 12, marginTop: 12 }}
 					onChange={handleChange}
 					options={[
 						{ value: FILTER_TIME.YEAR, label: 'Year' },

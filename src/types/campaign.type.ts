@@ -7,3 +7,9 @@ export type CampaignType = {
 	expired_time: string;
 	status: CAMPAIGN;
 };
+
+export type CampaignCountType = {
+	currentYearCount?: any;
+	oldYearCount?: any;
+	totalCampaignCount?: any;
+};

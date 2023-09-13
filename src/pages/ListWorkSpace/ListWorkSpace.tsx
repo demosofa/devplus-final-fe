@@ -4,7 +4,7 @@ import {
 	ExclamationCircleFilled,
 	PlusCircleOutlined,
 } from '@ant-design/icons';
-import { Button, Modal, Table } from 'antd';
+import { Button, Modal, Table, Tag } from 'antd';
 import { useState } from 'react';
 import { ColumnsType } from 'antd/es/table';
 import { Link, useNavigate } from 'react-router-dom';
@@ -87,6 +87,31 @@ export const ListWorkSpace = () => {
 			title: 'Status',
 			dataIndex: 'status',
 			key: 'status',
+			render: (status) => {
+				let color;
+				let text;
+				switch (status) {
+					case WORKSPACE.REJECT:
+						color = 'red';
+						text = 'Reject';
+						break;
+					case WORKSPACE.ACCEPT:
+						color = 'green';
+						text = 'Accept';
+						break;
+					case WORKSPACE.PENDING:
+						color = 'blue';
+						text = 'Pending';
+				}
+				return (
+					<Tag
+						color={color}
+						style={{ fontWeight: 'bold', textTransform: 'uppercase' }}
+					>
+						{text}
+					</Tag>
+				);
+			},
 		},
 		{
 			title: 'Action',

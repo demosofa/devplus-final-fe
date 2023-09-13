@@ -6,3 +6,9 @@ export type UserType = {
 	phone_number?: string;
 	password?: string;
 };
+
+export type UserCountType = {
+	currentYearCount?: any;
+	oldYearCount?: any;
+	totalUserCount?: any;
+};

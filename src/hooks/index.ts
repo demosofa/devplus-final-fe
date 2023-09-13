@@ -26,3 +26,6 @@ export * from './useCreateCampaign';
 export * from './useChartCV';
 export * from './useChartCampaign';
 export * from './useChartUser';
+export * from './useGetCampaignStatistic';
+export * from './useGetCVStatistic';
+export * from './useGetUserStatistic';
