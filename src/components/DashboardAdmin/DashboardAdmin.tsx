@@ -14,7 +14,7 @@ import { FILTER_TIME } from '@enums';
 import { Line, Pie } from 'react-chartjs-2';
 
 import { useChartCV } from '@hooks';
-import { TotalStatistics } from 'pages/TotalStatistic/TotalStatistics';
+import { TotalStatistics } from '@components';
 
 ChartJS.register(
 	CategoryScale,

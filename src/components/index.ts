@@ -5,3 +5,4 @@ export * from './TopBar/TopBar';
 export * from './ErrorBoundary/ErrorBoundary';
 export * from './DashboardAdmin/DashboardAdmin';
 export * from './DashboardSuperAdmin/DashboardSuperAdmin';
+export * from './TotalStatistic/TotalStatistics';
