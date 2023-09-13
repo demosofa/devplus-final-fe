@@ -3,6 +3,7 @@ import { notification } from 'antd';
 
 import { NOTIFICATION } from '@enums';
 import { passCV } from '@services';
+import { QUERY_KEY } from '@constants';
 
 export function usePassCV() {
 	const queryClient = useQueryClient();
@@ -16,7 +17,7 @@ export function usePassCV() {
 				message: NOTIFICATION.SUCCESS,
 				description: 'pass CV successfully',
 			});
-			queryClient.refetchQueries();
+			queryClient.refetchQueries([QUERY_KEY.LIST_CV]);
 		},
 
 		onError: () => {

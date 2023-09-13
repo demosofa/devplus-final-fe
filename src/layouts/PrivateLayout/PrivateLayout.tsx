@@ -73,7 +73,7 @@ export function PrivateLayout() {
 				collapsed={collapsed}
 				onCollapse={(value) => setCollapsed(value)}
 			>
-				<div>
+				<div className="logo-wrap">
 					<img
 						className="logo_image"
 						src={

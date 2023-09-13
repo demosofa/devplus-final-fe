@@ -3,6 +3,7 @@ import { notification } from 'antd';
 
 import { rejectWorkspace } from '@services';
 import { NOTIFICATION } from '@enums';
+import { QUERY_KEY } from '@constants';
 
 export function useRejectWorkspace() {
 	const queryClient = useQueryClient();
@@ -16,7 +17,7 @@ export function useRejectWorkspace() {
 				message: NOTIFICATION.SUCCESS,
 				description: 'Reject workspace successfully.',
 			});
-			queryClient.refetchQueries();
+			queryClient.refetchQueries([QUERY_KEY.LIST_WORKSPACE]);
 		},
 		onError: () => {
 			notification.error({
