@@ -1,8 +1,9 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { notification } from 'antd';
+import { AxiosError } from 'axios';
 
 import { acceptWorkspace } from '@services';
-import { WorkspaceType } from '@types';
+import { NestError, WorkspaceType } from '@types';
 import { NOTIFICATION } from '@enums';
 import { QUERY_KEY } from '@constants';
 
@@ -20,10 +21,10 @@ export function useAcceptWorkspace() {
 			});
 			queryClient.refetchQueries([QUERY_KEY.LIST_WORKSPACE]);
 		},
-		onError: () => {
+		onError: (data: AxiosError<NestError>) => {
 			notification.error({
 				message: NOTIFICATION.ERROR,
-				description: 'Accept workspace failed',
+				description: data.response?.data.message,
 			});
 		},
 	});

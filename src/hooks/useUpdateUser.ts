@@ -1,9 +1,10 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { notification } from 'antd';
+import { AxiosError } from 'axios';
 
 import { NOTIFICATION } from '@enums';
 import { updateUser } from '@services';
-import { UserType } from '@types';
+import { NestError, UserType } from '@types';
 import { QUERY_KEY } from '@constants';
 
 export const useUpdateUser = () => {
@@ -21,10 +22,10 @@ export const useUpdateUser = () => {
 			});
 			queryClient.refetchQueries([QUERY_KEY.LIST_USER]);
 		},
-		onError: () => {
+		onError: (data: AxiosError<NestError>) => {
 			notification.error({
 				message: NOTIFICATION.ERROR,
-				description: 'Update user failed',
+				description: data.response?.data.message,
 			});
 		},
 	});
