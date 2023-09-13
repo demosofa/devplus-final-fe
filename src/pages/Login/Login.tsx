@@ -30,7 +30,12 @@ export function Login() {
 
 	return (
 		<Row className="login-container">
-			<Col span={0} md={14} lg={16} className="login-left"></Col>
+			<Col span={0} md={14} lg={16}>
+				<img
+					src="https://devskiller.com/wp-content/uploads/2022/05/Candidate-selection.png"
+					alt=""
+				/>
+			</Col>
 
 			<Col
 				span={24}
